@@ -1,15 +1,15 @@
 #!/bin/bash
 
 update() {
-	sum=0
-	for arg; do
-		read -r i <"$arg"
-		sum=$((sum + i))
-	done
-	cache=${XDG_CACHE_HOME:-$HOME/.cache}/${1##*/}
-	[ -f "$cache" ] && read -r old <"$cache" || old=0
-	printf %d\\n "$sum" >"$cache"
-	printf %d\\n $((sum - old))
+  sum=0
+  for arg; do
+    read -r i <"$arg"
+    sum=$((sum + i))
+  done
+  cache=${XDG_CACHE_HOME:-$HOME/.cache}/${1##*/}
+  [ -f "$cache" ] && read -r old <"$cache" || old=0
+  printf %d\\n "$sum" >"$cache"
+  printf %d\\n $((sum - old))
 }
 
 tx=$(update /sys/class/net/enp4s0/statistics/tx_bytes)
@@ -17,9 +17,9 @@ rx=$(update /sys/class/net/enp4s0/statistics/rx_bytes)
 
 case $1 in
 "--down")
-	printf "%4sB\\n" $(numfmt --to=iec $rx)
-	;;
+  printf "%4sB\\n" $(numfmt --to=iec $rx)
+  ;;
 "--up")
-	printf "%4sB\\n" $(numfmt --to=iec $tx)
-	;;
+  printf "%4sB\\n" $(numfmt --to=iec $tx)
+  ;;
 esac

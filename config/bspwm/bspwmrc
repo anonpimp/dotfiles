@@ -5,14 +5,14 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true'
 
 ## Functions
-config() { bspc config "$@" &}
+config() { bspc config "$@" &;}
 
 ## Autostart
 # Xrandr
 xrandr --output HDMI-A-0 --mode 1920x1080 --rate 75.00 --rotate normal --pos 0x0 &
 
 # Keybindings
-pgrep -x sxhkd > /dev/null || sxhkd &
+pgrep -x sxhkd >/dev/null || sxhkd &
 
 # Fix Cursor
 xsetroot -cursor_name left_ptr &
@@ -39,8 +39,8 @@ fullscreen &
 [ -n "$(pidof xsettingsd)" ] || xsettingsd &
 
 # Polkit
-[ -n "$(pidof polkit-gnome-authentication-agent-1)" ] \
-  || /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+[ -n "$(pidof polkit-gnome-authentication-agent-1)" ] ||
+  /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 
 # Thunar daemon mode
 [ -n "$(pidof thunar)" ] || thunar --daemon &
@@ -54,29 +54,32 @@ $HOME/.fehbg &
 ## General Config
 config external_rules_command "$HOME/.config/bspwm/rules"
 
-bspc monitor -d 1 2 3 4 5 6 
+bspc monitor -d 1 2 3 4 5 6
 
-config border_width				    3
-config window_gap				      10
-config split_ratio			      0.50
+config border_width 3
+config window_gap 10
+config split_ratio 0.50
 
-config borderless_monocle		  true
-config gapless_monocle			  true
-config single_monocle			    false
-config focus_follows_pointer	true
+config borderless_monocle true
+config gapless_monocle true
+config single_monocle false
+config focus_follows_pointer true
 
-config top_padding    			  20
-config left_padding				    20
-config right_padding			    20
+config top_padding 20
+config left_padding 20
+config right_padding 20
 
-config pointer_modifier			  mod4
-config pointer_action1			  move
-config pointer_action2			  resize_side
-config pointer_action2			  resize_corner
+config pointer_modifier mod4
+config pointer_action1 move
+config pointer_action2 resize_side
+config pointer_action2 resize_corner
 
-config focused_border_color		"#0f0f0f"
-config normal_border_color		"#0f0f0f"
-config active_border_color		"#4c4c4c"
+config focused_border_color "#0f0f0f"
+config normal_border_color "#0f0f0f"
+config active_border_color "#4c4c4c"
 
 # Double borders
-[ -n "$(pidof 2bspwm)" ] && pkill -x 2bspwm; sleep 0.1; 2bspwm &
+[ -n "$(pidof 2bspwm)" ] && 
+pkill -x 2bspwm
+sleep 0.1
+2bspwm &

@@ -68,14 +68,15 @@ sleep 1 && print '(notification-card :class "notification-card notification-card
 }
 
 function compile_caches() {
-  tr '\n' ' ' < "$DUNST_LOG" && sed -i '/SL "'666'"/d' "$DUNST_LOG"
+  tr '\n' ' ' < "$DUNST_LOG" && \
+  sed -i '/SL "'666'"/d' "$DUNST_LOG"
 }
 
 function make_literal() {
   local caches="$(compile_caches)"
   [[ "$caches" == "" ]] \
-  && print '(box :class "notifications-empty-box" :height 480 :orientation "vertical" :space-evenly "false" (image :class "notifications-empty-banner" :valign "end" :vexpand true :path "assets/fallback.png" :image-width 100 :image-height 100) (label :vexpand true :valign "start" :class "notifications-empty-label" :text "No Notifications :("))' \
-  || print "(scroll :height 480 :vscroll true (box :orientation 'vertical' :class 'notification-scroll-box' :spacing 10 :space-evenly 'false' $caches))"
+  && print '(box :class "notifications-empty-box" :height 500 :orientation "vertical" :space-evenly "false" (image :class "notifications-empty-banner" :valign "end" :vexpand true :path "assets/fallback.png" :image-width 100 :image-height 100) (label :vexpand true :valign "start" :class "notifications-empty-label" :text "No Notifications :("))' \
+  || print "(scroll :height 500 :vscroll true (box :orientation 'vertical' :class 'notification-scroll-box' :spacing 10 :space-evenly 'false' $caches))"
 }
 
 function clear_logs() {

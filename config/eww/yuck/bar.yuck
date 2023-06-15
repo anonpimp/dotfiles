@@ -363,8 +363,7 @@
 )
 
 (defwindow bar
-	:stacking "fg"
-	:wm-ignore false		   
+	:wm-ignore false
 	:windowtype "dock"
 	:reserve (struts :distance "75px" :side "bottom")
 	:geometry (geometry :width "100%" :anchor "center bottom")

@@ -1,41 +1,31 @@
 body {
-	font-family: "Roboto";
+  font-family: "Roboto";
 }
 
 code {
-	color: #e7e7e7;
+  color: #e7e7e7;
 }
 
 .theme-dark {
-	--background-primary: #0f0f0f;
-	--background-primary-alt: #0f0f0f;
-	--background-secondary: #0f0f0f;
-	--background-secondary-alt: #0f0f0f;
-	--background-tertiary: #0f0f0f;
+  --background-primary: #0f0f0f;
+  --background-primary-alt: #0f0f0f;
+  --background-secondary: #0f0f0f;
+  --background-secondary-alt: #0f0f0f;
+  --background-tertiary: #0f0f0f;
 
   --header-primary: #c49ec4;
-  --header-secondary: #9ec49f;
-
-  --text-normal: #f0f0f0;
-  --text-muted: #cacaca;
-  --text-link: #cacaca;
-  --text-link-low-saturation: #c49ec4;
-  --text-positive: #c49ec4;
-  --text-warning: #ceb188;
-  --text-danger: #ceb188;
-  --text-brand: #cacaca;
 }
 
 /* No Scrollbar*/
 ::-webkit-scrollbar-thumb {
-	color: transparent;
+  color: transparent;
 }
 
 ::-webkit-scrollbar {
-	display: none;
+  display: none;
 }
 
 /* Home */
 .container-2cd8Mz {
-	background-color: #0f0f0f !important;
+  background-color: #0f0f0f !important;
 }

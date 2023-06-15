@@ -1,190 +1,190 @@
 .bar {
-	font-family: "SF Pro", "Font Awesome 6 Pro Solid";
-	background-color: $bg;
-	padding: .5rem 1.5rem .5rem 1.5rem;
+  font-family: "SF Pro", "Font Awesome 6 Pro Solid";
+  background-color: $bg;
+  padding: .5rem 1.5rem .5rem 1.5rem;
 
-	scale trough {
-		all: unset;
-		background-color: $black;
-		border-radius: 1rem;
-		min-height: .3rem;
-		min-width: 5rem;
-		margin-left: .3rem;
-		box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.3);
-	}
-	
-	.group,
-	.layout-button-box,
-	.workspaces,
-	.notification-icon-box {
-		background-color: $bg-alt;
-		padding: .4rem 1rem .4rem 1rem;
-		border-radius: .6rem;
-	}
-	
-	.power-icon,
-	.workspace-focused,
-	.pacman-icon,
-	.network-icon,
-	.volume-icon,
-	.notification-icon {
-		font-size: 1.4rem;
-	}
-	
-	.pacman-text,
-	.network-text,
-	.memory-info,
-	.cpu-info {
-		font-size: 1rem;
-		font-weight: bold;
-	}
-	
-	.power-icon {
-		color: $red;
-		margin-top: 0.1rem;
-	
-		&:hover {
-			color: darken($color: $red, $amount: 10%);
-		}
-	}
-	
-	.layout-button {
-		font-size: 1.6rem;
-		color: $fg;
-		background-color: $bg-alt;
-	
-		&:hover {
-			color: lighten($color: $cyan, $amount: 2%);
-		}
-	}
-	
-	.workspace-focused {
-		color: $green;
-	}
-	
-	.workspace-occupied {
-		font-size: 1rem;
-		color: lighten($color: $black, $amount: 8%);
-	
-		&:hover {
-			color: rgba($green, 0.5);
-		}
-	}
-	
-	.workspace-empty {
-		font-size: 1rem;
-		color: $black;
-	
-		&:hover {
-			color: lighten($color: $black, $amount: 6%);
-		}
-	}
-	
-	.workspace-urgent {
-		font-size: 1rem;
-		color: $green;
-	}
-	
-	.windowtitle {
-		font-size: 1rem;
-		font-weight: 500;
-	}
-	
-	.memory-inside,
-	.cpu-inside {
-		padding: .7rem;
-	}
-	
-	.memory-bar {
-		color: $magenta;
-		background-color: $black;
-	}
-	
-	.cpu-bar {
-		color: $yellow;
-		background-color: $black;
-	}
-	
-	.pacman-icon {
-		color: $yellow;
-	}
+  scale trough {
+    all: unset;
+    background-color: $black;
+    border-radius: 1rem;
+    min-height: .3rem;
+    min-width: 5rem;
+    margin-left: .3rem;
+    box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.3);
+  }
 
-	.pacman-text {
-		color: $fg;
-		margin-left: .3rem;
-	}
-	
-	.volume-bar trough highlight {
-		background: $green;
-		border-radius: 1rem;
-	}
-	
-	.network-text {
-		color: $fg;
-		margin-left: .3rem;
-	}
-	
-	.notification-icon {	
-		color: $fg;
-	}
+  .group,
+  .layout-button-box,
+  .workspaces,
+  .notification-icon-box {
+    background-color: $bg-alt;
+    padding: .4rem 1rem .4rem 1rem;
+    border-radius: .6rem;
+  }
 
-	.notification-count {
-		font-family: SF Mono;
-		color: $fg-alt;
-		font-weight: bold;
-	}
+  .power-icon,
+  .workspace-focused,
+  .pacman-icon,
+  .network-icon,
+  .volume-icon,
+  .notification-icon {
+    font-size: 1.4rem;
+  }
 
-	.clock {
-		font-family: SF Mono;
+  .pacman-text,
+  .network-text,
+  .memory-info,
+  .cpu-info {
+    font-size: 1rem;
+    font-weight: bold;
+  }
 
-		.clock-hour {
-			font-size: 1.2rem;
-			font-weight: bold;
-			color: $fg;
-		}
-		
-		.clock-minute {
-			font-size: 1.2rem;
-			color: $fg-alt;
-		}
-		
-		.clock-separator {
-			font-size: 1.2rem;
-			color: $fg-alt;
-			margin-top: -.1rem;
-		}
-	}
-	
-	.musicbar-art {
-		background-repeat: no-repeat;
-		background-size: cover;
-		background-position: center;
-		min-width: 2.6rem;
-		border-radius: 2rem;
-	}
-	
-	.musicbar-title {
-		font-size: 1rem;
-		font-weight: bold;
-		color: $fg;
-	}
-	
-	.musicbar-toggle-icon {
-		font-size: 1.25rem;
-	}
-	
-	.musicbar-previous-icon,
-	.musicbar-next-icon {
-		font-size: 1rem;
-	}
-	
-	.musicbar-previous-icon,
-	.musicbar-next-icon,
-	.musicbar-toggle-icon {
-		color: $fg;
-	
-		&:hover {
-			color: $magenta;
-		}
-	}
+  .power-icon {
+    color: $red;
+    margin-top: 0.1rem;
+
+    &:hover {
+      color: darken($color: $red, $amount: 10%);
+    }
+  }
+
+  .layout-button {
+    font-size: 1.6rem;
+    color: $fg;
+    background-color: $bg-alt;
+
+    &:hover {
+      color: lighten($color: $cyan, $amount: 2%);
+    }
+  }
+
+  .workspace-focused {
+    color: $green;
+  }
+
+  .workspace-occupied {
+    font-size: 1rem;
+    color: lighten($color: $black, $amount: 8%);
+
+    &:hover {
+      color: rgba($green, 0.5);
+    }
+  }
+
+  .workspace-empty {
+    font-size: 1rem;
+    color: $black;
+
+    &:hover {
+      color: lighten($color: $black, $amount: 6%);
+    }
+  }
+
+  .workspace-urgent {
+    font-size: 1rem;
+    color: $green;
+  }
+
+  .windowtitle {
+    font-size: 1rem;
+    font-weight: 500;
+  }
+
+  .memory-inside,
+  .cpu-inside {
+    padding: .7rem;
+  }
+
+  .memory-bar {
+    color: $magenta;
+    background-color: $black;
+  }
+
+  .cpu-bar {
+    color: $yellow;
+    background-color: $black;
+  }
+
+  .pacman-icon {
+    color: $yellow;
+  }
+
+  .pacman-text {
+    color: $fg;
+    margin-left: .3rem;
+  }
+
+  .volume-bar trough highlight {
+    background: $green;
+    border-radius: 1rem;
+  }
+
+  .network-text {
+    color: $fg;
+    margin-left: .3rem;
+  }
+
+  .notification-icon {
+    color: $fg;
+  }
+
+  .notification-count {
+    font-family: SF Mono;
+    color: $fg-alt;
+    font-weight: bold;
+  }
+
+  .clock {
+    font-family: SF Mono;
+
+    .clock-hour {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: $fg;
+    }
+
+    .clock-minute {
+      font-size: 1.2rem;
+      color: $fg-alt;
+    }
+
+    .clock-separator {
+      font-size: 1.2rem;
+      color: $fg-alt;
+      margin-top: -.1rem;
+    }
+  }
+
+  .musicbar-art {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    min-width: 2.6rem;
+    border-radius: 2rem;
+  }
+
+  .musicbar-title {
+    font-size: 1rem;
+    font-weight: bold;
+    color: $fg;
+  }
+
+  .musicbar-toggle-icon {
+    font-size: 1.25rem;
+  }
+
+  .musicbar-previous-icon,
+  .musicbar-next-icon {
+    font-size: 1rem;
+  }
+
+  .musicbar-previous-icon,
+  .musicbar-next-icon,
+  .musicbar-toggle-icon {
+    color: $fg;
+
+    &:hover {
+      color: $magenta;
+    }
+  }
 }

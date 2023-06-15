@@ -50,12 +50,18 @@
 
       .notification-time {
         font-size: .9rem;
+        font-weight: 500;
         color: $fg-alt;
       }
 
       .notification-close {
         color: $fg-alt;
         margin: .2rem 0rem;
+
+        &:hover {
+          color: $red;
+        }
+
       }
     }
 
@@ -87,10 +93,14 @@
         margin: .5rem 1rem 0rem 1rem;
 
         .screenshot-open {
-          background-color: $green;
+          background-color: darken($color: $green, $amount: 4%);
           color: $bg-alt;
           padding: .5rem;
           border-radius: 1rem;
+
+          &:hover {
+            background-color: lighten($color: $green, $amount: 4%);
+          }
         }
 
         .screenshot-delete {
@@ -98,6 +108,10 @@
           color: $red;
           padding: .5rem;
           border-radius: 1rem;
+
+          &:hover {
+            background-color: lighten($color: $black, $amount: 4%);
+          }
         }
       }
     }

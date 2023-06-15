@@ -172,9 +172,8 @@
 )
 
 (defwindow powermenu
-	:stacking "fg" 
-	:wm-ignore true
-	:windowtype "normal"
+	:wm-ignore false
+	:windowtype "dock"
 	:geometry (geometry :width "100%" :height "100%")
 	(powermenu)
 )

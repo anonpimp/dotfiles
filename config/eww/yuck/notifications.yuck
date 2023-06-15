@@ -212,10 +212,6 @@
 
 (defwindow notifications
   :wm-ignore false
-  :geometry (geometry 
-	:width "25%" 
-	:height "80%" 
-	:y "-6%" 
-	:anchor "bottom right")
+  :geometry (geometry :width "25%" :height "80%":y "-6%" :anchor "bottom right")
   (notifications)
 )
