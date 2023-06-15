@@ -56,33 +56,32 @@ function create_cache() {
   elif [[ $DUNST_APP_NAME == "Kotatogram Desktop" ]]; then
     ICON_PATH=$HOME/.config/eww/assets/telegram.png
 
-  elif [[ $DUNST_APP_NAME == "Discord" ]]; then
+  elif [[ $DUNST_APP_NAME == "discord" ]]; then
     ICON_PATH=$HOME/.config/eww/assets/discord.png
   fi
 
   # pipe stdout -> pipe cat stdin (cat conCATs multiple files and sends to stdout) -> absorb stdout from cat
   # concat: "one" + "two" + "three" -> notice how the order matters i.e. "one" will be prepended
-sleep 1 && print '(notification-card :class "notification-card notification-card-'$DUNST_URGENCY' notification-card-'$DUNST_APP_NAME'" :SL "'$DUNST_ID'" :L "dunstctl history-pop '$DUNST_ID'" :body "'$body'" :summary "'$summary'" :image "'$ICON_PATH'" :image_width "'$image_width'" :image_height "'$image_height'" :application "'$DUNST_APP_NAME'" :time "'$timestamp'" :show "'$show'" :screenshot "'$screenshot'")' \
+sleep 1 && print '(notification-card :id "'$DUNST_ID'" :pop "dunstctl history-pop '$DUNST_ID'" :body "'$body'" :summary "'$summary'" :image "'$ICON_PATH'" :image_width "'$image_width'" :image_height "'$image_height'" :app "'$DUNST_APP_NAME'" :time "'$timestamp'" :show "'$show'" :screenshot "'$screenshot'")' \
   | cat - "$DUNST_LOG" \
   | sponge "$DUNST_LOG"
 }
 
 function compile_caches() {
-  tr '\n' ' ' < "$DUNST_LOG" && \
-  sed -i '/SL "'666'"/d' "$DUNST_LOG"
+  tr '\n' ' ' < "$DUNST_LOG"
 }
 
 function make_literal() {
   local caches="$(compile_caches)"
   [[ "$caches" == "" ]] \
-  && print '(box :class "notifications-empty-box" :height 500 :orientation "vertical" :space-evenly "false" (image :class "notifications-empty-banner" :valign "end" :vexpand true :path "assets/fallback.png" :image-width 100 :image-height 100) (label :vexpand true :valign "start" :class "notifications-empty-label" :text "No Notifications :("))' \
-  || print "(scroll :height 500 :vscroll true (box :orientation 'vertical' :class 'notification-scroll-box' :spacing 10 :space-evenly 'false' $caches))"
+  && print '(box :class "notifications-empty-box" :height 500 :orientation "v" :space-evenly "false" (image :class "notifications-empty-banner" :valign "end" :vexpand "true" :path "assets/fallback.png" :image-width 100 :image-height 100) (label :vexpand "true" :valign "start" :class "notifications-empty-label" :text "No Notifications :("))' \
+  || print "(scroll :height 500 :vscroll true (box :orientation 'v' :class 'notification-scroll-box' :spacing 10 :space-evenly 'false' $caches))"
 }
 
 function clear_logs() {
   dunstctl history-clear
   print > "$DUNST_LOG"
-  rm -rf  $DUNST_CACHE_DIR/cover/*.png
+  rm -rf  $DUNST_CACHE_DIR/cover/*
   rm -rf  $DUNST_CACHE_DIR/timestamp/*
 }
 
@@ -91,7 +90,7 @@ function pop() {
 }
 
 function remove_line() { 
-  sed -i '/SL "'$1'"/d' "$DUNST_LOG"
+  sed -i '/id "'$1'"/d' "$DUNST_LOG"
 
   dunstctl history-rm $DUNST_ID
 

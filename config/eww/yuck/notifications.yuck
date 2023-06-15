@@ -1,6 +1,6 @@
 (defwidget dnd [icon color action waiting count]
   (eventbox
-		:class "notifications-dnd"
+    :class "notifications-dnd"
     :halign "start"
     :cursor "pointer"
     (box
@@ -11,8 +11,7 @@
       )
       (revealer 
         :reveal waiting
-        :transition "crossfade"
-        :duration "300ms"
+        :transition "fade"
         (label
           :class "notifications-dnd-count"
           :text count
@@ -23,11 +22,11 @@
 )
 
 (defwidget notifications []
-	(box 
+  (box 
     :class "notifications-box" 
     :space-evenly "false" 
     :orientation "v"
-	  (box 
+    (box 
       :class "notifications-header"
       :spacing 10
       (dnd
@@ -37,33 +36,31 @@
         :waiting {dunst-waiting == "0" ? "false" : "true"}
         :count dunst-waiting
       )
-	    (label 
+      (label 
         :class "notifications-header-label" 
         :text "Notifications"  
       )
       (revealer 
-				:reveal {dunst-count == "0" ? "false" : "true"}
-				:transition "slideleft"
-				:halign "end"
-				(box
-					:class "clear-box"
-					:space-evenly false
-					:spacing 20
-					(eventbox
-						:cursor "pointer"
-						(button 
-							:class "notifications-header-clear" 
-							:halign "end"
-							:onclick "scripts/logger.zsh clear" 
-							""
-						)
-					)
-				)
+        :reveal {dunst-count == "0" ? "false" : "true"}
+        :transition "slideleft"
+        :halign "end"
+        (box
+          :class "clear-box"
+          :space-evenly false
+          :spacing 20
+          (eventbox
+            :cursor "pointer"
+            (button 
+              :class "notifications-header-clear" 
+              :halign "end"
+              :onclick "scripts/logger.zsh clear" 
+              ""
+            )
+          )
+        )
       )
     )
-    (literal 
-      :content notifications-cards
-    )
+    (literal :content notifications-cards)
     (box 
       :class "calendar-box"
       (calendar 
@@ -103,20 +100,18 @@
   )
 )
 
-(defwidget notification-card 
-  [summary body image image_width image_height application time 
-  ?class ?SL ?L ?screenshot ?show]
+(defwidget notification-card [app time id image image_width image_height summary body pop ?screenshot ?show]
   (eventbox 
     :class "notification-eventbox"
-    :onclick L
+    :onclick pop
     (box 
       :space-evenly false 
       :orientation "v"
       (box 
         :class "notification-header-box"
-        (label 
+        (label
           :class "notification-app-name" 
-          :text "${application}" 
+          :text "${app}" 
           :halign "start"
         )
         (box
@@ -132,7 +127,7 @@
             :cursor "pointer"
             (button 
               :class "notification-close" 
-              :onclick "scripts/logger.zsh rm_id ${SL}"
+              :onclick "scripts/logger.zsh rm_id ${id}"
               :halign "end"
               "" 
             )
@@ -157,29 +152,29 @@
           :width image_width
           :height image_height
         )
-        (box 
-          :visible {screenshot ? false : show}
+        (box
           :class "notification-card"
+          :visible {screenshot ? false : show}
           :orientation "vertical"
           :class class
           :space-evenly false
           :hexpand true
           (label 
+            :class "notification-summary"
             :limit-width 30
             :wrap true
             :xalign 0
             :text summary
-            :class "notification-summary"
             :halign "start"
             :hexpand true
           )
-          (label 
+          (label
+            :class "notification-body"
             :limit-width 130
             :wrap true
             :xalign 0
             :text body
             :halign "start"
-            :class "notification-body"
           )
         )
         (box
@@ -194,12 +189,12 @@
               :timeout "1s"
               "Open"
             )
-          )
+          ) 
           (eventbox
             :cursor "pointer"
             (button
               :class "screenshot-delete"
-              :onclick "rm -f '${image}' && scripts/logger.zsh rm_id ${SL}"
+              :onclick "rm -f '${image}' && scripts/logger.zsh rm_id ${id}"
               :timeout "1s"
               "Delete"
             )

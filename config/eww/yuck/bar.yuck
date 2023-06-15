@@ -118,7 +118,7 @@
 			:value memory 
 			:class "memory-bar"
 			:clockwise false
-			:thickness 4
+			:thickness 3
 			(label 
 				:class "memory-inside" 
 				:tooltip "${memorymb}MB used" 
@@ -140,7 +140,7 @@
 		(circular-progress 
 			:class "cpu-bar" 
 			:value cpu 
-			:thickness 4
+			:thickness 3
 			(label 
 				:class "cpu-inside" 
 				:text ""
