@@ -1,4 +1,7 @@
 #!/bin/bash
+
+# requieres gpick xclip imagemagick
+
 TEMP_DIR=/tmp/xcolor
 HEX_COLOR=$(gpick -pso --no-newline)
 

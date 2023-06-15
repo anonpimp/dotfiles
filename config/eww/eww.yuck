@@ -12,7 +12,7 @@
 (defvar music-rev false)
 
 ;; Volume
-(defpoll volume-percent :interval "1s" "pamixer --get-volume-human | tr -d '%'")
+(defpoll volume-percent :interval "250ms" "pamixer --get-volume-human | tr -d '%'")
 (defvar volume-rev false)
 
 ;; Date
@@ -47,8 +47,8 @@
 ;; Workspaces
 (deflisten workspaces "scripts/workspaces")
 (deflisten windowtitle `xtitle -s | stdbuf -oL -eL uniq | cat`)
-(defpoll layout-status :interval "250ms" "bsp-layout get")
-(defpoll focused-desktop :interval "250ms" "bspc query -D -d focused --names")
+(defpoll layout-status :interval "1s" "bsp-layout get")
+(defpoll focused-desktop :interval "1s" "bspc query -D -d focused --names")
 
 ;; Updates
 (defpoll updates :interval "2h" "scripts/updates --get")
@@ -65,6 +65,7 @@
 (include "yuck/player.yuck")
 (include "yuck/powermenu.yuck")
 (include "yuck/notifications.yuck")
+(include "yuck/volume.yuck")
 
 (defwidget closer [window]
 	(eventbox 

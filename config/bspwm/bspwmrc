@@ -79,4 +79,4 @@ config normal_border_color "#0f0f0f"
 config active_border_color "#4c4c4c"
 
 # Double borders
-[ -n "$(pidof 2bspwm)" ] && pkill -x 2bspwm ; sleep 0.1 ; 2bspwm &
+[ -n "$(pidof 2bspwm)" ] && pkill -x 2bspwm || sleep 0.1 ; 2bspwm &

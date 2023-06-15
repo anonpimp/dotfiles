@@ -225,15 +225,14 @@
 				)
 			)
 			(revealer 
-				:class "volumebar-reveal" 
+				:class "volume-bar"
 				:transition "slideleft" 
 				:reveal volume-rev 
 				:duration "500ms"
 				(eventbox
 					:cursor "pointer"
 					:valign "center"
-					(scale 
-						:class "volume-bar" 
+					(scale  
 						:tooltip {volume-percent == "muted" ? "muted" : "${volume-percent}%" }
 						:value {volume-percent == "muted" ? "0" : volume-percent}  
 						:min 0 
