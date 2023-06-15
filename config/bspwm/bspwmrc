@@ -8,7 +8,7 @@ export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true'
 config() { bspc config "$@" & }
 
 ## Autostart
-#Xrandr
+# Xrandr
 xrandr --output HDMI-A-0 --mode 1920x1080 --rate 75.00 --rotate normal --pos 0x0 &
 
 # Keybindings
@@ -32,7 +32,7 @@ dunst &
 # Eww
 [ -n "$(pidof eww)" ] || eww daemon && eww open bar &
 
-# Fix eww bar above fullscreen windows
+# Fix eww above fullscreen windows
 fullscreen &
 
 # Xsettings
