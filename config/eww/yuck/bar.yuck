@@ -190,7 +190,7 @@
 			:space-evenly false		
 			(button 
 				:class "network-icon" 
-				:style {network-status == "up" ? "color: #A39EC4;" : "color: #dd6777;"}
+				:style {network-status == "down" ? "color: #dd6777;" : "color: #A39EC4;"}
 				{network-status == "up" ? "" : ""}
 			)
 			(revealer 
