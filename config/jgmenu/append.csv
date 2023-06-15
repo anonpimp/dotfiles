@@ -1,0 +1,8 @@
+^tag(bspwm)
+Reload,bspc wm -r,/home/klyn/.config/jgmenu/icons/repeat.svg
+
+^tag(exit)
+Suspend,systemctl suspend,/home/klyn/.config/jgmenu/icons/snooze.svg
+Reboot,systemctl reboot,/home/klyn/.config/jgmenu/icons/repeat.svg
+Poweroff,systemctl poweroff,/home/klyn/.config/jgmenu/icons/power-off.svg
+Log Out,bspc quit,/home/klyn/.config/jgmenu/icons/exit.svg

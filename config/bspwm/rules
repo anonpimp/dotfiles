@@ -1,0 +1,66 @@
+#!/bin/sh
+
+wid=$1
+class=$2
+instance=$3
+consequences=$4
+
+case "$class" in
+Brave-browser)
+	echo desktop=^2
+	;;
+esac
+
+case "$class" in
+KotatogramDesktop)
+	echo desktop=^3
+	;;
+esac
+
+case "$class" in
+Spotify|spotify)
+	echo 'desktop=^4 state=tiled follow=off'
+	;;
+esac
+
+case "$class" in
+discord)
+	echo 'desktop=^5 follow=off'
+	;;
+esac
+
+case "$class" in
+mpv)
+	echo 'desktop=^6 state=floating rectangle=1200x800+0+0 center=true follow=on'
+	;;
+esac
+
+case "$class" in
+Transmission-gtk|transmission-gtk)
+	echo 'desktop=^6 state=floating center=true follow=off'
+	;;
+esac
+
+case "$class" in
+'Apache NetBeans IDE 16')
+	echo 'desktop=^6 follow=on'
+	;;
+esac
+
+case "$class" in
+Viewnior)
+	echo state=floating
+	;;
+esac
+
+case "$class" in
+Thunar|thunar)
+	echo state=floating
+	;;
+esac
+
+case "$class" in
+Engrampa|engrampa)
+	echo state=floating
+	;;
+esac

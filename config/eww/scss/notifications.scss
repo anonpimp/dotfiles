@@ -1,0 +1,172 @@
+.notifications-box {
+  font-family: "SF Pro", "Font Awesome 6 Pro Solid";
+  background-color: $bg;
+  padding: 1.5rem 1rem 1.5rem 1rem;
+
+  .notifications-header {
+    font-size: 1.5rem;
+    color: $fg;
+    margin: 0rem 1rem 1rem 1rem;
+
+    .notifications-dnd {
+      font-size: 1.6rem;
+    }
+
+    .notifications-dnd-count {
+      font-size: 1.2rem;
+      margin-bottom: -.3rem;
+    }
+
+    .notifications-header-label {
+      font-weight: bold;
+    }
+
+    .notifications-header-clear {
+
+      &:hover {
+        color: lighten($color: $red, $amount: 3%);
+      }
+    }
+  }
+
+  .notification-eventbox {
+    background-color: $bg-alt;
+    border-radius: 1rem;
+
+    &:hover {
+      background-color: lighten($color: $bg-alt, $amount: 3%);
+    }
+
+    .notification-header-box {
+      font-size: 1rem;
+      background-color: darken($color: $bg-alt, $amount: 2%);
+      border-radius: 15px 15px 0px 0px;
+      padding: .5rem 1rem;
+
+      .notification-app-name {
+        font-weight: 500;
+        color: $fg-alt;
+      }
+
+      .notification-time {
+        font-size: .9rem;
+        color: $fg-alt;
+      }
+
+      .notification-close {
+        color: $fg-alt;
+        margin: .2rem 0rem;
+      }
+    }
+
+    .notification-content {
+      margin: 1rem;
+      .notification-image {
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        border-radius: 1rem;
+        box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.3);
+      }
+
+      .notification-summary {
+        font-weight: bold;
+        font-size: 1rem;
+        padding-bottom: .5rem;
+        color: $fg;
+      }
+
+      .notification-body {
+        color: $fg;
+        font-size: 1rem;
+      }
+
+      .screenshot-buttons-box {
+        font-size: 1rem;
+        font-weight: bold;
+        margin: .5rem 1rem 0rem 1rem;
+
+        .screenshot-open {
+          background-color: $green;
+          color: $bg-alt;
+          padding: .5rem;
+          border-radius: 1rem;
+        }
+
+        .screenshot-delete {
+          background-color: $black;
+          color: $red;
+          padding: .5rem;
+          border-radius: 1rem;
+        }
+      }
+    }
+  }
+
+  .notifications-empty-box {
+    .notifications-empty-label {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin: 1rem;
+      color: $fg;
+    }
+  }
+
+  .calendar-box {
+    font-size: 1.1rem;
+    font-weight: 500;
+    background-color: $bg-alt;
+    border-radius: 1rem;
+    padding: 1rem 1rem 0rem 1rem;
+    margin-top: 1rem;
+
+    calendar {
+      padding: .5rem;
+
+      &.button {
+        color: $fg-alt;
+
+        &:hover {
+          background-color: $black;
+          border-radius: 1rem;
+        }
+      }
+
+      &:selected {
+        color: $green;
+      }
+
+      &.header {
+        background-color: transparent;
+        border: none;
+      }
+
+      &.highlight {
+        color: $green;
+      }
+
+      &:indeterminate {
+        color: $gray;
+      }
+    }
+  }
+
+  .weather-box {
+    padding: 1rem .5rem 0rem .5rem;
+
+    .weather-desc {
+      font-size: 1.25rem;
+      color: $fg-alt;
+    }
+
+    .weather-temp {
+      font-size: 1.55rem;
+      font-weight: bolder;
+      color: $fg;
+    }
+
+    .weather-icon {
+      font-size: 3rem;
+    }
+  }
+}

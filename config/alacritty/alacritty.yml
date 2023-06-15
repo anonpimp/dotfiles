@@ -1,0 +1,60 @@
+import:
+  - ~/.config/alacritty/mountain.yml
+
+env:
+  TERM: xterm-256color
+
+window:
+  padding:
+    x: 25
+    y: 25
+
+scrolling:
+  history: 3000
+  multiplier: 3
+
+font:
+  normal:
+    family: 'Juminai'
+    style: Regular
+
+  bold:
+    family: 'Juminai'
+    style: Bold
+
+  italic:
+    family: 'Juminai'
+    style: Italic
+
+  bold_italic:
+    family: 'Juminai'
+    style: Bold Italic
+
+  size: 14.0
+
+  offset:
+    x: 0
+    y: 0
+
+  glyph_offset:
+    x: 0
+    y: 0
+
+  builtin_box_drawing: true
+
+mouse_bindings:
+  - { mouse: Middle, action: PasteSelection }
+
+mouse:
+  double_click: { threshold: 300 }
+  triple_click: { threshold: 300 }
+
+  hide_when_typing: true
+  save_to_clipboard: true
+
+cursor:
+  style: 'Underline'
+  vi_mode_style: 'Underline'
+
+key_bindings:
+  - { key: Return,   mods: Control|Shift, action: SpawnNewInstance }

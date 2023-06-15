@@ -1,0 +1,8 @@
+#!/bin/bash
+
+CACHE_TIME="$HOME/.cache/dunst/timestamp"
+CACHE_TIME_FILE="$CACHE_TIME/$DUNST_ID"
+
+[[ ! -d "$CACHE_TIME" ]] && mkdir -p "$CACHE_TIME"
+
+echo $(date +'%H:%M') > "$CACHE_TIME_FILE"

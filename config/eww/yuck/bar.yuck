@@ -1,0 +1,372 @@
+(defwidget power []
+	(eventbox
+		:cursor "pointer"
+		(button 
+			:class "power-icon" 
+			:valign "center"
+			:onclick "eww open --toggle powermenu" 
+			""
+		)
+	)
+)
+
+(defwidget layout [icon set reset]
+	(eventbox
+		:cursor "pointer"
+		(button 
+			:class "layout-button" 
+			:onclick set
+			:onmiddleclick reset
+			icon
+		)
+	)
+)
+
+(defwidget bsp-layout []
+	(box
+		:class "layout-button-box" 
+		(layout
+			:icon {layout-status == "rtall" ? "" : 
+				layout-status == "grid" ? "" :
+				layout-status == "tiled" ? "" :
+				layout-status == "wide" ? "" : ""}
+			:set "bsp-layout next --layouts rtall,wide,grid,tiled --master-size 40 --desktop ${focused-desktop}"
+			:reset "bsp-layout set tiled ${focused-desktop}"
+		)
+	)
+)
+
+(defwidget workspaces []
+	(literal
+		:content workspaces
+	)
+)
+
+(defwidget windowtitle []
+	(label
+		:class "windowtitle"
+		:limit-width 30
+		:text windowtitle
+	)
+)
+
+(defwidget music [] 
+	(eventbox 
+		:onhover "eww update music-rev=true" 
+		:onhoverlost "eww update music-rev=false"
+		(box 
+			:space-evenly false 
+			:spacing 8
+			(eventbox
+				:cursor "pointer"
+				:class "eventbox"
+				:halign "center"
+				:vexpand true
+				(button 
+					:class "musicbar-art" 
+					:onclick "eww open-many --toggle player-closer player" 
+					:style "background-image: url('${music-art}');"
+				)
+			)
+			(label 
+				:class "musicbar-title" 
+				:limit-width 25 
+				:text {music-title == "" ? "Play Something" : music-title}
+			)
+			(revealer 
+				:transition "slideright" 
+				:reveal music-rev 
+				:duration "500ms"
+				(box 
+					:spacing 10
+					(eventbox
+						:cursor "pointer"
+						(button 
+							:class "musicbar-previous-icon" 
+							:onclick "playerctl -p spotify previous" 
+							""
+						)
+					)
+					(eventbox
+						:cursor "pointer"
+						(button 
+							:class "musicbar-toggle-icon" 
+							:onclick "playerctl -p spotify play-pause" 
+							{music-status == "Playing" ? "" : music-status == "Paused" ? "" : ""}
+						)
+					)
+					(eventbox
+						:cursor "pointer"
+						(button 
+							:class "musicbar-next-icon" 
+							:onclick "playerctl -p spotify next" 
+							""
+						)
+					)
+				)
+			)
+		)
+	)
+)
+
+(defwidget memory []
+	(box 
+		:class "memory" 
+		:space-evenly false 
+		:spacing 5
+		(circular-progress 
+			:value memory 
+			:class "memory-bar"
+			:clockwise false
+			:thickness 4
+			(label 
+				:class "memory-inside" 
+				:tooltip "${memorymb}MB used" 
+				:text ""
+			)
+		)
+		(label 
+			:class "memory-info" 
+			:text "${memory}%"
+		)
+	)
+)
+
+(defwidget cpu []
+	(box 
+		:class "cpu" 
+		:space-evenly false 
+		:spacing 5
+		(circular-progress 
+			:class "cpu-bar" 
+			:value cpu 
+			:thickness 4
+			(label 
+				:class "cpu-inside" 
+				:text ""
+			)
+		)
+		(label 
+			:class "cpu-info" 
+			:text "${cpu}%"
+		)
+	)
+)
+
+(defwidget pacman []
+	(eventbox 
+		:onhover "eww update pacman-rev=true" 
+		:onhoverlost "eww update pacman-rev=false" 
+		(box 
+			:space-evenly false
+			(eventbox
+				:cursor "pointer"
+				(button 
+					:class "pacman-icon" 
+					:onclick "scripts/updates --up"
+					:timeout "3s"
+					:tooltip "click to update"
+					""
+				)
+			)	
+			(revealer 
+				:transition "slideright" 
+				:reveal pacman-rev 
+				:duration "300ms"
+				(label 
+					:class "pacman-text" 
+					:text updates
+				)
+			)
+		)
+	)
+)
+
+(defwidget network []
+	(eventbox 
+		:onhover "eww update network-rev=true" 
+		:onhoverlost "eww update network-rev=false"
+		(box 
+			:space-evenly false		
+			(button 
+				:class "network-icon" 
+				:style {network-status == "up" ? "color: #A39EC4;" : "color: #dd6777;"}
+				{network-status == "up" ? "" : ""}
+			)
+			(revealer 
+				:transition "slideleft" 
+				:reveal network-rev 
+				:duration "300ms"
+				(label 
+					:class "network-text" 
+					:text network-speed
+				)
+			)
+		)
+	)
+)
+
+(defwidget volume []
+	(eventbox 
+		:onhover "eww update volume-rev=true" 
+		:onhoverlost "eww update volume-rev=false"
+		(box 
+			:space-evenly false
+			(eventbox
+				:cursor "pointer"
+				(button 
+					:class "volume-icon" 
+					:style {volume-percent == 0 || volume-percent == "muted" ? "color: #dd6777;" : "color: #9ec49f;"} 
+					:tooltip {volume-percent == "muted" ? "muted" : "${volume-percent}%" } 
+					:onclick "pamixer -t" 
+					{volume-percent == 0 || volume-percent == "muted" ? "" : 
+					volume-percent < 30 ? "" : 
+					volume-percent < 75 ? "" : ""}
+				)
+			)
+			(revealer 
+				:class "volumebar-reveal" 
+				:transition "slideleft" 
+				:reveal volume-rev 
+				:duration "500ms"
+				(eventbox
+					:cursor "pointer"
+					:valign "center"
+					(scale 
+						:class "volume-bar" 
+						:tooltip {volume-percent == "muted" ? "muted" : "${volume-percent}%" }
+						:value {volume-percent == "muted" ? "0" : volume-percent}  
+						:min 0 
+						:max 101 
+						:onchange "pamixer -u && pamixer --set-volume {}"
+					)
+				)
+			)
+		)
+	)
+)
+
+(defwidget notifications-icon []
+	(box
+		:class "notification-icon-box"
+		:space-evenly false
+		(eventbox
+			:cursor "pointer"
+			(button
+				:class "notification-icon"
+				:onclick "eww open --toggle notifications"
+				:timeout "1s"
+				{notifications-dnd ? "" : ""}
+			)
+		)
+		(revealer 
+			:reveal {dunst-count == "0" ? "false" : "true"}
+			:transition "slideleft"
+			(label
+				:class "notification-count"
+				:text dunst-count
+				:style "margin-left: .5rem;"
+			)
+		)
+	)
+)
+
+(defwidget clock []
+	(box
+		:space-evenly false
+		:orientation "v"
+		(box
+			:space-evenly false
+			:spacing 15
+			:halign "end"
+			(label
+				:text weather-icon
+				:style "font-size: 1.2rem; color: ${weather-color};"
+			)
+			(box 
+				:class "clock" 
+				:space-evenly false 
+				:spacing 8
+				:halign "end"
+				(label 
+					:class "clock-hour" 
+					:text hour
+				)
+				(label 
+					:class "clock-separator" 
+					:text ""
+				)
+				(label 
+					:class "clock-minute" 
+					:text minute
+				)
+			)
+		)
+		(label
+			:text today
+			:style "font-weight: 500;"
+		)
+	)
+)
+
+(defwidget group []
+	(box 
+		:class "group"
+		:space-evenly false
+		:spacing 15
+		(pacman)
+		(network)
+		(volume)
+	)
+)
+
+(defwidget left []
+	(box 
+		:space-evenly false 
+		:halign "start" 
+		:spacing 15
+		(power)
+		(bsp-layout)
+		(workspaces)
+		(windowtitle)
+	)
+)
+
+(defwidget center []
+	(box 
+		:space-evenly false 
+		:halign "center"
+		(music)
+	)
+)
+
+(defwidget right []
+	(box 
+		:space-evenly false 
+		:halign "end" 
+		:spacing 15
+		(memory)
+		(cpu)
+		(group)
+		(notifications-icon)
+		(clock)
+	)
+)
+
+(defwidget bar []
+	(box 
+		:class "bar"
+		(left)
+		(center)
+		(right)
+	)
+)
+
+(defwindow bar
+	:stacking "fg"
+	:wm-ignore false		   
+	:windowtype "dock"
+	:reserve (struts :distance "75px" :side "bottom")
+	:geometry (geometry :width "100%" :anchor "center bottom")
+	(bar)
+)

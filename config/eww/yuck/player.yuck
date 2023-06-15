@@ -1,0 +1,157 @@
+(defwidget shuffle [color action status]
+	(eventbox
+		:cursor "pointer"
+		(button 
+			:onclick action
+			:style "color: ${color}"
+			:tooltip status
+			""
+		)
+	)
+)
+
+(defwidget loop [icon color status action]
+	(eventbox
+		:cursor "pointer"
+		(button 
+			:onclick action
+			:style "color: ${color}"
+			:tooltip status
+			icon
+		)
+	)
+)
+
+(defwidget player []
+	(box 
+		:class "player" 
+		:space-evenly false
+		(box 
+			:class "player-art" 
+			:style "background-image: url('${music-art}')"
+			(box 
+				:class "player-info" 
+				:space-evenly false 
+				:orientation "v" 
+				:spacing 10
+				(box 
+					:class "top-icons"
+					(box 
+						:space-evenly false 
+						:spacing 10
+						(shuffle
+							:action "playerctl -p spotify shuffle toggle"
+							:color {shuffle == "On" ? "#9ec49f" : "#a0a0a0"}
+							:status shuffle
+						)
+						(loop
+							:action 
+							{loop == "None" ? "playerctl -p spotify loop playlist" : 
+							loop == "Playlist" ? "playerctl -p spotify loop track" :
+							"playerctl -p spotify loop none"}
+							:icon 
+							{loop == "None" ? "" :
+							loop == "Playlist" ? "" :
+							""}
+							:color {loop != "None" ? "#9ec49f" : "#a0a0a0"}
+							:status loop
+						)
+					)
+					(box
+						(button 
+							:class "spotify-icon" 
+							:halign "end" 
+							""
+						)
+					)
+				)
+				(label 
+					:class "player-title" 
+					:halign "start" 
+					:text {music-title == "" ? "Play Something" : music-title} 
+					:limit-width 30
+				)
+				(label 
+					:class "player-artist" 
+					:halign "start" 
+					:text music-artist 
+					:limit-width 35
+				)
+				(box
+					:space-evenly false
+					:orientation "v"
+					:valign "end"
+					:spacing 6
+					:vexpand true
+					(box 
+						:class "player-bar" 
+						(eventbox
+							:cursor "pointer"
+							(scale 
+								:onchange "playerctl -p spotify position {}"
+								:min 0 
+								:max music-lengths 
+								:value music-positions
+							)
+						)
+					)
+					(box 
+						:class "player-position" 
+						:space-evenly false 
+						:valign "end"
+						:spacing 3
+						(label 
+							:class "player-time"
+							:text {music-position == "" ? "0:00" : music-position} 
+						)
+						(label :class "player-time" :text "/")
+						(label 
+							:class "player-time"
+							:text {music-length == "" ? "0:00" 
+							: music-length} 
+						)	
+					)
+				)
+			)
+		)
+		(box 
+			:class "player-controls" 
+			:orientation "v"
+			:valign "center"
+			:hexpand true
+			:space-evenly false
+			:spacing 30
+			(eventbox
+				:cursor "pointer"
+				(button 
+					:class "player-previous" 
+					:onclick "playerctl -p spotify previous" 
+					""
+				)
+			)
+			(eventbox
+				:cursor "pointer"
+				(button 
+					:class "player-toggle" 
+					:onclick "playerctl -p spotify play-pause" 
+					{music-status == "Playing" ? "" : music-status == "Paused" ? "" : ""}
+				)
+			)
+			(eventbox
+				:cursor "pointer"
+				(button 
+					:class "player-next" 
+					:onclick "playerctl -p spotify next" 
+					""
+				)
+			)
+		)		
+	)
+)
+
+(defwindow player
+	:wm-ignore false
+	:windowtype "dock"
+	:geometry (geometry :y "-6%" :anchor "bottom center")
+	(player)
+)

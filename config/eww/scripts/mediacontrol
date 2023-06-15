@@ -1,0 +1,80 @@
+#!/bin/bash
+
+[[ -n $(pgrep spotify) ]] && Control="spotify"
+
+case $1 in
+--title)
+	playerctl -p $Control metadata -f {{title}}
+	;;
+
+--artist)
+	playerctl -p $Control metadata -f {{artist}}
+	;;
+
+--status)
+	playerctl -p $Control status
+	;;
+
+--position)
+	playerctl -p $Control position -f '{{ duration(position) }}'
+	;;
+
+--length)
+	playerctl -p $Control metadata -f '{{ duration(mpris:length) }}'
+	;;
+
+--cover)
+	# saves covers here
+	Cover=/tmp/cover.png
+	# if cover not found in metadata use this instead
+	bkpCover=~/.config/eww/assets/music-fallback.png
+
+	albumart="$(playerctl --player=$Control metadata mpris:artUrl | sed -e 's/open.spotify.com/i.scdn.co/g')"
+	[ $(playerctl --player=$Control metadata mpris:artUrl) ] && curl -s "$albumart" --output $Cover || cp $bkpCover $Cover
+	echo "$Cover"
+	;;
+
+--position)
+	time=$(playerctl --player=$Control position --format "{{ duration(position) }}")
+	[ -z "$time" ] && time="0:00"
+	echo "$time"
+	;;
+
+--positions)
+	position=$(playerctl --player=$Control metadata --format "{{ duration(position) }}")
+	[ -z "$position" ] && position="0:00"
+	time=$position
+	if [[ $time == *:* ]]; then
+		minutes=${time%%:*}
+		seconds=${time#*:}
+		seconds=$((${seconds#0}))
+	else
+		minutes=${time:0:1}
+		seconds=${time:2:2}
+	fi
+	total_seconds=$((minutes * 60 + seconds))
+	echo $total_seconds
+	;;
+
+--length)
+	length=$(playerctl --player=$Control metadata --format "{{ duration(mpris:length) }}")
+	[ -z "$length" ] && length="0:00"
+	echo "$length"
+	;;
+
+--lengths)
+	length=$(playerctl --player=$Control metadata --format "{{ duration(mpris:length) }}")
+	[ -z "$length" ] && length="0:00"
+	time=$length
+	if [[ $time == *:* ]]; then
+		minutes=${time%%:*}
+		seconds=${time#*:}
+		seconds=$((${seconds#0}))
+	else
+		minutes=${time:0:1}
+		seconds=${time:2:2}
+	fi
+	total_seconds=$((minutes * 60 + seconds))
+	echo $total_seconds
+	;;
+esac

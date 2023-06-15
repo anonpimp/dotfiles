@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 512 512"
+   version="1.1"
+   id="svg2646"
+   sodipodi:docname="crop.svg"
+   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs2650" />
+  <sodipodi:namedview
+     id="namedview2648"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#505050"
+     showgrid="false"
+     inkscape:zoom="1.7109375"
+     inkscape:cx="256"
+     inkscape:cy="254.83105"
+     inkscape:window-width="1774"
+     inkscape:window-height="874"
+     inkscape:window-x="50"
+     inkscape:window-y="110"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg2646" />
+  <!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+  <path
+     d="M256 192l-39.5-39.5c4.9-12.6 7.5-26.2 7.5-40.5C224 50.1 173.9 0 112 0S0 50.1 0 112s50.1 112 112 112c14.3 0 27.9-2.7 40.5-7.5L192 256l-39.5 39.5c-12.6-4.9-26.2-7.5-40.5-7.5C50.1 288 0 338.1 0 400s50.1 112 112 112s112-50.1 112-112c0-14.3-2.7-27.9-7.5-40.5L499.2 76.8c7.1-7.1 7.1-18.5 0-25.6c-28.3-28.3-74.1-28.3-102.4 0L256 192zm22.6 150.6L396.8 460.8c28.3 28.3 74.1 28.3 102.4 0c7.1-7.1 7.1-18.5 0-25.6L342.6 278.6l-64 64zM64 112a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm48 240a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"
+     id="path2644"
+     style="fill:#a39ec4;fill-opacity:1" />
+  <path
+     style="fill:#a39ec4;fill-opacity:1"
+     d="m 441.86301,481.52996 c -12.44021,-1.33934 -23.82415,-5.42524 -34.48401,-12.37693 -3.08209,-2.00994 -19.41096,-17.95858 -66.19532,-64.6539 l -62.10399,-61.98579 31.70989,-31.7139 31.70989,-31.71389 79.09137,79.05083 c 58.99218,58.96195 79.48765,79.79349 80.65074,81.97321 1.338,2.50751 1.55937,3.62764 1.55937,7.89041 0,4.25309 -0.22331,5.3886 -1.55174,7.89041 -5.25998,9.90599 -24.44589,21.40966 -40.91885,24.53453 -4.85587,0.92115 -15.5415,1.52769 -19.46735,1.10502 z"
+     id="path3132" />
+</svg>
