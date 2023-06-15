@@ -1,6 +1,3 @@
-export PATH="$HOME/.local/bin:$PATH"
-export EDITOR=nvim
-
 if [ "$TERM" = "linux" ]; then
     printf '%b' '\e]P00f0f0f
                  \e]P1ac8aac
