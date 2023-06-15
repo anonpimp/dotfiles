@@ -1,18 +1,18 @@
-#!/bin/bash
+#!/bin/sh
 
 ## Envs
 export _JAVA_AWT_WM_NONREPARENTING=1
 export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true'
 
 ## Functions
-config() { bspc config "$@" &;}
+config() { bspc config "$@" & }
 
 ## Autostart
-# Xrandr
+#Xrandr
 xrandr --output HDMI-A-0 --mode 1920x1080 --rate 75.00 --rotate normal --pos 0x0 &
 
 # Keybindings
-pgrep -x sxhkd >/dev/null || sxhkd &
+pgrep -x sxhkd > /dev/null || sxhkd &
 
 # Fix Cursor
 xsetroot -cursor_name left_ptr &
@@ -79,7 +79,4 @@ config normal_border_color "#0f0f0f"
 config active_border_color "#4c4c4c"
 
 # Double borders
-[ -n "$(pidof 2bspwm)" ] && 
-pkill -x 2bspwm
-sleep 0.1
-2bspwm &
+[ -n "$(pidof 2bspwm)" ] && pkill -x 2bspwm ; sleep 0.1 ; 2bspwm &

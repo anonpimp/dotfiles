@@ -53,8 +53,8 @@ mouse:
   save_to_clipboard: true
 
 cursor:
-  style: 'Underline'
-  vi_mode_style: 'Underline'
+  style: 'Beam'
+  vi_mode_style: 'Beam'
 
 key_bindings:
   - { key: Return,   mods: Control|Shift, action: SpawnNewInstance }
