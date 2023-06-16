@@ -55,11 +55,10 @@
 (defvar pacman-rev false)
 
 ;; Notification
-(defpoll dunst-history :interval "1s" "dunstctl history")
 (defpoll dunst-count :interval "1s" "dunstctl count history")
 (defpoll dunst-waiting :interval "1s" "dunstctl count waiting")
 (defpoll notifications-dnd :interval "1s" "dunstctl is-paused")
-(deflisten notifications-cards "scripts/logger.zsh subscribe")
+(deflisten notifications "scripts/logger.zsh subscribe")
 
 (include "yuck/bar.yuck")
 (include "yuck/player.yuck")

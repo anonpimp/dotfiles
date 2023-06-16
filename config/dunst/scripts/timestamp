@@ -1,7 +1,7 @@
 #!/bin/bash
 
 CACHE_TIME="$HOME/.cache/dunst/timestamp"
-CACHE_TIME_FILE="$CACHE_TIME/$DUNST_ID"
+CACHE_TIME_FILE="$CACHE_TIME/$DUNST_TIMESTAMP"
 
 [[ ! -d "$CACHE_TIME" ]] && mkdir -p "$CACHE_TIME"
 

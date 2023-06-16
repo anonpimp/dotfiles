@@ -3,7 +3,7 @@
 [global]
 width = (100, 350)
 height = 150
-origin = "top-right"
+origin = "top-left"
 offset = "20x20"
 notification_limit = 3
 transparency = 0
@@ -31,7 +31,7 @@ progress_bar_frame_width = 0
 ignore_newline = false
 alignment = left
 show_indicators = true
-history_length = 25
+history_length = 50
 idle_threshold = 120
 show_age_threshold = 60
 sticky_history = true

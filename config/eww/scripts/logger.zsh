@@ -23,11 +23,10 @@ function create_cache() {
   [ "$DUNST_BODY" = "" ] && body="Body unavailable." || body="$(print "$DUNST_BODY" | tr '\n' ' ' | tr '"' "'")"
   # | recode html)"
 
+  local timestamp=$(cat $DUNST_CACHE_DIR/timestamp/$DUNST_TIMESTAMP)
   local image_width=50
   local image_height=50
-
   local screenshot=false
-  local show=true
 
   if [[ $DUNST_APP_NAME == "Spotify" || $DUNST_APP_NAME == "Color Picker" ]]; then
     image_width=90
@@ -36,10 +35,7 @@ function create_cache() {
     image_width=420
     image_height=220
     screenshot=true
-    show=false
   fi
-
-  local timestamp=$(cat $DUNST_CACHE_DIR/timestamp/$DUNST_ID)
 
   if [[ $DUNST_ICON_PATH == "" ]]; then
     ICON_PATH=/usr/share/icons/Papirus-Dark/128x128/apps/$DUNST_APP_NAME.svg
@@ -62,7 +58,7 @@ function create_cache() {
 
   # pipe stdout -> pipe cat stdin (cat conCATs multiple files and sends to stdout) -> absorb stdout from cat
   # concat: "one" + "two" + "three" -> notice how the order matters i.e. "one" will be prepended
-sleep 1 && print '(notification-card :id "'$DUNST_ID'" :pop "dunstctl history-pop '$DUNST_ID'" :body "'$body'" :summary "'$summary'" :image "'$ICON_PATH'" :image_width "'$image_width'" :image_height "'$image_height'" :app "'$DUNST_APP_NAME'" :time "'$timestamp'" :show "'$show'" :screenshot "'$screenshot'")' \
+sleep 1 && print '(notification-card :id "'$DUNST_ID'" :app "'$DUNST_APP_NAME'" :summary "'$summary'" :body "'$body'" :image "'$ICON_PATH'" :image_width "'$image_width'" :image_height "'$image_height'" :time "'$timestamp'" :screenshot "'$screenshot'" :pop "dunstctl history-pop '$DUNST_ID'")' \
   | cat - "$DUNST_LOG" \
   | sponge "$DUNST_LOG"
 }
@@ -93,6 +89,7 @@ function remove_line() {
   sed -i '/id "'$1'"/d' "$DUNST_LOG"
 
   dunstctl history-rm $DUNST_ID
+  rm -f $DUNST_LOG/$DUNST_ID
 
   if [[ -z $(cat $DUNST_LOG) ]]; then
     dunstctl history-clear

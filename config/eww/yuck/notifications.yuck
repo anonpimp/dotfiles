@@ -24,7 +24,7 @@
 (defwidget notifications []
   (box 
     :class "notifications-box" 
-    :space-evenly "false" 
+    :space-evenly false 
     :orientation "v"
     (box 
       :class "notifications-header"
@@ -33,7 +33,7 @@
         :action "dunstctl set-paused toggle"
         :icon {notifications-dnd ? "" : ""}
         :color {notifications-dnd ? "#dd6777;" : "#ceb188;"}
-        :waiting {dunst-waiting == "0" ? "false" : "true"}
+        :waiting {dunst-waiting == "0" ? false : true}
         :count dunst-waiting
       )
       (label 
@@ -41,8 +41,8 @@
         :text "Notifications"  
       )
       (revealer 
-        :reveal {dunst-count == "0" ? "false" : "true"}
-        :transition "slideleft"
+        :reveal {dunst-count == "0" ? false : true}
+        :transition "fade"
         :halign "end"
         (box
           :class "clear-box"
@@ -60,7 +60,7 @@
         )
       )
     )
-    (literal :content notifications-cards)
+    (literal :content notifications)
     (box 
       :class "calendar-box"
       (calendar 
@@ -100,10 +100,9 @@
   )
 )
 
-(defwidget notification-card [app time id image image_width image_height summary body pop ?screenshot ?show]
+(defwidget notification-card [app time id image image_width image_height summary body pop ?screenshot]
   (eventbox 
     :class "notification-eventbox"
-    :onclick pop
     (box 
       :space-evenly false 
       :orientation "v"
@@ -137,26 +136,26 @@
       (box  
         :class "notification-content"
         :orientation {screenshot ? "v" : "h"}
-        :space-evenly "false" 
+        :space-evenly false 
         :spacing 10
         (label 
           :class "screenshot-name" 
           :visible screenshot 
           :text image
         )
-        (box 
+        (button
           :class "notification-image"
           :style "background-image: url('${image}');"
           :halign "center"
           :valign "center"
           :width image_width
           :height image_height
+          :onclick pop
         )
         (box
           :class "notification-card"
-          :visible {screenshot ? false : show}
+          :visible {screenshot ? false : true}
           :orientation "vertical"
-          :class class
           :space-evenly false
           :hexpand true
           (label 
@@ -207,6 +206,6 @@
 
 (defwindow notifications
   :wm-ignore false
-  :geometry (geometry :width "25%" :height "80%":y "-6%" :anchor "bottom right")
+  :geometry (geometry :width "25%" :height "80%" :y "-6%" :anchor "bottom right")
   (notifications)
 )
