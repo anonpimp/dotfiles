@@ -62,9 +62,6 @@ highlight = "#c49ec4"
 [logger]
 script = ~/.config/eww/scripts/logger.zsh
 
-[timestamp]
-script = ~/.config/dunst/scripts/timestamp
-
 [volume]
 appname = "Volume"
 history_ignore = true

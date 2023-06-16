@@ -3,7 +3,6 @@
 function _set_vars() {
   typeset -gx DUNST_CACHE_DIR="$HOME/.cache/dunst"
   typeset -gx DUNST_LOG="$DUNST_CACHE_DIR/notifications.txt"
-  typeset -gx ICON_THEME="Papirus-Dark"
 }
 _set_vars
 
@@ -23,7 +22,6 @@ function create_cache() {
   [ "$DUNST_BODY" = "" ] && body="Body unavailable." || body="$(print "$DUNST_BODY" | tr '\n' ' ' | tr '"' "'")"
   # | recode html)"
 
-  local timestamp=$(cat $DUNST_CACHE_DIR/timestamp/$DUNST_TIMESTAMP)
   local image_width=50
   local image_height=50
   local screenshot=false
@@ -37,13 +35,6 @@ function create_cache() {
     screenshot=true
   fi
 
-  if [[ $DUNST_ICON_PATH == "" ]]; then
-    ICON_PATH=/usr/share/icons/Papirus-Dark/128x128/apps/$DUNST_APP_NAME.svg
-  else
-    FIXED_ICON_PATH=$(echo ${DUNST_ICON_PATH} | sed 's/32x32/48x48/g')
-    ICON_PATH=$FIXED_ICON_PATH
-  fi
-
   local SPOTIFY_TITLE=$(echo $DUNST_SUMMARY | tr '/' '-')
 
   if [[ $DUNST_APP_NAME == "Spotify" ]]; then
@@ -54,11 +45,13 @@ function create_cache() {
 
   elif [[ $DUNST_APP_NAME == "discord" ]]; then
     ICON_PATH=$HOME/.config/eww/assets/discord.png
+  else
+    ICON_PATH=$(echo ${DUNST_ICON_PATH} | sed 's/32x32/48x48/g')
   fi
 
   # pipe stdout -> pipe cat stdin (cat conCATs multiple files and sends to stdout) -> absorb stdout from cat
   # concat: "one" + "two" + "three" -> notice how the order matters i.e. "one" will be prepended
-sleep 1 && print '(notification-card :id "'$DUNST_ID'" :app "'$DUNST_APP_NAME'" :summary "'$summary'" :body "'$body'" :image "'$ICON_PATH'" :image_width "'$image_width'" :image_height "'$image_height'" :time "'$timestamp'" :screenshot "'$screenshot'" :pop "dunstctl history-pop '$DUNST_ID'")' \
+sleep 1 && print '(notification-card :id "'$DUNST_ID'" :app "'$DUNST_APP_NAME'" :summary "'$summary'" :body "'$body'" :image "'$ICON_PATH'" :image_width "'$image_width'" :image_height "'$image_height'" :time "'$(date +'%H:%M')'" :screenshot "'$screenshot'" :pop "dunstctl history-pop '$DUNST_ID'")' \
   | cat - "$DUNST_LOG" \
   | sponge "$DUNST_LOG"
 }
@@ -77,8 +70,7 @@ function make_literal() {
 function clear_logs() {
   dunstctl history-clear
   print > "$DUNST_LOG"
-  #rm -rf  $DUNST_CACHE_DIR/cover/*
-  rm -rf  $DUNST_CACHE_DIR/timestamp/*
+  rm -rf  $DUNST_CACHE_DIR/cover/*
 }
 
 function pop() {
