@@ -166,7 +166,7 @@
 					:onclick "scripts/updates --up"
 					:timeout "3s"
 					:tooltip "click to update"
-					""
+					""
 				)
 			)	
 			(revealer 

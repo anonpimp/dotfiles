@@ -1,8 +1,9 @@
 (defwidget powermenu-close []
 	(box
 		:class "close-box"
-		:valign "start"
+		:valign "end"
 		:halign "start"
+    :vexpand true
 		(eventbox
 			:cursor "pointer"
 			(button
@@ -163,11 +164,11 @@
 		:class "powermenu-box" 
 		:space-evenly false
 		:orientation "v"
-		(powermenu-close)
 		(powermenu-clock)
 		(powermenu-weather)
 		(powermenu-profile)
 		(powermenu-buttons)
+    (powermenu-close)
 	)
 )
 
