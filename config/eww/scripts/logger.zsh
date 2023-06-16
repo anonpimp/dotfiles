@@ -71,7 +71,7 @@ function make_literal() {
   local caches="$(compile_caches)"
   [[ "$caches" == "" ]] \
   && print '(box :class "notifications-empty-box" :height 500 :orientation "v" :space-evenly "false" (image :class "notifications-empty-banner" :valign "end" :vexpand "true" :path "assets/fallback.png" :image-width 100 :image-height 100) (label :vexpand "true" :valign "start" :class "notifications-empty-label" :text "No Notifications :("))' \
-  || print "(scroll :height 500 :vscroll true (box :orientation 'v' :class 'notification-scroll-box' :spacing 10 :space-evenly 'false' $caches))"
+  || print "(scroll :height 500 :vscroll true (box :orientation 'v' :class 'notifications-scroll-box' :spacing 10 :space-evenly 'false' $caches))"
 }
 
 function clear_logs() {

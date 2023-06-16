@@ -29,7 +29,7 @@ progress_bar_max_width = 300
 progress_bar_frame_width = 0
 
 ignore_newline = false
-alignment = left
+alignment = center
 show_indicators = true
 history_length = 50
 idle_threshold = 120

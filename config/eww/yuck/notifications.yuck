@@ -169,9 +169,10 @@
           )
           (label
             :class "notification-body"
-            :limit-width 130
+            :limit-width 100
             :wrap true
             :xalign 0
+            :justify "left"
             :text body
             :halign "start"
           )
