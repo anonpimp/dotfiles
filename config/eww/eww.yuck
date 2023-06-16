@@ -16,16 +16,17 @@
 (defvar volume-rev false)
 
 ;; Date
-(defpoll hour :interval "1s" "date '+%H'")
-(defpoll minute :interval "1s" "date '+%M'")
+(defpoll hour :interval "1m" "date '+%H'")
+(defpoll minute :interval "1m" "date '+%M'")
 (defpoll today :interval "1h" "date '+%A, %B %d'")
-(defpoll calendar-day :interval "1h" "date '+%d'")
-(defpoll calendar-month :interval "1h" "date '+%m'")
-(defpoll calendar-year :interval "1h" "date '+%Y'")
+(defpoll day :interval "1h" "date '+%d'")
+(defpoll month :interval "1h" "date '+%m'")
+(defpoll year :interval "1h" "date '+%Y'")
 
 ;; Profile
 (defvar profile-image "assets/profile.jpg")
 (defpoll profile-name :interval "24h" "scripts/details --name")
+(defpoll uptime :interval "1m" "uptime -p | sed -e 's/up //g'")
 
 ;; Weather
 (defpoll weather-icon :interval "1h" "scripts/weather --icon")
@@ -33,15 +34,8 @@
 (defpoll weather-desc :interval "1h" "scripts/weather --desc")
 (deflisten weather-color "scripts/weather --hex")
 
-;; System
-(defpoll uptime :interval "1m" "uptime -p | sed -e 's/up //g'")
-(defpoll cpu :interval "5s" "scripts/system --cpu")
-(defpoll memory :interval "5s" "scripts/system --mem")
-(defpoll memorymb :interval "5s" "scripts/system --memb")
-
 ;; Network
 (defpoll network-status :interval "1s" `cat /sys/class/net/e*/operstate`)
-(defpoll network-speed :interval "1s" "scripts/netspeed --down")
 (defvar network-rev false)
 
 ;; Workspaces
@@ -52,7 +46,7 @@
 
 ;; Updates
 (defpoll updates :interval "2h" "scripts/updates --get")
-(defvar pacman-rev false)
+(defvar updates-rev false)
 
 ;; Notification
 (defpoll dunst-count :interval "1s" "dunstctl count history")

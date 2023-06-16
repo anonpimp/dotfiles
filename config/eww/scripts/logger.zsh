@@ -77,7 +77,7 @@ function make_literal() {
 function clear_logs() {
   dunstctl history-clear
   print > "$DUNST_LOG"
-  rm -rf  $DUNST_CACHE_DIR/cover/*
+  #rm -rf  $DUNST_CACHE_DIR/cover/*
   rm -rf  $DUNST_CACHE_DIR/timestamp/*
 }
 
@@ -85,11 +85,9 @@ function pop() {
   sed -i '1d' "$DUNST_LOG" 
 }
 
-function remove_line() { 
+function remove_line() {
+  dunstctl history-rm "$1"
   sed -i '/id "'$1'"/d' "$DUNST_LOG"
-
-  dunstctl history-rm $DUNST_ID
-  rm -f $DUNST_LOG/$DUNST_ID
 
   if [[ -z $(cat $DUNST_LOG) ]]; then
     dunstctl history-clear

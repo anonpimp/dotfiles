@@ -19,19 +19,19 @@ print_workspaces() {
     if [ "$(contains "$focused_desktop" "$d")" -eq 1 ]; then
       ws=$d
       icon=""
-      class="workspace-focused"
+      class="focused"
     elif [ "$(contains "$occupied_desktops" "$d")" -eq 1 ]; then
       ws=$d
       icon=""
-      class="workspace-occupied"
+      class="occupied"
     elif [ "$(contains "$urgent_desktops" "$d")" -eq 1 ]; then
       ws=$d
       icon=""
-      class="workspace-urgent"
+      class="urgent"
     else
       ws=$d
       icon=""
-      class="workspace-empty"
+      class="empty"
     fi
 
     buf="$buf (eventbox :cursor \"pointer\" (button :class \"$class\" :onclick \"bspc desktop -f $ws\" \"$icon\"))"
@@ -41,6 +41,6 @@ print_workspaces() {
 
 # Listen to bspwm changes
 print_workspaces
-bspc subscribe desktop node_transfer | while read -r _; do
+bspc subscribe desktop node_transfer | while read -r _ ; do
   print_workspaces &
 done

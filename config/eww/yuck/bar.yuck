@@ -114,20 +114,19 @@
 		:class "memory" 
 		:space-evenly false 
 		:spacing 5
-		(circular-progress 
-			:value memory 
+		(circular-progress  
 			:class "memory-bar"
+			:value "${round(EWW_RAM.used_mem_perc, 0)}"
 			:clockwise false
-			:thickness 3
+			:thickness 4
 			(label 
 				:class "memory-inside" 
-				:tooltip "${memorymb}MB used" 
 				:text ""
 			)
 		)
 		(label 
 			:class "memory-info" 
-			:text "${memory}%"
+			:text "${round(EWW_RAM.used_mem_perc, 0)}%"
 		)
 	)
 )
@@ -139,8 +138,8 @@
 		:spacing 5
 		(circular-progress 
 			:class "cpu-bar" 
-			:value cpu 
-			:thickness 3
+			:value "${round(EWW_CPU.avg, 0)}" 
+			:thickness 4
 			(label 
 				:class "cpu-inside" 
 				:text ""
@@ -148,21 +147,21 @@
 		)
 		(label 
 			:class "cpu-info" 
-			:text "${cpu}%"
+			:text "${round(EWW_CPU.avg, 0)}%"
 		)
 	)
 )
 
-(defwidget pacman []
+(defwidget updates []
 	(eventbox 
-		:onhover "eww update pacman-rev=true" 
-		:onhoverlost "eww update pacman-rev=false" 
+		:onhover "eww update updates-rev=true" 
+		:onhoverlost "eww update updates-rev=false" 
 		(box 
 			:space-evenly false
 			(eventbox
 				:cursor "pointer"
 				(button 
-					:class "pacman-icon" 
+					:class "updates-icon" 
 					:onclick "scripts/updates --up"
 					:timeout "3s"
 					:tooltip "click to update"
@@ -171,10 +170,10 @@
 			)	
 			(revealer 
 				:transition "slideright" 
-				:reveal pacman-rev 
+				:reveal updates-rev 
 				:duration "300ms"
 				(label 
-					:class "pacman-text" 
+					:class "updates-text" 
 					:text updates
 				)
 			)
@@ -199,7 +198,7 @@
 				:duration "300ms"
 				(label 
 					:class "network-text" 
-					:text network-speed
+					:text  "${round(EWW_NET.enp4s0.NET_DOWN / 1000000, 2)}MB"
 				)
 			)
 		)
@@ -313,7 +312,7 @@
 		:class "group"
 		:space-evenly false
 		:spacing 15
-		(pacman)
+		(updates)
 		(network)
 		(volume)
 	)

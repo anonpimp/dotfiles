@@ -1,5 +1,7 @@
 #!/bin/bash
 
+[[ -z $(pgrep -fl checkvolume) ]] && checkvolume
+
 # requieres pamixer
 
 case $1 in
@@ -20,7 +22,3 @@ case $1 in
   pamixer -t >/dev/null
      ;;
 esac
-
-eww open volume
-sleep 8
-eww close volume

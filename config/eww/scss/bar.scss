@@ -1,24 +1,20 @@
 .bar {
   font-family: "SF Pro", "Font Awesome 6 Pro Solid";
   background-color: $bg;
-  padding: .5rem 1.5rem .5rem 1.5rem;
+  padding: 0.5rem 1.5rem 0.5rem 1.5rem;
 
   .group,
   .layout-button-box,
   .workspaces,
   .notification-icon-box {
     background-color: $bg-alt;
-    padding: .4rem 1rem .4rem 1rem;
-    border-radius: .6rem;
-  }
-
-  .group {
-    //margin: -1rem;
+    padding: 0.4rem 1rem 0.4rem 1rem;
+    border-radius: 0.6rem;
   }
 
   .power-icon,
-  .workspace-focused,
-  .pacman-icon,
+  .focused,
+  .updates-icon,
   .network-icon,
   .volume-icon,
   .notification-icon {
@@ -52,31 +48,32 @@
     }
   }
 
-  .workspace-focused {
-    color: $green;
-  }
-
-  .workspace-occupied {
+  .workspaces {
     font-size: 1rem;
-    color: lighten($color: $black, $amount: 8%);
 
-    &:hover {
-      color: rgba($green, 0.5);
+    .focused {
+      color: $green;
     }
-  }
 
-  .workspace-empty {
-    font-size: 1rem;
-    color: $black;
+    .occupied {
+      color: lighten($color: $black, $amount: 8%);
 
-    &:hover {
-      color: lighten($color: $black, $amount: 6%);
+      &:hover {
+        color: rgba($green, 0.5);
+      }
     }
-  }
 
-  .workspace-urgent {
-    font-size: 1rem;
-    color: $green;
+    .empty {
+      color: $black;
+
+      &:hover {
+        color: lighten($color: $black, $amount: 6%);
+      }
+    }
+
+    .urgent {
+      color: $green;
+    }
   }
 
   .windowtitle {
@@ -86,7 +83,7 @@
 
   .memory-inside,
   .cpu-inside {
-    padding: .7rem;
+    padding: 0.7rem;
   }
 
   .memory-bar {
@@ -99,13 +96,14 @@
     background-color: $black;
   }
 
-  .pacman-icon {
-    color: $yellow;
+  .updates-icon {
+    color: lighten($color: $red, $amount: 5%);
   }
 
-  .pacman-text {
+  .updates-text {
+    font-weight: 500;
     color: $fg;
-    margin-left: .3rem;
+    margin-left: 0.3rem;
   }
 
   .volume-bar trough highlight {
@@ -117,15 +115,15 @@
     all: unset;
     background-color: $black;
     border-radius: 1rem;
-    min-height: .3rem;
+    min-height: 0.3rem;
     min-width: 5rem;
-    margin-left: .3rem;
+    margin-left: 0.3rem;
     box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.3);
   }
 
   .network-text {
     color: $fg;
-    margin-left: .3rem;
+    margin-left: 0.3rem;
   }
 
   .notification-icon {
@@ -155,7 +153,7 @@
     .clock-separator {
       font-size: 1.2rem;
       color: $fg-alt;
-      margin-top: -.1rem;
+      margin-top: -0.1rem;
     }
   }
 
