@@ -63,7 +63,7 @@ cover() {
 
 shuffle() {
   shuffle=$(playerctl -p $Control shuffle)
-  [ -z "$shuffle" ] && lengths="Off"
+  [ -z "$shuffle" ] && shuffle="Off"
   echo "$shuffle"
 }
 
