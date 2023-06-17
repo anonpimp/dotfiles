@@ -1,6 +1,6 @@
 #!/bin/bash
 
-[[ -z $(pgrep -fl checkvolume) ]] && checkvolume
+[[ -z $(pgrep checkvolume) ]] && checkvolume &
 
 # requieres pamixer
 

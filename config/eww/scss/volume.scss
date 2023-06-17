@@ -14,15 +14,19 @@
 
   .volume-popup-bar scale trough highlight {
     all: unset;
-    background-image: linear-gradient(to right, $cyan, $green);
+    background-image: linear-gradient(
+      to right,
+      darken($color: $green, $amount: 15%),
+      $green
+    );
     border-radius: 2rem;
   }
 
   .volume-popup-bar scale trough {
     all: unset;
     background-color: rgba($green, 0.1);
-    box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.5);
+    box-shadow: 0px 0px 2px 1px rgba(black, 0.5);
     border-radius: 1rem;
-    min-height: .5rem;
+    min-height: 0.5rem;
   }
 }

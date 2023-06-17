@@ -6,8 +6,6 @@ CACHE_COVER_FILE="$CACHE_COVER/$SPOTIFY_TITLE.png"
 
 [[ ! -d "$CACHE_COVER" ]] && mkdir -p "$CACHE_COVER"
 
-COVER_FROM_SPOTIFY="$(playerctl -p %any,spotify metadata mpris:artUrl | sed -e 's/open.spotify.com/i.scdn.co/g')"
+COVER_FROM_SPOTIFY="$(playerctl -p spotify metadata mpris:artUrl | sed -e 's/open.spotify.com/i.scdn.co/g')"
 
-if [[ $(playerctl -p spotify,%any,firefox,chromium,brave,mpd metadata mpris:artUrl) ]]; then
-	curl -s "$COVER_FROM_SPOTIFY" --output "$CACHE_COVER_FILE"
-fi
+[ $(playerctl -p spotify metadata mpris:artUrl) ] && curl -s "$COVER_FROM_SPOTIFY" --output "$CACHE_COVER_FILE"

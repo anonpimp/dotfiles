@@ -45,15 +45,12 @@
 							:status shuffle
 						)
 						(loop
-							:action 
-							{loop == "None" ? "playerctl -p spotify loop playlist" : 
+							:action {loop == "None" ? "playerctl -p spotify loop playlist" : 
 							loop == "Playlist" ? "playerctl -p spotify loop track" :
 							"playerctl -p spotify loop none"}
-							:icon 
-							{loop == "None" ? "" :
-							loop == "Playlist" ? "" :
-							""}
-							:color {loop != "None" ? "#9ec49f" : "#a0a0a0"}
+							:icon  {loop == "Track" ? "" :
+							loop == "Playlist" ? "" : ""}
+							:color {loop == "Playlist" || loop == "Track" ? "#9ec49f" : "#a0a0a0"}
 							:status loop
 						)
 					)
@@ -61,21 +58,29 @@
 						(button 
 							:class "spotify-icon" 
 							:halign "end" 
-							""
+							{music-player != "spotify" ? "" : ""}
 						)
 					)
 				)
 				(label 
 					:class "player-title" 
 					:halign "start" 
-					:text {music-title == "" ? "Play Something" : music-title} 
+					:text music-title
 					:limit-width 30
+					:wrap true
+					:xalign 0
 				)
 				(label 
 					:class "player-artist" 
 					:halign "start" 
 					:text music-artist 
 					:limit-width 35
+				)
+				(label 
+					:class "player-album" 
+					:halign "start" 
+					:text music-album
+					:limit-width 30
 				)
 				(box
 					:space-evenly false
@@ -88,7 +93,7 @@
 						(eventbox
 							:cursor "pointer"
 							(scale 
-								:onchange "playerctl -p spotify position {}"
+								:onchange "playerctl -p ${music-player} position {}"
 								:min 0 
 								:max music-lengths 
 								:value music-positions
@@ -125,7 +130,7 @@
 				:cursor "pointer"
 				(button 
 					:class "player-previous" 
-					:onclick "playerctl -p spotify previous" 
+					:onclick "scripts/mediacontrol --prev" 
 					""
 				)
 			)
@@ -133,7 +138,7 @@
 				:cursor "pointer"
 				(button 
 					:class "player-toggle" 
-					:onclick "playerctl -p spotify play-pause" 
+					:onclick "scripts/mediacontrol --toggle" 
 					{music-status == "Playing" ? "" : music-status == "Paused" ? "" : ""}
 				)
 			)
@@ -141,7 +146,7 @@
 				:cursor "pointer"
 				(button 
 					:class "player-next" 
-					:onclick "playerctl -p spotify next" 
+					:onclick "scripts/mediacontrol --next" 
 					""
 				)
 			)
@@ -151,7 +156,6 @@
 
 (defwindow player
 	:wm-ignore false
-	:windowtype "dock"
 	:geometry (geometry :y "-6%" :anchor "bottom center")
 	(player)
 )

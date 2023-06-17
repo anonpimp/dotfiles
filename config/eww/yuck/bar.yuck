@@ -83,7 +83,7 @@
 						:cursor "pointer"
 						(button 
 							:class "musicbar-previous-icon" 
-							:onclick "playerctl -p spotify previous" 
+							:onclick "scripts/mediacontrol --prev" 
 							""
 						)
 					)
@@ -91,7 +91,7 @@
 						:cursor "pointer"
 						(button 
 							:class "musicbar-toggle-icon" 
-							:onclick "playerctl -p spotify play-pause" 
+							:onclick "scripts/mediacontrol --toggle" 
 							{music-status == "Playing" ? "" : music-status == "Paused" ? "" : ""}
 						)
 					)
@@ -99,7 +99,7 @@
 						:cursor "pointer"
 						(button 
 							:class "musicbar-next-icon" 
-							:onclick "playerctl -p spotify next" 
+							:onclick "scripts/mediacontrol --next" 
 							""
 						)
 					)

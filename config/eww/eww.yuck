@@ -1,14 +1,16 @@
 ;; Music
-(defpoll music-art :interval "1s" "scripts/mediacontrol --cover")
-(defpoll music-title :interval "1s" "scripts/mediacontrol --title")
-(defpoll music-artist :interval "1s" "scripts/mediacontrol --artist")
-(defpoll music-status :interval "1s" "scripts/mediacontrol --status")
-(defpoll music-position :interval "1s" "scripts/mediacontrol --position")
-(defpoll music-positions :interval "1s" "scripts/mediacontrol --positions")
-(defpoll music-length :interval "1s" "scripts/mediacontrol --length")
-(defpoll music-lengths :interval "1s" "scripts/mediacontrol --lengths")
-(defpoll shuffle :interval "1s" `playerctl -p spotify shuffle`)
-(defpoll loop :interval "1s" `playerctl -p spotify loop`)
+(defpoll music-player			:interval "1s" "scripts/mediacontrol --player")
+(defpoll music-art				:interval "1s" "scripts/mediacontrol --cover")
+(defpoll music-title 			:interval "1s" "scripts/mediacontrol --title")
+(defpoll music-artist 		:interval "1s" "scripts/mediacontrol --artist")
+(defpoll music-album 			:interval "1s" "scripts/mediacontrol --album")
+(defpoll music-status 		:interval "1s" "scripts/mediacontrol --status")
+(defpoll music-position 	:interval "1s" "scripts/mediacontrol --position")
+(defpoll music-positions	:interval "1s" "scripts/mediacontrol --positions")
+(defpoll music-length 		:interval "1s" "scripts/mediacontrol --length")
+(defpoll music-lengths 		:interval "1s" "scripts/mediacontrol --lengths")
+(defpoll shuffle 					:interval "1s" "scripts/mediacontrol --shuffle")
+(defpoll loop 						:interval "1s" "scripts/mediacontrol --loop")
 (defvar music-rev false)
 
 ;; Volume
@@ -16,14 +18,14 @@
 (defvar volume-rev false)
 
 ;; Date
-(defpoll hour :interval "1m" "date '+%H'")
+(defpoll hour 	:interval "1m" "date '+%H'")
 (defpoll minute :interval "1m" "date '+%M'")
-(defpoll today :interval "1h" "date '+%A, %B %d'")
-(defpoll day :interval "1h" "date '+%d'")
-(defpoll month :interval "1h" "date '+%m'")
-(defpoll year :interval "1h" "date '+%Y'")
+(defpoll today 	:interval "1h" "date '+%A, %B %d'")
+(defpoll day 		:interval "1h" "date '+%d'")
+(defpoll month 	:interval "1h" "date '+%m'")
+(defpoll year 	:interval "1h" "date '+%Y'")
 
-;; Profile
+;; Powemenu
 (defvar profile-image "assets/profile.jpg")
 (defpoll profile-name :interval "24h" "scripts/details --name")
 (defpoll uptime :interval "1m" "uptime -p | sed -e 's/up //g'")
@@ -35,23 +37,23 @@
 (deflisten weather-color "scripts/weather --hex")
 
 ;; Network
-(defpoll network-status :interval "1s" `cat /sys/class/net/e*/operstate`)
+(defpoll network-status :interval "1m" "cat /sys/class/net/e*/operstate")
 (defvar network-rev false)
 
 ;; Workspaces
-(deflisten workspaces "scripts/workspaces")
-(deflisten windowtitle `xtitle -s | stdbuf -oL -eL uniq | cat`)
-(defpoll layout-status :interval "1s" "bsp-layout get")
-(defpoll focused-desktop :interval "1s" "bspc query -D -d focused --names")
+(deflisten workspaces 	"scripts/workspaces")
+(deflisten windowtitle "xtitle -s | stdbuf -oL -eL uniq | cat")
+(defpoll layout-status		:interval "1s" "bsp-layout get")
+(defpoll focused-desktop	:interval "1s" "bspc query -D -d focused --names")
 
 ;; Updates
 (defpoll updates :interval "2h" "scripts/updates --get")
 (defvar updates-rev false)
 
 ;; Notification
-(defpoll dunst-count :interval "1s" "dunstctl count history")
-(defpoll dunst-waiting :interval "1s" "dunstctl count waiting")
-(defpoll notifications-dnd :interval "1s" "dunstctl is-paused")
+(defpoll dunst-count 				:interval "1s" "dunstctl count history")
+(defpoll dunst-waiting 			:interval "1s" "dunstctl count waiting")
+(defpoll notifications-dnd	:interval "1s" "dunstctl is-paused")
 (deflisten notifications "scripts/logger.zsh subscribe")
 
 (include "yuck/bar.yuck")

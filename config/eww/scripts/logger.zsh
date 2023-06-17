@@ -51,13 +51,13 @@ function create_cache() {
 
   # pipe stdout -> pipe cat stdin (cat conCATs multiple files and sends to stdout) -> absorb stdout from cat
   # concat: "one" + "two" + "three" -> notice how the order matters i.e. "one" will be prepended
-sleep 1 && print '(notification-card :id "'$DUNST_ID'" :app "'$DUNST_APP_NAME'" :summary "'$summary'" :body "'$body'" :image "'$ICON_PATH'" :image_width "'$image_width'" :image_height "'$image_height'" :time "'$(date +'%H:%M')'" :screenshot "'$screenshot'" :pop "dunstctl history-pop '$DUNST_ID'")' \
+print '(notification-card :id "'$DUNST_ID'" :app "'$DUNST_APP_NAME'" :summary "'$summary'" :body "'$body'" :image "'$ICON_PATH'" :image_width "'$image_width'" :image_height "'$image_height'" :time "'$(date +'%H:%M')'" :screenshot "'$screenshot'" :pop "dunstctl history-pop '$DUNST_ID'")' \
   | cat - "$DUNST_LOG" \
   | sponge "$DUNST_LOG"
 }
 
 function compile_caches() {
-  tr '\n' ' ' < "$DUNST_LOG"
+  sleep 0.2 && tr '\n' ' ' < "$DUNST_LOG"
 }
 
 function make_literal() {
@@ -96,11 +96,11 @@ function subscribe() {
 }
 
 case "$1" in
-  "pop") pop;;
-  "clear") clear_logs;;
-  "subscribe") subscribe;;
-  "rm_id") remove_line $2;;
-  *) create_cache;;
+  "pop") pop ;;
+  "clear") clear_logs ;;
+  "subscribe") subscribe ;;
+  "rm_id") remove_line $2 ;;
+  *) create_cache ;;
 esac
 
 sed -i '/^$/d' "$DUNST_LOG"
