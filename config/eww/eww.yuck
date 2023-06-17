@@ -17,32 +17,24 @@
 (defpoll volume-percent :interval "250ms" "pamixer --get-volume-human | tr -d '%'")
 (defvar volume-rev false)
 
-;; Date
-(defpoll hour 	:interval "1m" "date '+%H'")
-(defpoll minute :interval "1m" "date '+%M'")
-(defpoll today 	:interval "1h" "date '+%A, %B %d'")
-(defpoll day 		:interval "1h" "date '+%d'")
-(defpoll month 	:interval "1h" "date '+%m'")
-(defpoll year 	:interval "1h" "date '+%Y'")
-
 ;; Powemenu
-(defvar profile-image "assets/profile.jpg")
-(defpoll profile-name :interval "24h" "scripts/details --name")
-(defpoll uptime :interval "1m" "uptime -p | sed -e 's/up //g'")
+(defvar profile-image	"assets/profile.jpg")
+(defpoll profile-name	:interval "24h" "scripts/details --name")
+(defpoll uptime				:interval "1m" "uptime -p | sed -e 's/up //g'")
 
 ;; Weather
-(defpoll weather-icon :interval "1h" "scripts/weather --icon")
-(defpoll weather-temp :interval "1h" "scripts/weather --temp")
-(defpoll weather-desc :interval "1h" "scripts/weather --desc")
-(deflisten weather-color "scripts/weather --hex")
+(defpoll weather-icon			:interval "1h" "scripts/weather --icon")
+(defpoll weather-temp			:interval "1h" "scripts/weather --temp")
+(defpoll weather-desc			:interval "1h" "scripts/weather --desc")
+(deflisten weather-color	"scripts/weather --hex")
 
 ;; Network
 (defpoll network-status :interval "1m" "cat /sys/class/net/e*/operstate")
 (defvar network-rev false)
 
 ;; Workspaces
-(deflisten workspaces 	"scripts/workspaces")
-(deflisten windowtitle "xtitle -s | stdbuf -oL -eL uniq | cat")
+(deflisten workspaces			"scripts/workspaces")
+(deflisten windowtitle		"xtitle -s | stdbuf -oL -eL uniq | cat")
 (defpoll layout-status		:interval "1s" "bsp-layout get")
 (defpoll focused-desktop	:interval "1s" "bspc query -D -d focused --names")
 
@@ -54,7 +46,7 @@
 (defpoll dunst-count 				:interval "1s" "dunstctl count history")
 (defpoll dunst-waiting 			:interval "1s" "dunstctl count waiting")
 (defpoll notifications-dnd	:interval "1s" "dunstctl is-paused")
-(deflisten notifications "scripts/logger.zsh subscribe")
+(deflisten notifications		"scripts/logger.zsh subscribe")
 
 (include "yuck/bar.yuck")
 (include "yuck/player.yuck")

@@ -24,7 +24,7 @@
 		:spacing 10
 		(label 
 			:class "time" 
-			:text hour
+			:text {formattime(EWW_TIME, "%H", "America/Sao_Paulo")}
 		)
 		(box 
 			:class "timeboxes" 
@@ -47,7 +47,7 @@
 		)
 		(label 
 			:class "time" 
-			:text minute
+			:text {formattime(EWW_TIME, "%M", "America/Sao_Paulo")}
 		)
 	)
 )

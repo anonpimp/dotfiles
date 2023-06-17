@@ -14,7 +14,7 @@ while true; do
     sleep_duration=3
     value="$new_value"
   else
-    # if volume hasnt changed, then sleep
+    # if volume hasnt changed, then sleep till volume changes again
     sleep $sleep_duration
 
     # check if the volume still hasn't changed
