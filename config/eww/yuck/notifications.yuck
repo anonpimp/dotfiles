@@ -169,7 +169,7 @@
           )
           (label
             :class "notification-body"
-            :limit-width 100
+            :limit-width 80
             :wrap true
             :xalign 0
             :text body

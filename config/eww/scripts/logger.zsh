@@ -18,9 +18,16 @@ function create_cache() {
 
   local summary
   local body
-  [ "$DUNST_SUMMARY" = "" ] && summary="Summary unavailable." || summary="$(print "$DUNST_SUMMARY" | tr '"' "'")"
-  [ "$DUNST_BODY" = "" ] && body="Body unavailable." || body="$(print "$DUNST_BODY" | tr '\n' ' ' | tr '"' "'")"
-  # | recode html)"
+
+  # clean summary
+  [ "$DUNST_SUMMARY" = "" ] && summary="Summary unavailable." || \
+  # turn doublequotes into apostrophe
+  summary="$(echo "$DUNST_SUMMARY" | tr '"' "'")"
+
+  # clean body
+  [ "$DUNST_BODY" = "" ] && body="Body unavailable." || \
+  # remove new line, turn doublequotes into apostrophe, squeeze spaces, remove bold markup, turn &quot; into apostrophe
+  body="$(echo "$DUNST_BODY" | tr -d '\n' | tr '"' "'" | tr -s " " | sed 's/.*<b>//' | sed 's/<\/b>/: /' | sed "s/&quot;/'/g")"
 
   local image_width=50
   local image_height=50
@@ -51,25 +58,26 @@ function create_cache() {
 
   # pipe stdout -> pipe cat stdin (cat conCATs multiple files and sends to stdout) -> absorb stdout from cat
   # concat: "one" + "two" + "three" -> notice how the order matters i.e. "one" will be prepended
-print '(notification-card :id "'$DUNST_ID'" :app "'$DUNST_APP_NAME'" :summary "'$summary'" :body "'$body'" :image "'$ICON_PATH'" :image_width "'$image_width'" :image_height "'$image_height'" :time "'$(date +'%H:%M')'" :screenshot "'$screenshot'" :pop "dunstctl history-pop '$DUNST_ID'")' \
+sleep 0.2 && \
+echo '(notification-card :id "'$DUNST_ID'" :app "'$DUNST_APP_NAME'" :summary "'$summary'" :body "'$body'" :image "'$ICON_PATH'" :image_width "'$image_width'" :image_height "'$image_height'" :time "'$(date +'%H:%M')'" :screenshot "'$screenshot'" :pop "dunstctl history-pop '$DUNST_ID'")' \
   | cat - "$DUNST_LOG" \
   | sponge "$DUNST_LOG"
 }
 
 function compile_caches() {
-  sleep 0.2 && tr '\n' ' ' < "$DUNST_LOG"
+  tr -d '\n' < "$DUNST_LOG"
 }
 
 function make_literal() {
   local caches="$(compile_caches)"
   [[ "$caches" == "" ]] \
-  && print '(box :class "notifications-empty-box" :height 500 :orientation "v" :space-evenly "false" (image :class "notifications-empty-banner" :valign "end" :vexpand "true" :path "assets/fallback.png" :image-width 100 :image-height 100) (label :vexpand "true" :valign "start" :class "notifications-empty-label" :text "No Notifications :("))' \
-  || print "(scroll :height 500 :vscroll true (box :orientation 'v' :class 'notifications-scroll-box' :spacing 10 :space-evenly 'false' $caches))"
+  && echo '(box :class "notifications-empty-box" :height 520 :orientation "v" :space-evenly "false" (image :class "notifications-empty-banner" :valign "end" :vexpand "true" :path "assets/fallback.png" :image-width 100 :image-height 100) (label :vexpand "true" :valign "start" :class "notifications-empty-label" :text "No Notifications"))' \
+  || echo "(scroll :height 520 :vscroll true (box :orientation 'v' :class 'notifications-scroll-box' :spacing 10 :space-evenly 'false' $caches))"
 }
 
 function clear_logs() {
   dunstctl history-clear
-  print > "$DUNST_LOG"
+  echo > "$DUNST_LOG"
   rm -rf  $DUNST_CACHE_DIR/cover/*
 }
 

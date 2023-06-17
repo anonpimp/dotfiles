@@ -21,7 +21,7 @@
     font-size: 1.4rem;
   }
 
-  .pacman-text,
+  .updates-text,
   .network-text,
   .memory-info,
   .cpu-info {
@@ -97,12 +97,12 @@
   }
 
   .updates-icon {
-    color: lighten($color: $red, $amount: 5%);
+    margin-top: -.1rem;
+    font-size: 1.55rem;
+    color: $yellow;
   }
 
   .updates-text {
-    font-weight: 500;
-    color: $fg;
     margin-left: 0.3rem;
   }
 
