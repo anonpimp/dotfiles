@@ -64,9 +64,9 @@
     (box 
       :class "calendar-box"
       (calendar 
-        :day day 
-        :month month 
-        :year year
+        :day {formattime(EWW_TIME, "%d", "America/Sao_Paulo")} 
+        :month {formattime(EWW_TIME, "%m", "America/Sao_Paulo")} 
+        :year {formattime(EWW_TIME, "%Y", "America/Sao_Paulo")}
       )
     )
     (box 

@@ -58,7 +58,7 @@ function create_cache() {
 
   # pipe stdout -> pipe cat stdin (cat conCATs multiple files and sends to stdout) -> absorb stdout from cat
   # concat: "one" + "two" + "three" -> notice how the order matters i.e. "one" will be prepended
-sleep 0.2 && \
+sleep 0.3 && \
 echo '(notification-card :id "'$DUNST_ID'" :app "'$DUNST_APP_NAME'" :summary "'$summary'" :body "'$body'" :image "'$ICON_PATH'" :image_width "'$image_width'" :image_height "'$image_height'" :time "'$(date +'%H:%M')'" :screenshot "'$screenshot'" :pop "dunstctl history-pop '$DUNST_ID'")' \
   | cat - "$DUNST_LOG" \
   | sponge "$DUNST_LOG"

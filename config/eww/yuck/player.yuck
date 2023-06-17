@@ -107,13 +107,12 @@
 						:spacing 3
 						(label 
 							:class "player-time"
-							:text {music-position == "" ? "0:00" : music-position} 
+							:text music-position
 						)
 						(label :class "player-time" :text "/")
 						(label 
 							:class "player-time"
-							:text {music-length == "" ? "0:00" 
-							: music-length} 
+							:text music-length
 						)	
 					)
 				)

@@ -216,7 +216,7 @@
 				(button 
 					:class "volume-icon" 
 					:style {volume-percent == 0 || volume-percent == "muted" ? "color: #dd6777;" : "color: #9ec49f;"} 
-					:tooltip {volume-percent == "muted" ? "muted" : "${volume-percent}%" } 
+					:tooltip {volume-percent == "muted" ? "Muted" : "${volume-percent}%" } 
 					:onclick "pamixer -t" 
 					{volume-percent == 0 || volume-percent == "muted" ? "" : 
 					volume-percent < 30 ? "" : 
@@ -232,7 +232,7 @@
 					:cursor "pointer"
 					:valign "center"
 					(scale  
-						:tooltip {volume-percent == "muted" ? "muted" : "${volume-percent}%" }
+						:tooltip  {volume-percent == "muted" ? "Muted" : "${volume-percent}%"}
 						:value {volume-percent == "muted" ? "0" : volume-percent}  
 						:min 0 
 						:max 101 
@@ -253,7 +253,6 @@
 			(button
 				:class "notification-icon"
 				:onclick "eww open --toggle notifications"
-				:timeout "1s"
 				{notifications-dnd ? "" : ""}
 			)
 		)
@@ -288,7 +287,7 @@
 				:halign "end"
 				(label 
 					:class "clock-hour" 
-					:text hour
+					:text {formattime(EWW_TIME, "%H", "America/Sao_Paulo")}
 				)
 				(label 
 					:class "clock-separator" 
@@ -296,12 +295,12 @@
 				)
 				(label 
 					:class "clock-minute" 
-					:text minute
+					:text {formattime(EWW_TIME, "%M", "America/Sao_Paulo")}
 				)
 			)
 		)
 		(label
-			:text today
+			:text {formattime(EWW_TIME, "%A, %B %d", "America/Sao_Paulo")}
 			:style "font-weight: 500;"
 		)
 	)
