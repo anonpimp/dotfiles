@@ -1,4 +1,4 @@
-(defwidget power []
+(defwidget powermenu-icon []
 	(eventbox
 		:cursor "pointer"
 		(button 
@@ -27,9 +27,9 @@
 		:class "layout-button-box" 
 		(layout
 			:icon {layout-status == "rtall" ? "" : 
-				layout-status == "grid" ? "" :
-				layout-status == "tiled" ? "" :
-				layout-status == "wide" ? "" : ""}
+			layout-status == "grid" ? "" :
+			layout-status == "tiled" ? "" :
+			layout-status == "wide" ? "" : ""}
 			:set "bsp-layout next --layouts rtall,wide,grid,tiled --master-size 40 --desktop ${focused-desktop}"
 			:reset "bsp-layout set tiled ${focused-desktop}"
 		)
@@ -52,7 +52,7 @@
 
 (defwidget music [] 
 	(eventbox 
-		:onhover "eww update music-rev=true" 
+		:onhover "eww update music-rev=${music-status == 'Stopped' ? false : true}"
 		:onhoverlost "eww update music-rev=false"
 		(box 
 			:space-evenly false 
@@ -71,7 +71,7 @@
 			(label 
 				:class "musicbar-title" 
 				:limit-width 25 
-				:text {music-title == "" ? "Play Something" : music-title}
+				:text music-title
 			)
 			(revealer 
 				:transition "slideright" 
@@ -105,49 +105,6 @@
 					)
 				)
 			)
-		)
-	)
-)
-
-(defwidget memory []
-	(box 
-		:class "memory" 
-		:space-evenly false 
-		:spacing 5
-		(circular-progress  
-			:class "memory-bar"
-			:value "${round(EWW_RAM.used_mem_perc, 0)}"
-			:clockwise false
-			:thickness 4
-			(label 
-				:class "memory-inside" 
-				:text ""
-			)
-		)
-		(label 
-			:class "memory-info" 
-			:text "${round(EWW_RAM.used_mem_perc, 0)}%"
-		)
-	)
-)
-
-(defwidget cpu []
-	(box 
-		:class "cpu" 
-		:space-evenly false 
-		:spacing 5
-		(circular-progress 
-			:class "cpu-bar" 
-			:value "${round(EWW_CPU.avg, 0)}" 
-			:thickness 4
-			(label 
-				:class "cpu-inside" 
-				:text ""
-			)
-		)
-		(label 
-			:class "cpu-info" 
-			:text "${round(EWW_CPU.avg, 0)}%"
 		)
 	)
 )
@@ -232,7 +189,7 @@
 					:cursor "pointer"
 					:valign "center"
 					(scale  
-						:tooltip  {volume-percent == "muted" ? "Muted" : "${volume-percent}%"}
+						:tooltip {volume-percent == "muted" ? "Muted" : "${volume-percent}%"}
 						:value {volume-percent == "muted" ? "0" : volume-percent}  
 						:min 0 
 						:max 101 
@@ -252,7 +209,7 @@
 			:cursor "pointer"
 			(button
 				:class "notification-icon"
-				:onclick "eww open --toggle notifications"
+				:onclick "notifications"
 				{notifications-dnd ? "" : ""}
 			)
 		)
@@ -270,15 +227,15 @@
 
 (defwidget clock []
 	(box
-		:space-evenly false
 		:orientation "v"
+		:space-evenly false
 		(box
 			:space-evenly false
 			:spacing 15
 			:halign "end"
 			(label
-				:text weather-icon
 				:style "font-size: 1.2rem; color: ${weather-color};"
+				:text weather-icon
 			)
 			(box 
 				:class "clock" 
@@ -305,6 +262,7 @@
 		)
 	)
 )
+	
 
 (defwidget group []
 	(box 
@@ -322,7 +280,7 @@
 		:space-evenly false 
 		:halign "start" 
 		:spacing 15
-		(power)
+		(powermenu-icon)
 		(bsp-layout)
 		(workspaces)
 		(windowtitle)
@@ -341,11 +299,11 @@
 		:space-evenly false 
 		:halign "end" 
 		:spacing 15
-		(memory)
-		(cpu)
 		(group)
 		(notifications-icon)
-		(clock)
+		(eventbox :cursor "pointer" 
+			(button :onclick "calendar" (clock))
+		)
 	)
 )
 

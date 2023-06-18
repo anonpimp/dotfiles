@@ -1,3 +1,10 @@
+;; Vars
+(defvar music-rev 	false)
+(defvar power-rev 	false)
+(defvar volume-rev 	false)
+(defvar network-rev	false)
+(defvar updates-rev	false)
+
 ;; Music
 (defpoll music-player			:interval "1s" "scripts/mediacontrol --player")
 (defpoll music-art				:interval "1s" "scripts/mediacontrol --cover")
@@ -11,11 +18,9 @@
 (defpoll music-lengths 		:interval "1s" "scripts/mediacontrol --lengths")
 (defpoll shuffle 					:interval "1s" "scripts/mediacontrol --shuffle")
 (defpoll loop 						:interval "1s" "scripts/mediacontrol --loop")
-(defvar music-rev false)
 
 ;; Volume
 (defpoll volume-percent :interval "250ms" "pamixer --get-volume-human | tr -d '%'")
-(defvar volume-rev false)
 
 ;; Powemenu
 (defvar profile-image	"assets/profile.jpg")
@@ -26,34 +31,37 @@
 (defpoll weather-icon			:interval "1h" "scripts/weather --icon")
 (defpoll weather-temp			:interval "1h" "scripts/weather --temp")
 (defpoll weather-desc			:interval "1h" "scripts/weather --desc")
+(defpoll weather-city			:interval "1h" "scripts/weather --city")
 (deflisten weather-color	"scripts/weather --hex")
 
 ;; Network
 (defpoll network-status :interval "1m" "cat /sys/class/net/e*/operstate")
-(defvar network-rev false)
 
 ;; Workspaces
-(deflisten workspaces			"scripts/workspaces")
-(deflisten windowtitle		"xtitle -s | stdbuf -oL -eL uniq | cat")
 (defpoll layout-status		:interval "1s" "bsp-layout get")
 (defpoll focused-desktop	:interval "1s" "bspc query -D -d focused --names")
+(deflisten workspaces			"scripts/workspaces")
+(deflisten windowtitle		"xtitle -s | stdbuf -oL -eL uniq | cat")
 
-;; Updates
+;; Packages
 (defpoll updates :interval "2h" "scripts/updates --get")
-(defvar updates-rev false)
+(defpoll packages :interval "2h" "scripts/details --pkgs")
 
-;; Notification
+;; Notifications
 (defpoll dunst-count 				:interval "1s" "dunstctl count history")
 (defpoll dunst-waiting 			:interval "1s" "dunstctl count waiting")
 (defpoll notifications-dnd	:interval "1s" "dunstctl is-paused")
 (deflisten notifications		"scripts/logger.zsh subscribe")
 
+;; Windows
 (include "yuck/bar.yuck")
 (include "yuck/player.yuck")
-(include "yuck/powermenu.yuck")
 (include "yuck/notifications.yuck")
 (include "yuck/volume.yuck")
+(include "yuck/powermenu.yuck")
+(include "yuck/calendar.yuck")
 
+;; Closers
 (defwidget closer [window]
 	(eventbox 
 		:onclick "eww close ${window} ${window}-closer"
@@ -72,4 +80,18 @@
 	:stacking "fg"
 	:geometry (geometry :y "-5%" :width "100%" :height "100%")
   (closer :window "notifications")
+)
+
+(defwindow calendar-closer
+	:wm-ignore true
+	:stacking "fg"
+	:geometry (geometry :y "-5%" :width "100%" :height "100%")
+  (closer :window "calendar")
+)
+
+(defwindow powermenu-closer
+	:wm-ignore true
+	:stacking "fg"
+	:geometry (geometry :y "-5%" :width "100%" :height "100%")
+  (closer :window "powermenu")
 )

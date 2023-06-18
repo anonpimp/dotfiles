@@ -22,9 +22,7 @@
   }
 
   .updates-text,
-  .network-text,
-  .memory-info,
-  .cpu-info {
+  .network-text {
     font-size: 1rem;
     font-weight: bold;
   }
@@ -79,21 +77,6 @@
   .windowtitle {
     font-size: 1rem;
     font-weight: 500;
-  }
-
-  .memory-inside,
-  .cpu-inside {
-    padding: 0.7rem;
-  }
-
-  .memory-bar {
-    color: $magenta;
-    background-color: $black;
-  }
-
-  .cpu-bar {
-    color: $cyan;
-    background-color: $black;
   }
 
   .updates-icon {

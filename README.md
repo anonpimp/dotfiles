@@ -1,5 +1,5 @@
-![desktop images](screenshots/notifications.png)
-![desktop images](screenshots/powermenu.png)
+![desktop images](screenshots/.png)
+![desktop images](screenshots/.png)
 
 #### Based on
 * [saimoom](https://github.com/Saimoomedits/eww-widgets)

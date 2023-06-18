@@ -61,42 +61,6 @@
       )
     )
     (literal :content notifications)
-    (box 
-      :class "calendar-box"
-      (calendar 
-        :day {formattime(EWW_TIME, "%d", "America/Sao_Paulo")} 
-        :month {formattime(EWW_TIME, "%m", "America/Sao_Paulo")} 
-        :year {formattime(EWW_TIME, "%Y", "America/Sao_Paulo")}
-      )
-    )
-    (box 
-      :class "weather-box"
-      :valign "end"
-      :vexpand true
-      (box 
-        :space-evenly false 
-        :orientation "v"
-        (label 
-          :class "weather-desc" 
-          :halign "start" 
-          :text weather-desc
-        )
-        (label 
-          :class "weather-temp" 
-          :halign "start" 
-          :text "${weather-temp}°C"
-        )
-      )
-      (box 
-        (label 
-          :class "weather-icon" 
-          :halign "end" 
-          :valign "end" 
-          :text weather-icon 
-          :style "color: ${weather-color}"
-        )
-      )
-    )
   )
 )
 
@@ -206,6 +170,6 @@
 
 (defwindow notifications
   :wm-ignore false
-  :geometry (geometry :width "25%" :height "80%" :x "1%" :y "-6%" :anchor "bottom right")
+  :geometry (geometry :width "25%" :x "1%" :y "-6%" :anchor "bottom right")
   (notifications)
 )

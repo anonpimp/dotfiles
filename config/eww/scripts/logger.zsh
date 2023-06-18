@@ -27,7 +27,7 @@ function create_cache() {
   # clean body
   [ "$DUNST_BODY" = "" ] && body="Body unavailable." || \
   # remove new line, turn doublequotes into apostrophe, squeeze spaces, remove bold markup, turn &quot; into apostrophe
-  body="$(echo "$DUNST_BODY" | tr -d '\n' | tr '"' "'" | tr -s " " | sed 's/.*<b>//' | sed 's/<\/b>/: /' | sed "s/&quot;/'/g")"
+  body="$(echo "$DUNST_BODY" | tr '\n' ' ' | tr '"' "'" | tr -s " " | sed 's/<b>//' | sed 's/<\/b>/: /' | sed "s/&quot;/'/g")"
 
   local image_width=50
   local image_height=50
@@ -71,8 +71,8 @@ function compile_caches() {
 function make_literal() {
   local caches="$(compile_caches)"
   [[ "$caches" == "" ]] \
-  && echo '(box :class "notifications-empty-box" :height 520 :orientation "v" :space-evenly "false" (image :class "notifications-empty-banner" :valign "end" :vexpand "true" :path "assets/fallback.png" :image-width 100 :image-height 100) (label :vexpand "true" :valign "start" :class "notifications-empty-label" :text "No Notifications"))' \
-  || echo "(scroll :height 520 :vscroll true (box :orientation 'v' :class 'notifications-scroll-box' :spacing 10 :space-evenly 'false' $caches))"
+  && echo '(box :class "notifications-empty-box" :height 800 :orientation "v" :space-evenly "false" (image :class "notifications-empty-banner" :valign "end" :vexpand "true" :path "assets/fallback.png" :image-width 100 :image-height 100) (label :vexpand "true" :valign "start" :class "notifications-empty-label" :text "No Notifications"))' \
+  || echo "(scroll :height 800 :vscroll true (box :orientation 'v' :class 'notifications-scroll-box' :spacing 10 :space-evenly 'false' $caches))"
 }
 
 function clear_logs() {
