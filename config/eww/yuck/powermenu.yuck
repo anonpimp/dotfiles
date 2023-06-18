@@ -152,45 +152,49 @@
   (box
     :class "fetch"
     :space-evenly false
-    :spacing 10
+    :spacing 15
     (label
       :class "arch"
       :text "󰣇"
     )
     (box
-      :orientation "v"
-      (label
-        :class "osi"
-        :text "󰠄"
+      :space-evenly false
+      :spacing 10
+      (box
+        :orientation "v"
+        (label
+          :class "osi"
+          :text "󰠄"
+        )
+        (label
+          :class "wmi"
+          :text "󰕮"
+        )
+        (label
+          :class "pki"
+          :text "󰮯"
+        )
       )
-      (label
-        :class "wmi"
-        :text "󰕮"
-      )
-      (label
-        :class "pki"
-        :text "󰮯"
-      )
-    )
-    (box
-      :orientation "v"
-      (label
-        :class "os"
-        :text "arch"
-        :justify "left"
-        :xalign 0
-      )
-      (label
-        :class "wm"
-        :text "bspwm"
-        :justify "left"
-        :xalign 0
-      )
-      (label
-        :class "pk"
-        :text packages
-        :justify "left"
-        :xalign 0
+      (box
+        :orientation "v"
+        (label
+          :class "os"
+          :text "arch"
+          :justify "left"
+          :xalign 0
+        )
+        (label
+          :class "wm"
+          :text "bspwm"
+          :justify "left"
+          :xalign 0
+        )
+        (label
+          :class "pk"
+          :text packages
+          :justify "left"
+          :xalign 0
+        )
       )
     )
   )
