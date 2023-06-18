@@ -1,5 +1,5 @@
-![desktop images](screenshots/.png)
-![desktop images](screenshots/.png)
+![desktop images](screenshots/full.png)
+![desktop images](screenshots/calendar.png)
 
 #### Based on
 * [saimoom](https://github.com/Saimoomedits/eww-widgets)
