@@ -97,5 +97,6 @@ super + x
 super + h
   hidebar
 
+# open notifications
 super + n
-  eww open --toggle notifications
+  notifications
