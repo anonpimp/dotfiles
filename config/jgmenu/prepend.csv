@@ -1,0 +1,25 @@
+@icon,,18,17,16,16,0,left,top,#c49ec4,#c49ec4,/home/kinkakuji/.config/jgmenu/icons/search.svg
+@search,,42,15,150,20,2,left,top,#cacaca,#c49ec4,Search
+
+Terminal,alacritty,/home/kinkakuji/.config/jgmenu/icons/terminal.svg
+Web Browser,brave,/home/kinkakuji/.config/jgmenu/icons/edge.svg
+File Manager,thunar,/home/kinkakuji/.config/jgmenu/icons/folder-open.svg
+Code,code,/home/kinkakuji/.config/jgmenu/icons/code.svg
+^sep()
+
+Apps,^checkout(lx-apps),/home/kinkakuji/.config/jgmenu/icons/rocket-launch.svg
+^sep()
+
+Color Picker,colorpicker,/home/kinkakuji/.config/jgmenu/icons/picker.svg
+Screenshot,^checkout(screenshot),/home/kinkakuji/.config/jgmenu/icons/screenshot.svg
+Wallpaper,feh --bg-fill -z ~/Pictures/wallpapers/,/home/kinkakuji/.config/jgmenu/icons/image.svg
+^sep()
+
+Openbox,^checkout(bspwm),/home/kinkakuji/.config/jgmenu/icons/window.svg
+Exit,^checkout(exit),/home/kinkakuji/.config/jgmenu/icons/exit.svg
+
+^tag(screenshot)
+Full,sauceshot delay2,/home/kinkakuji/.config/jgmenu/icons/full.svg
+Crop,sauceshot crop,/home/kinkakuji/.config/jgmenu/icons/crop.svg
+
+^tag(lx-apps)

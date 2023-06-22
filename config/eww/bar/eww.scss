@@ -1,0 +1,155 @@
+.bar {
+	background-color: $bg;
+	padding: .35rem 1.5rem .35rem 1.5rem;
+}
+
+scale trough {
+	all: unset;
+	background-color: $black;
+	border-radius: 1rem;
+	min-height: .3rem;
+	min-width: 5rem;
+	margin-left: .3rem;
+	box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.5);
+}
+
+.group {
+	background-color: $bg-alt;
+	padding: 0rem 1rem 0rem 1rem;
+	border-radius: .5rem;
+}
+
+.power-icon,
+.pacman-icon,
+.network-icon,
+.volume-icon {
+	font-size: 1.2rem;
+	font-family: "Font Awesome 6 Pro Solid";
+}
+
+.pacman-text,
+.network-text,
+.memory-info,
+.cpu-info {
+	font-family: "SF Pro Text";
+	font-size: .9rem;
+	font-weight: bold;
+}
+
+.power-icon {
+	color: $red;
+	margin-top: 0.1rem;
+}
+
+.workspaces {
+	font-family: "Font Awesome 6 Pro Solid";
+	font-size: 1.2rem;
+	background-color: $bg-alt;
+	padding: .5rem 1rem .5rem 1rem;
+	border-radius: .5rem;
+}
+.occupied-active {
+	color: $green;
+}
+
+.occupied-inactive {
+	color: rgba($fg, 0.3);
+}
+
+.empty-inactive {
+	color: rgba($fg, 0.1);
+}
+
+.empty-active {
+	color: $green;
+}
+
+.memory-inside,
+.cpu-inside {
+	padding: .7rem;
+}
+
+.memory-bar {
+	color: $magenta;
+	background-color: $black;
+}
+
+.cpu-bar {
+	color: $red;
+	background-color: $black;
+}
+
+.pacman-icon {
+	color: $yellow;
+}
+
+.pacman-text {
+	color: $fg;
+	margin-left: .3rem;
+}
+
+.volume-bar trough highlight {
+	background: $green;
+	border-radius: 1rem;
+}
+
+.network-text {
+	color: $fg;
+	margin-left: .3rem;
+}
+
+.clock {
+	font-family: "SF Mono";
+}
+
+.clock-hour {
+	font-size: 1.2rem;
+	font-weight: bold;
+	color: $fg;
+}
+
+.clock-minute {
+	font-size: 1.2rem;
+	color: $fg-alt;
+}
+
+.clock-separator {
+	font-size: 1.2rem;
+	color: $fg-alt;
+	margin-top: .075rem;
+}
+
+.musicbar-art {
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+	min-width: 2.2rem;
+	border-radius: 6.25rem;
+}
+
+.musicbar-title {
+	font-size: 1rem;
+	font-weight: bold;
+	font-family: "SF Pro";
+	color: $fg;
+}
+
+.musicbar-toggle-icon {
+	font-size: 1.25rem;
+}
+
+.musicbar-previous-icon,
+.musicbar-next-icon {
+	font-size: 1rem;
+}
+
+.musicbar-previous-icon,
+.musicbar-next-icon,
+.musicbar-toggle-icon {
+	font-family: "Font Awesome 6 Pro Solid";
+	color: $fg;
+
+	&:hover {
+		color: $magenta;
+	}
+}

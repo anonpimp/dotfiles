@@ -1,0 +1,9 @@
+^tag(bspwm)
+Reconfigure,openbox --reconfigure,/home/kinkakuji/.config/jgmenu/icons/repeat.svg
+Restart,openbox --restart,/home/kinkakuji/.config/jgmenu/icons/repeat.svg
+
+^tag(exit)
+Suspend,systemctl suspend,/home/kinkakuji/.config/jgmenu/icons/snooze.svg
+Reboot,systemctl reboot,/home/kinkakuji/.config/jgmenu/icons/repeat.svg
+Poweroff,systemctl poweroff,/home/kinkakuji/.config/jgmenu/icons/power-off.svg
+Log Out,openbox --exit,/home/kinkakuji/.config/jgmenu/icons/exit.svg

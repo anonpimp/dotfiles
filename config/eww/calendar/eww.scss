@@ -1,0 +1,96 @@
+.calendar-main-box {
+	background-color: $bg;
+	padding: 1.25rem;
+}
+
+.time {
+	font-family: SF Mono;
+	font-weight: bolder;
+	font-size: 3rem;
+	color: $fg;
+}
+
+.today {
+	font-family: SF Pro;
+	font-size: 1.5rem;
+	color: $fg-alt;
+}
+
+.timeboxes {
+	font-size: .5rem;
+
+	.magenta {
+		color: $magenta;
+	}
+
+	.green {
+		color: $green;
+	}
+
+	.yellow {
+		color: $yellow;
+	}
+}
+
+.weather-box {
+	padding: 0rem .5rem 0rem .5rem;
+}
+
+.weather-desc {
+	font-family: "SF Pro";
+	font-size: 1.25rem;
+	color: $fg-alt;
+}
+
+.weather-temp {
+	font-family: "SF Pro";
+	font-size: 1.55rem;
+	font-weight: bolder;
+	color: $fg;
+}
+
+.weather-icon {
+	font-family: "Font Awesome 6 Pro Solid";
+	font-size: 3rem;
+}
+
+.cal {
+	font-size: 1.2rem;
+	font-family: "SF Pro";
+	font-weight: 500;
+	background-color: $bg-alt;
+	border-radius: .75rem;
+}
+
+.cal-inner-box {
+	padding: .8rem .65rem 0rem .65rem;
+}
+
+.calendar {
+	padding: .4rem
+}
+
+calendar:selected {
+	color: $green;
+}
+
+calendar.highlight {
+	color: $green;
+}
+
+calendar.header {
+	color: $magenta;
+}
+
+calendar.button {
+	color: $magenta;
+}
+
+calendar.button:hover {
+	background-color: $black;
+	border-radius: 3rem;
+}
+
+calendar:indeterminate {
+	color: $gray;
+}

@@ -1,0 +1,70 @@
+;; Music
+(defpoll music-art :interval "1s" "scripts/mediacontrol coverloc")
+(defpoll music-title :interval "1s" "scripts/mediacontrol title")
+(defpoll music-artist :interval "1s" "scripts/mediacontrol artist")
+(defpoll music-toggle :interval "1s" "scripts/mediacontrol statusicon")
+(defpoll music-status :interval "1s" "scripts/mediacontrol status")
+(defpoll music-position :interval "1s" "scripts/mediacontrol position")
+(defpoll music-length :interval "1s" "scripts/mediacontrol length")
+(defpoll music-positions :interval "1s" "scripts/mediacontrol positions")
+(defpoll music-lengths :interval "1s" "scripts/mediacontrol lengths")
+(defpoll music-shuffle-color :interval "1s" "scripts/mediacontrol shufflecolor")
+(defpoll music-shuffle-status :interval "1s" "playerctl -p spotify shuffle")
+(defpoll music-loop-icon :interval "1s" "scripts/mediacontrol loopicon")
+(defpoll music-loop-color :interval "1s" "scripts/mediacontrol loopcolor")
+(defpoll music-loop-status :interval "1s" "playerctl -p spotify loop")
+(defvar music-rev false)
+
+;; Volume
+(defpoll volume-icon :interval "1s" "scripts/volume icon")
+(defpoll volume-percent :interval "1s" "scripts/volume percent")
+(defpoll volume-value :interval "1s" "scripts/volume vol")
+(defpoll volume-color :interval "1s" "scripts/volume color")
+(defvar volume-rev false)
+
+;; Date
+(defpoll hour :interval "1s" "date '+%H'")
+(defpoll minute :interval "1s" "date '+%M'")
+(defpoll date :interval "1h" "date '+%A, %B %d'")
+(defpoll calendar-day :interval "1h" "date '+%d'")
+(defpoll calendar-month :interval "1h" "date '+%m'")
+(defpoll calendar-year :interval "1h" "date '+%Y'")
+
+;; Profile
+(defvar profile-image "assets/asa.jpg")
+(defpoll profile-name :interval "24h" "scripts/details --name")
+(defpoll profile-os :interval "24h" "scripts/details --os")
+(defpoll profile-wm :interval "24h" "scripts/details --wm")
+(defpoll profile-kernel :interval "24h" "scripts/details --kernel")
+(defpoll profile-pkgs :interval "24h" "scripts/details --pkgs")
+
+;; Weather
+(defpoll weather-icon :interval "1h" "scripts/weather icon")
+(defpoll weather-temp :interval "1h" "scripts/weather current_temp")
+(defpoll weather-desc :interval "1h" "scripts/weather weather_desc")
+(defpoll weather-color :interval "1h" "scripts/weather hex")
+
+;; System
+(defpoll uptime :interval "1m" "uptime -p | sed -e 's/up //g'")
+(defpoll cpu :interval "5s" "scripts/system --cpu")
+(defpoll memory :interval "5s" "scripts/system --mem")
+(defpoll memorymb :interval "5s" "scripts/system --memb")
+
+;; Network
+(defpoll network-icon :interval "10s" "scripts/network icon")
+(defpoll network-color :interval "10s" "scripts/network color")
+(defpoll network-status :interval "10s" "scripts/network stat")
+(defpoll network-speed :interval "1s" "scripts/netspeed down")
+(defvar network-rev false)
+
+;; Updates
+(defpoll updates :interval "2h" "scripts/updates get")
+(defvar pacman-rev false)
+
+;; Workspaces
+(deflisten workspaces "scripts/workspaces")
+
+(include "bar/eww.yuck")
+(include "player/eww.yuck")
+(include "calendar/eww.yuck")
+(include "powermenu/eww.yuck")

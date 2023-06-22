@@ -1,0 +1,33 @@
+#!/bin/bash
+
+# Xresources
+xrdb ~/.Xresources &
+
+# Compositor
+picom &
+
+# Notify Daemon
+dunst &
+
+# Eww
+[ -n "$(pidof eww)" ] \
+  || eww daemon && eww open bar &
+
+# Xsettings
+[ -n "$(pidof xsettingsd)" ] \
+  || xsettingsd &
+
+# Polkit
+[ -n "$(pidof polkit-gnome-authentication-agent-1)" ] \
+  || /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+
+# Thunar daemon mode
+[ -n "$(pidof thunar)" ] \
+  || thunar --daemon &
+
+# Spotify
+[ -n "$(pidof spotify)" ] \
+  || spotify --uri=%U &
+
+# Wallpaper
+~/.fehbg &
