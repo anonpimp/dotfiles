@@ -1,0 +1,96 @@
+.player {
+  font-family: "SF Pro", "Font Awesome 6 Pro Solid";
+  background-color: $bg-alt;
+  border-radius: 1rem;
+
+  &.cover {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    box-shadow: 0 0 0.2rem black;
+    border-radius: 1.2rem;
+    min-height: 13rem;
+
+    .info {
+      border-radius: 1rem;
+      background: linear-gradient(to right, rgb($bg-alt, 1), rgba($black, 0.5));
+      padding: 1rem 1rem .5rem;
+
+      .icons {
+        text-shadow: 0 0 0.2rem black;
+
+        .shuffle,
+        .loop {
+          font-size: 1rem;
+        }
+
+        .app {
+          font-size: 1.25rem;
+          color: $green;
+        }
+      }
+
+      .title {
+        font-size: 1.1rem;
+        font-weight: bolder;
+        text-shadow: 0 0 0.5rem rgba($color: black, $alpha: 1);
+      }
+
+      .artist {
+        color: $white;
+        text-shadow: 0 0 0.5rem rgba($color: black, $alpha: 1);
+      }
+
+      .album {
+        color: $white;
+        text-shadow: 0 0 0.5rem rgba($color: black, $alpha: 1);
+      }
+
+      .progress scale trough highlight {
+        all: unset;
+        background-image: linear-gradient(to right,
+            darken($color: $green, $amount: 15%),
+            $green );
+        border-radius: 2rem;
+      }
+
+      .progress scale trough {
+        all: unset;
+        background-color: rgba($cyan, 0.5);
+        box-shadow: 0 0 2px 1px rgba(black, 0.5);
+        border-radius: 1rem;
+        min-height: 0.25rem;
+        margin-bottom: 5px;
+      }
+
+      .position {
+        font-size: 0.9rem;
+        font-weight: 500;
+        color: $fg-alt;
+      }
+    }
+  }
+
+  &.controls {
+    background-color: $bg-alt;
+    border-radius: 1rem;
+    margin: 0 1rem;
+
+    .toggle {
+      font-size: 2rem;
+      color: $fg;
+    }
+
+    .previous,
+    .next {
+      font-size: 1.6rem;
+      color: $fg-alt;
+    }
+
+    button {
+      &:hover {
+        color: $magenta;
+      }
+    }
+  }
+}

@@ -1,0 +1,22 @@
+(include "yuck/menu/calendar.yuck")
+(include "yuck/menu/mclock.yuck")
+(include "yuck/menu/profile.yuck")
+(include "yuck/menu/system.yuck")
+(include "yuck/menu/weather.yuck")
+(include "yuck/menu/player.yuck")
+
+(defwidget menu []
+  (box 
+    :class "menu"
+    :space-evenly false
+    :orientation "v"
+    :spacing 15
+    (mclock)
+    (cal)
+    (weather)
+    (system)
+    (player)
+    (box :class "separator" :height 2 :hexpand true)
+    (profile)
+  )
+)

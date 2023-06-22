@@ -1,0 +1,29 @@
+(defwidget updates []
+	(eventbox 
+		:onhover "eww update updates-rev=true" 
+		:onhoverlost "eww update updates-rev=false" 
+		(box
+			:class "updates"
+			:space-evenly false
+			:orientation "v"
+			(revealer 
+				:transition "slideup" 
+				:reveal updates-rev 
+				(label 
+					:class "updates total" 
+					:text updates
+				)
+			)
+			(eventbox
+				:cursor "pointer"
+				(button 
+					:class "updates icon" 
+					:onclick "scripts/updates --up"
+					:timeout "3s"
+					:tooltip "click to update"
+					""
+				)
+			)	
+		)
+	)
+)

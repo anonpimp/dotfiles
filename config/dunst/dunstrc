@@ -1,0 +1,71 @@
+# vim:ft=dosini
+
+[global]
+width = (100, 350)
+height = 150
+origin = "top-right"
+offset = "20x20"
+notification_limit = 3
+transparency = 0
+padding = 10
+horizontal_padding = 10
+frame_width = 4
+frame_color = "#0f0f0f"
+corner_radius = 20
+separator_color = "#4c4c4c"
+
+font = "Roboto 11"
+format = "<span size='12000' font_desc='Roboto' weight='500' foreground='#c49ec4'>%s</span>\n%b"
+
+icon_theme = "Papirus-Dark"
+enable_recursive_icon_lookup = true
+icon_position = left
+min_icon_size = 32
+max_icon_size = 96
+
+progress_bar_height = 5
+progress_bar_min_width = 0
+progress_bar_max_width = 300
+progress_bar_frame_width = 0
+
+ignore_newline = false
+alignment = center
+show_indicators = true
+history_length = 50
+idle_threshold = 120
+show_age_threshold = 60
+sticky_history = true
+browser = xdg-open
+
+mouse_left_click = close_current
+mouse_middle_click = context_all
+mouse_right_click = close_all
+
+[urgency_low]
+timeout = 5
+background = "#0f0f0f"
+foreground = "#e7e7e7"
+highlight = "#c49ec4"
+
+[urgency_normal]
+timeout = 10
+background = "#0f0f0f"
+foreground = "#e7e7e7"
+highlight = "#c49ec4"
+
+[urgency_critical]
+timeout = 0
+background = "#0f0f0f"
+foreground = "#e7e7e7"
+highlight = "#c49ec4"
+
+[logger]
+script = ~/.config/eww/scripts/logger.zsh
+
+[volume]
+appname = "Volume"
+history_ignore = true
+
+[spotify]
+appname = "Spotify"
+script = ~/.config/dunst/scripts/cover

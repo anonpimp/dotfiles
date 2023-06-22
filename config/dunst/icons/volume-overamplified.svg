@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="16"
+   height="16"
+   version="1.1"
+   id="svg1549"
+   sodipodi:docname="audio-volume-overamplified-symbolic.svg"
+   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1553" />
+  <sodipodi:namedview
+     id="namedview1551"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="false"
+     inkscape:zoom="54.75"
+     inkscape:cx="7.9817352"
+     inkscape:cy="7.9817352"
+     inkscape:window-width="1778"
+     inkscape:window-height="898"
+     inkscape:window-x="50"
+     inkscape:window-y="90"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg1549" />
+  <path
+     d="m8 1-4 4h-3v6h3l4 4v-11.172zm-2 4.8281v4.3418l-1-0.99805-0.16992-0.17188h-1.8301v-2h1.8301l0.16992-0.17188z"
+     fill="#555555"
+     style="fill:#c49ec4"
+     id="path1543" />
+  <rect
+     x="9"
+     y="4"
+     width="2"
+     height="8"
+     fill="#555555"
+     id="rect1545"
+     style="fill:#c49ec4" />
+  <rect
+     x="12"
+     y="2"
+     width="2"
+     height="12"
+     fill="#555555"
+     id="rect1547"
+     style="fill:#c49ec4" />
+</svg>

@@ -1,0 +1,68 @@
+(include "yuck/bar/bell.yuck")
+(include "yuck/bar/clock.yuck")	
+(include "yuck/bar/launcher.yuck")	
+(include "yuck/bar/music.yuck")	
+(include "yuck/bar/network.yuck")	
+(include "yuck/bar/updates.yuck")	
+(include "yuck/bar/volume.yuck")	
+(include "yuck/bar/workspaces.yuck")	
+
+(defwidget group []
+	(box 
+		:class "group"
+		:space-evenly false
+		:spacing 15
+		:orientation "v"
+		:width 40
+		(updates)
+		(network)
+		(volume)
+	)
+)
+
+(defwidget left []
+	(box 
+		:space-evenly false 
+		:halign "center"
+		:valign "start" 
+		:spacing 15
+		:orientation "v"
+		(launcher)
+		(workspaces)
+	)
+)
+
+(defwidget center []
+	(box 
+		:halign "center"
+		:valign "center" 
+		:orientation "v"
+		(music)
+	)
+)
+
+(defwidget right []
+	(box 
+		:space-evenly false 
+		:halign "center"
+		:valign "end" 
+		:spacing 15
+		:orientation "v"
+		(group)
+		(bell)
+		(label :text weather-icon :style "color: ${weather-color}; font-size: 1.3rem;")
+		(eventbox :cursor "pointer" 
+		(button :onclick "menu" (clock))
+		)
+	)
+)
+
+(defwidget bar []
+	(box 
+		:class "bar"
+		:orientation "v"
+		(left)
+		(center)
+		(right)
+	)
+)

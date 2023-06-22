@@ -1,0 +1,35 @@
+window>.volume-popup-box {
+  margin: 1rem;
+  box-shadow: 0 0 5px 2px rgba(black, 0.5);
+  background-color: $bg;
+}
+
+.volume-popup-box {
+  font-family: "Font Awesome 6 Pro Solid";
+  background-color: transparent;
+  padding: 0.4rem;
+  border-radius: 1rem;
+
+  .volume-popup-icon {
+    font-size: 2.2rem;
+    margin-left: 0.6rem;
+  }
+
+  .volume-popup-bar scale trough highlight {
+    all: unset;
+    background-image: linear-gradient(
+      to right,
+      darken($color: $green, $amount: 20%),
+      $green
+    );
+    border-radius: .8rem;
+  }
+
+  .volume-popup-bar scale trough {
+    all: unset;
+    background-color: $bg-alt;
+    border-radius: .8rem;
+    min-height: 3rem;
+    min-width: 15rem;
+  }
+}

@@ -1,0 +1,7 @@
+#!/bin/bash
+pkill dunst
+dunst -config ~/.config/dunst/dunstrc &
+
+dunstify -u critical "Critical message" "critical message"
+dunstify -u normal "Normal message" "normal message"
+dunstify -u low "Low message" "low message"

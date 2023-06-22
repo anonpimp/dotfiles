@@ -1,0 +1,159 @@
+(defwidget header []
+  (box 
+    :class "header"
+    :space-evenly false
+    (box
+      :class "dnd"
+      :halign "start"
+      (eventbox
+        :cursor "pointer"
+        (button 
+          :onclick "dunstctl set-paused toggle"
+          :style "color: ${notifications-dnd ? '#dd6777;' : '#ceb188;'}"
+          {notifications-dnd ? "" : ""}
+        )
+      )
+      (revealer 
+        :reveal {dunst-waiting == "0" ? false : true}
+        :transition "slideright"
+        (label
+          :class "dnd count"
+          :text dunst-count
+        )
+      )
+    )
+    (box 
+      :class "label"
+      :halign "end" 
+      :hexpand true 
+      (label  
+        :text "Notifications"
+      )
+    )
+    (box
+      :halign "end"
+      :hexpand true
+      (revealer 
+        :reveal {dunst-count == "0" ? false : true}
+        :transition "fade"
+        (box
+          (eventbox
+            :cursor "pointer"
+            (button 
+              :class "clear"
+              :halign "end"
+              :onclick "scripts/logger.zsh clear" 
+              ""
+            )
+          )
+        )
+      )
+    )
+  )
+)
+
+(defwidget notifications []
+  (box 
+    :class "notifications" 
+    :space-evenly false 
+    :orientation "v"
+    (header)
+    (literal :content notifications)
+  )
+)
+
+(defwidget notification-card [app time id image image_width image_height summary body pop ?screenshot]
+  (eventbox 
+    :class "notification"
+    (box 
+      :space-evenly false 
+      :orientation "v"
+      (box 
+        :class "osd"
+        (label
+          :class "app" 
+          :text app 
+          :halign "start"
+        )
+        (box
+          :space-evenly false
+          :halign "end"
+          :spacing 15
+          (label
+            :class "time"
+            :halign "end"
+            :text time
+          )
+          (eventbox
+            :cursor "pointer"
+            (button 
+              :class "close" 
+              :onclick "scripts/logger.zsh rm_id ${id}"
+              :halign "end"
+              "" 
+            )
+          )
+        )
+      )
+      (box  
+        :class "content"
+        :orientation {screenshot ? "v" : "h"}
+        :space-evenly false 
+        :spacing 10
+        (button
+          :class "image"
+          :style "background-image: url('${image}');"
+          :halign "center"
+          :valign "center"
+          :width image_width
+          :height image_height
+          :onclick pop
+        )
+        (box
+          :visible {screenshot ? false : true}
+          :orientation "v"
+          :space-evenly false
+          (label 
+            :class "summary"
+            :limit-width 30
+            :wrap true
+            :xalign 0
+            :text summary
+            :halign "start"
+          )
+          (label
+            :class "body"
+            :limit-width 80
+            :wrap true
+            :xalign 0
+            :text body
+            :halign "start"
+          )
+        )
+        (box
+          :class "screenshot buttons"
+          :visible screenshot
+          :spacing 40
+          (eventbox
+            :cursor "pointer"
+            (button
+              :class "open"
+              :onclick "viewnior '${image}' &"
+              :timeout "1s"
+              "Open"
+            )
+          ) 
+          (eventbox
+            :cursor "pointer"
+            (button
+              :class "delete"
+              :onclick "rm -f '${image}' && scripts/logger.zsh rm_id ${id}"
+              :timeout "1s"
+              "Delete"
+            )
+          )
+        )
+      )
+    )
+  )
+)

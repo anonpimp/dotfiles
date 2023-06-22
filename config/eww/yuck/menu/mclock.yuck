@@ -1,0 +1,43 @@
+(defwidget mclock []
+	(box
+		:class "menu clock"
+		:space-evenly false
+    :orientation "v"
+    :spacing 5
+    (box
+      :space-evenly false
+      :spacing 10
+      :halign "center"
+      (label 
+        :class "time" 
+        :text {formattime(EWW_TIME, "%H", "America/Sao_Paulo")}
+      )
+      (box 
+        :class "timebox" 
+        :valign "center" 
+        :orientation "v" 
+        :spacing 10
+        (box 
+          :class "timebox magenta" 
+          ""
+        )
+        (box 
+          :class "timebox green" 
+          ""
+        )
+        (box 
+          :class "timebox yellow" 
+          ""
+        )
+		  )
+      (label 
+        :class "time" 
+        :text {formattime(EWW_TIME, "%M", "America/Sao_Paulo")}
+      )
+    )
+    (label 
+      :class "today" 
+      :text {formattime(EWW_TIME, "%A, %B %d", "America/Sao_Paulo")}
+    )
+	)
+)

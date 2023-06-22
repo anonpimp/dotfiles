@@ -1,0 +1,8 @@
+(defwidget network []
+	(box 
+		:class "network"
+		:orientation "v"
+		:style {network-status == "down" ? "color: #dd6777;" : "color: #A39EC4;"}
+		{network-status == "up" ? "" : ""}
+	)
+)

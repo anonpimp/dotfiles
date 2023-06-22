@@ -1,0 +1,41 @@
+(defwindow bar
+	:monitor 0
+	:exclusive true
+  :stacking "fg"
+  :focusable false
+  :namespace "eww-bar"
+	:geometry (geometry :height "100%" :anchor "center left")
+	(bar)
+)
+
+(defwindow menu
+  :monitor 0 
+	:geometry (geometry :width "25%" :anchor "center left")
+	(menu)
+)
+
+(defwindow notifications
+  :monitor 0
+  :geometry (geometry :width "25%" :anchor "center left")
+  (notifications)
+)
+
+(defwindow player
+  :monitor 0
+	:geometry (geometry :anchor "left center")
+	(player)
+)
+
+(defwindow powermenu
+  :monitor 0 
+  :focusable false
+	:geometry (geometry :anchor "right center")
+  (powermenu)
+)
+
+(defwindow volume
+  :monitor 0 
+  :focusable false
+	:geometry (geometry :width "10%" :anchor "top center")
+  (volume-popup)
+)
