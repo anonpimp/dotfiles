@@ -106,6 +106,7 @@
           :class "screenshot-name" 
           :visible screenshot 
           :text image
+          :limit-width 50
         )
         (button
           :class "notification-image"

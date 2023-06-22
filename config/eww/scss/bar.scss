@@ -54,7 +54,7 @@
     }
 
     .occupied {
-      color: lighten($color: $black, $amount: 8%);
+      color: lighten($color: $black, $amount: 15%);
 
       &:hover {
         color: rgba($green, 0.5);

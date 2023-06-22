@@ -4,6 +4,7 @@
 (defvar volume-rev 	false)
 (defvar network-rev	false)
 (defvar updates-rev	false)
+(defvar profile-image	"assets/profile.jpg")
 
 ;; Music
 (defpoll music-player			:interval "1s" "scripts/mediacontrol --player")
@@ -23,7 +24,6 @@
 (defpoll volume-percent :interval "250ms" "pamixer --get-volume-human | tr -d '%'")
 
 ;; Powemenu
-(defvar profile-image	"assets/profile.jpg")
 (defpoll profile-name	:interval "24h" "scripts/details --name")
 (defpoll uptime				:interval "1m" "uptime -p | sed -e 's/up //g'")
 
@@ -48,7 +48,7 @@
 (defpoll packages :interval "2h" "scripts/details --pkgs")
 
 ;; Notifications
-(defpoll dunst-count 				:interval "1s" "dunstctl count history")
+(defpoll dunst-count 				:interval "1s" "scripts/logger.zsh count")
 (defpoll dunst-waiting 			:interval "1s" "dunstctl count waiting")
 (defpoll notifications-dnd	:interval "1s" "dunstctl is-paused")
 (deflisten notifications		"scripts/logger.zsh subscribe")
@@ -60,38 +60,3 @@
 (include "yuck/volume.yuck")
 (include "yuck/powermenu.yuck")
 (include "yuck/calendar.yuck")
-
-;; Closers
-(defwidget closer [window]
-	(eventbox 
-		:onclick "eww close ${window} ${window}-closer"
-	)
-)
-  
-(defwindow player-closer
-	:wm-ignore true
-	:stacking "fg"
-	:geometry (geometry :y "-5%" :width "100%" :height "100%")
-  (closer :window "player")
-)
-
-(defwindow notifications-closer
-	:wm-ignore true
-	:stacking "fg"
-	:geometry (geometry :y "-5%" :width "100%" :height "100%")
-  (closer :window "notifications")
-)
-
-(defwindow calendar-closer
-	:wm-ignore true
-	:stacking "fg"
-	:geometry (geometry :y "-5%" :width "100%" :height "100%")
-  (closer :window "calendar")
-)
-
-(defwindow powermenu-closer
-	:wm-ignore true
-	:stacking "fg"
-	:geometry (geometry :y "-5%" :width "100%" :height "100%")
-  (closer :window "powermenu")
-)

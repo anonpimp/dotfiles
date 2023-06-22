@@ -27,7 +27,7 @@ function create_cache() {
   # clean body
   [ "$DUNST_BODY" = "" ] && body="Body unavailable." || \
   # remove new line, turn doublequotes into apostrophe, squeeze spaces, remove bold markup, turn &quot; into apostrophe
-  body="$(echo "$DUNST_BODY" | tr '\n' ' ' | tr '"' "'" | tr -s " " | sed 's/<b>//' | sed 's/<\/b>/: /' | sed "s/&quot;/'/g")"
+  body="$(echo "$DUNST_BODY" | tr '\n' ' ' | tr '"' "'" | sed 's/  */ /g' | sed 's/[[:blank:]]*$//' | sed 's/<b>//' | sed 's/<\/b>/:/' | sed "s/&quot;/'/g")"
 
   local image_width=50
   local image_height=50
@@ -42,7 +42,7 @@ function create_cache() {
     screenshot=true
   fi
 
-  local SPOTIFY_TITLE=$(echo $DUNST_SUMMARY | tr '/' '-')
+  local SPOTIFY_TITLE=$(echo $DUNST_SUMMARY | tr '/' '-' | tr -d "'")
 
   if [[ $DUNST_APP_NAME == "Spotify" ]]; then
     ICON_PATH=$DUNST_CACHE_DIR/cover/$SPOTIFY_TITLE.png
@@ -86,7 +86,7 @@ function pop() {
 }
 
 function remove_line() {
-  dunstctl history-rm "$1"
+  dunstctl history-rm $id
   sed -i '/id "'$1'"/d' "$DUNST_LOG"
 
   if [[ -z $(cat $DUNST_LOG) ]]; then
@@ -105,6 +105,7 @@ function subscribe() {
 
 case "$1" in
   "pop") pop ;;
+  "count") cat $DUNST_LOG | wc -l ;;
   "clear") clear_logs ;;
   "subscribe") subscribe ;;
   "rm_id") remove_line $2 ;;
