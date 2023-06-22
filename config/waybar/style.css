@@ -1,0 +1,177 @@
+@import "mountain.css";
+
+* {
+    border-radius: 22px 22px 0 0;
+    min-height: 0;
+    margin-top: 2px;
+    margin-bottom: 2px;
+
+    font-family: "Roboto", "Font Awesome 6 Pro Solid";
+    font-size: 16px;
+    font-weight: 500;
+    font-style: normal;
+}
+
+window#waybar {
+    background: @black;
+}
+
+tooltip {
+    background: @menu;
+}
+
+tooltip label {
+    color: @white1;
+}
+
+#workspaces {
+    background: @black1;
+    color: @black1;
+    border-radius: 22px;
+    padding: 0 20px;
+}
+
+#workspaces button {
+    background: @black1;
+    color: @black1;
+    border-radius: 0px;
+    margin-right: 0px;
+    padding: 0;
+}
+
+#workspaces button:hover {
+    background: @black1;
+    color: @black1;
+    border-radius: 0px;
+    border-bottom: 6px solid @black1;
+    padding: 0;
+}
+
+#workspaces button.focused {
+    background: @black1;
+    color: @black1;
+    border-radius: 3px;
+    border-top: 0px solid @black1;
+    border-bottom: 3px solid #4c4c4c;
+    padding: 0px;
+}
+
+#workspaces button.persistent {
+    background: @black1;
+    color: @black1;
+    border-radius: 0px;
+    padding: 0px;
+}
+
+#workspaces button.urgent {
+    background: #303030;
+    color: @black1;
+    border-radius: 40px;
+}
+
+#tray {
+    background-color: @white1;
+}
+
+#tray menu {
+    background: @menu;
+    color: @white1;
+    border-radius: 10px;
+}
+
+#tray menu menuitem {
+    border-radius: 0px;
+}
+
+#tray menu menuitem:hover {
+    color: @white;
+    background: @black1;
+}
+
+#clock {
+    background: @black1;
+    color: @white2;
+    padding: 0 20px;
+    border-radius: 22px;
+}
+
+#memory {
+    background: @black1;
+    color: @orange;
+    padding: 0 20px;
+    border-radius: 22px;
+}
+
+#cpu {
+    background: @black1;
+    color: @green;
+    padding: 0 20px;
+    border-radius: 22px;
+}
+
+#pulseaudio {
+    background: @black1;
+    color: @blue;
+    padding: 0 20px;
+    border-radius: 22px;
+}
+
+#pulseaudio.muted {
+    color: @pink;
+}
+
+#custom-spotify {
+    background: @black1;
+    color: @green;
+    padding: 0 20px;
+    border-radius: 22px;
+    margin-left: 10px;
+}
+
+#custom-pacman {
+    background: @black1;
+    color: @yellow;
+    padding: 0 20px;
+    border-radius: 22px;
+}
+
+#custom-launcher {
+    background: @black;
+    color: @green;
+    padding: 0 15px;
+}
+
+#custom-powermenu {
+    background: @black;
+    color: #e06c75;
+    padding: 0 10px;
+    margin-right: 10px;
+}
+
+#custom-weather {
+    background: @black1;
+    padding: 0 20px;
+    border-radius: 22px;
+}
+
+#custom-weather.severe {
+    color: @pink;
+}
+
+#custom-weather.sunnyDay {
+    color: @yellow;
+}
+
+#custom-weather.rainyDay,
+#custom-weather.rainyNight,
+#custom-weather.clearNight,
+#custom-weather.cloudyFoggyDay,
+#custom-weather.cloudyFoggyNight {
+    color: @blue;
+}
+
+#custom-weather.showyIcyDay,
+#custom-weather.snowyIcyNight,
+#custom-weather.default {
+    color: @white1;
+}

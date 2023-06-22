@@ -1,0 +1,119 @@
+{
+        "position": "bottom",
+        "height": 50,
+        "margin-bottom": 0,
+        "margin-left": 0,
+        "margin-right": 0,
+        "spacing": 5,
+        "ipc": true,
+        "modules-left": [
+                "custom/spotify",
+                "custom/weather",
+                "custom/pacman",
+                "custom/launcher"
+        ],
+        "modules-center": [
+                "sway/workspaces"
+        ],
+        "modules-right": [
+                "cpu",
+                "memory",
+                "pulseaudio",
+                "clock",
+                "custom/powermenu"
+        ],
+        "sway/workspaces": {
+                "disable-scroll": false,
+                "all-outputs": true,
+                "format": "<span font_desc='Font Awesome 6 Pro Solid 14'>{icon}</span>",
+                "format-icons": {
+                        "1": "<span foreground='#c49ec4'></span>",
+                        "2": "<span foreground='#9ec4c3'></span>",
+                        "3": "<span foreground='#c6a679'></span>",
+                        "4": "<span foreground='#c49ea0'></span>",
+                        "5": "<span foreground='#a39ec4'></span>",
+                        "6": "<span foreground='#9ec49f'></span>"
+                },
+                "persistent_workspaces": {
+                        "1": [],
+                        "2": [],
+                        "3": [],
+                        "4": [],
+                        "5": [],
+                        "6": []
+                }
+        },
+        "tray": {
+                "icon-size": 23,
+                "spacing": 10
+        },
+        "clock": {
+                "format": "<span font='13'></span>  {:%H:%M}",
+                "format-alt": "<span font='13'></span>  {:%H:%M ~ %A, %d/%m}",
+                "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+        },
+        "memory": {
+                "format": "<span font='13'></span>  {used:0.1f}GiB",
+                "tooltip-format": "Memory {}% used"
+        },
+        "cpu": {
+                "interval": 10,
+                "format": "<span font='14'></span>  {usage}%",
+                "max-length": 10
+        },
+        "pulseaudio": {
+                "format": "<span font='13' rise='0pt'>{icon}</span>  {volume}%",
+                "format-muted": "<span font='13'></span>  Muted",
+                "format-icons": {
+                        "default": [
+                                "",
+                                ""
+                        ]
+                },
+                "scroll-step": 5,
+                "on-click": "volume toggle",
+                "on-click-right": "pavucontrol",
+                "tooltip": false
+        },
+        "custom/spotify": {
+                "exec": "~/.config/waybar/scripts/player.py --player spotify",
+                "format": "<span font='15' rise='-1pt'>{icon}</span>  {}",
+                "format-icons": [
+                        ""
+                ],
+                "escape": true,
+                "return-type": "json",
+                "max-length": 40,
+                "on-click": "playerctl -p spotify play-pause",
+                "on-click-right": "sway workspace number 4",
+                "on-scroll-up": "playerctl -p spotify next",
+                "on-scroll-down": "playerctl -p spotify previous"
+        },
+        "custom/weather": {
+                "exec": "~/.config/waybar/scripts/weather.py",
+                "restart-interval": 300,
+                "return-type": "json",
+                "format": "{}",
+                "format-alt": "{alt}"
+        },
+        "custom/pacman": {
+                "exec": "checkupdates | wc -l",
+                "exec-if": "exit 0",
+                "format": "<span font='13'></span>  {} updates",
+                "interval": 3600,
+                "signal": 8,
+                "on-click": "foot --app-id termfloat yay -Syyu",
+                "tooltip": false
+        },
+        "custom/launcher": {
+                "format": "<span font='13'></span>",
+                "on-click": "launcher",
+                "tooltip": false
+        },
+        "custom/powermenu": {
+                "format": "<span font='13'></span>",
+                "on-click": "powermenu",
+                "tooltip": false
+        }
+}
+// vim:ft=json

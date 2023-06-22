@@ -1,0 +1,18 @@
+#!/usr/bin/sh
+
+TEMP_DIR=/tmp/color
+
+main() {
+
+    HEX_COLOR=$(grim -g "$(slurp -b 00000000 -p)" -t png - | convert - -format '%[pixel:p{0,0}]' txt:- | tail -n 1 | cut -d ' ' -f 4)
+    mkdir -p $TEMP_DIR
+    HEX="${HEX_COLOR#\#}"
+    FNAME="$TEMP_DIR/$HEX.png"
+    convert -size 100x100 xc:"$HEX_COLOR" "$FNAME"
+    COLOR_CODE="$HEX_COLOR"
+
+    printf %s "$COLOR_CODE" | wl-copy -n
+       dunstify -i "$FNAME" "$COLOR_CODE " -u normal
+}
+
+main

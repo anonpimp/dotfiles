@@ -1,0 +1,24 @@
+#!/usr/bin/env sh
+
+date="$(date +'%Y-%m-%d_%H:%M')"
+dir="$HOME/Pictures/screenshots"
+pic="$dir/$date.png"
+
+[ ! -d "$dir" ] && mkdir -pv "$dir"
+
+full(){ grim "$pic" ;}
+crop(){ grim -g "$(slurp)" "$pic" ;}
+abort(){ dunstify -i face-crying "Error " ; exit 1 ;}
+
+case "$1" in 
+    full)
+      full || abort
+      wl-copy < "$pic"
+      dunstify -u normal -i "$pic" "Saved!" $pic
+      ;;
+    crop)
+      crop || abort
+      wl-copy < "$pic" 
+      dunstify -u normal -i "$pic" "Saved!" $pic
+      ;;
+esac

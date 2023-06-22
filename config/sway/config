@@ -1,0 +1,240 @@
+output HDMI-A-1 mode 1920x1080@74.973Hz position 0,0
+
+### Variables
+
+  set {
+    $mod Mod4
+    $term foot
+    $menu launcher 
+    $powermenu powermenu
+    $browser brave
+  }
+
+### Key bindings
+#
+# Basics:
+#
+    # Start a terminal
+    bindsym $mod+Return exec $term
+    bindsym $mod+Shift+Return exec $term --app-id="termfloat"
+
+    # Kill focused window
+    bindsym $mod+q kill
+
+    # Start your launcher
+    bindsym $mod+d exec $menu
+
+    # Drag floating windows by holding down $mod and left mouse button.
+    # Resize them with right mouse button + $mod.
+    # Despite the name, also works for non-floating windows.
+    # Change normal to inverse to use left mouse button for resizing and right
+    # mouse button for dragging.
+    floating_modifier $mod normal
+
+    # Reload the configuration file
+    bindsym $mod+shift+r reload
+
+    # Exit sway (logs you out of your Wayland session)
+    bindsym $mod+Shift+e exec $powermenu 
+
+#
+# Moving around:
+#
+    # Move your focus around
+    bindsym $mod+Left focus left
+    bindsym $mod+Down focus down
+    bindsym $mod+Up focus up
+    bindsym $mod+Right focus right
+
+    # Move the focused window with the same, but add Shift
+    bindsym $mod+Shift+Left move left
+    bindsym $mod+Shift+Down move down
+    bindsym $mod+Shift+Up move up
+    bindsym $mod+Shift+Right move right
+#
+# Workspaces:
+#
+    # Switch to workspace
+    bindsym $mod+1 workspace number 1
+    bindsym $mod+2 workspace number 2
+    bindsym $mod+3 workspace number 3
+    bindsym $mod+4 workspace number 4
+    bindsym $mod+5 workspace number 5
+    bindsym $mod+6 workspace number 6
+    bindsym $mod+7 workspace number 7
+    bindsym $mod+8 workspace number 8
+    bindsym $mod+9 workspace number 9
+    bindsym $mod+0 workspace number 10
+    # Move focused container to workspace
+    bindsym $mod+Shift+1 move container to workspace number 1
+    bindsym $mod+Shift+2 move container to workspace number 2
+    bindsym $mod+Shift+3 move container to workspace number 3
+    bindsym $mod+Shift+4 move container to workspace number 4
+    bindsym $mod+Shift+5 move container to workspace number 5
+    bindsym $mod+Shift+6 move container to workspace number 6
+    bindsym $mod+Shift+7 move container to workspace number 7
+    bindsym $mod+Shift+8 move container to workspace number 8
+    bindsym $mod+Shift+9 move container to workspace number 9
+    bindsym $mod+Shift+0 move container to workspace number 10
+    # Note: workspaces can have any name you want, not just numbers.
+    # We just use 1-10 as the default.
+    bindsym $mod+tab workspace back_and_forth
+#
+# Layout stuff:
+#
+    # You can "split" the current object of your focus with
+    # $mod+b or $mod+v, for horizontal and vertical splits
+    # respectively.
+    bindsym $mod+h splith
+    bindsym $mod+v splitv
+
+    # Switch the current container between different layout styles
+    bindsym $mod+s layout stacking
+    bindsym $mod+w layout tabbed
+    bindsym $mod+e layout toggle split
+
+    # Make the current focus fullscreen
+    bindsym $mod+f fullscreen
+
+    # Toggle the current focus between tiling and floating mode
+    bindsym $mod+space floating toggle
+
+    # Swap focus between the tiling area and the floating area
+    bindsym $mod+c focus mode_toggle
+
+    # Move focus to the parent container
+    bindsym $mod+a focus parent
+#
+# Scratchpad:
+#
+    # Sway has a "scratchpad", which is a bag of holding for windows.
+    # You can send windows there and get them back later.
+
+    # Move the currently focused window to the scratchpad
+    bindsym $mod+Shift+minus move scratchpad
+
+    # Show the next scratchpad window or hide the focused scratchpad window.
+    # If there are multiple scratchpad windows, this command cycles through them.
+    bindsym $mod+minus scratchpad show
+#
+# Resizing containers:
+#
+  mode "resize" {
+    # left will shrink the containers width
+    # right will grow the containers width
+    # up will shrink the containers height
+    # down will grow the containers height
+    bindsym Left resize shrink width 10px
+    bindsym Down resize grow height 10px
+    bindsym Up resize shrink height 10px
+    bindsym Right resize grow width 10px
+
+    # Return to default mode
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+  }
+bindsym $mod+r mode "resize"
+
+# Volume keys
+bindsym XF86AudioMute exec volume toggle
+bindsym XF86AudioLowerVolume exec volume down 
+bindsym XF86AudioRaiseVolume exec volume up
+
+# Media Control
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioPrev exec playerctl previous
+bindsym XF86AudioNext exec playerctl next
+
+# Screenshot
+bindsym Print exec dripshot full 
+bindsym $mod+Print exec dripshot crop
+
+# Restart Waybar
+bindsym $mod+bracketright exec ~/.config/waybar/launch.sh &
+
+# Restart Dunst
+bindsym $mod+bracketleft exec ~/.config/dunst/launch.sh
+
+# Color Picker
+bindsym $mod+Shift+p exec colorpicker
+
+# Lock
+bindsym $mod+alt+l exec lock
+
+# Window Rules
+  for_window {
+    [window_role="pop-up"] floating enable
+    [window_role="bubble"] floating enable
+    [window_role="task_dialog"] floating enable
+    [window_role="Preferences"] floating enable
+    [window_type="dialog"] floating enable
+    [window_type="menu"] floating enable
+    [title="."] title_format " %title"
+    [title="^float$"] floating enable
+    [title="(?:Open|Save) (?:File|Folder|As)"] floating enable
+    [title="(?:Choose Files)"] floating enable
+    [title="(?:Copying)"] floating enable
+    [title="mpv"] floating enable, resize set 900 600
+    [class="Viewnior"] floating enable
+    [class="Brave"] move to workspace number 2
+    [class="Spotify"] move to workspace number 4
+    [class="discord"] move to workspace number 5
+    [app_id="engrampa"] floating enable
+    [app_id="termfloat"] floating enable
+    [app_id="thunar"] floating enable
+    [app_id="org.telegram.desktop"] move to workspace number 3
+  }
+# Cursor theme
+seat seat0 xcursor_theme WhiteSur-cursors 27
+
+# Gaps and borders
+gaps inner 10
+gaps outer 40
+default_border pixel 4
+default_floating_border pixel 4 
+corner_radius 12
+
+# shadows
+shadows on
+shadows_on_csd false
+shadow_blur_radius 15
+shadow_color #0000007F
+
+# Window Colors
+set $unfocused  #151515
+set $normal     #303030
+set $inactive   #151515
+set $accent     #c49ec4
+
+# colors                border     bg         text     indicator  chld_brdr
+client.focused          $normal    $normal    #e7e7e7  $normal    $normal
+client.focused_inactive $inactive  $inactive  #e7e7e7  $inactive  $inactive
+client.unfocused        $unfocused $unfocused #767676  $unfocused $unfocused
+client.urgent           $accent    $accent    $inactive
+
+font pango:Roboto Medium 15px
+
+# Autostart
+  exec {
+    xwayland enable
+    swaybg -i ~/Pictures/wallpapers/guts.jpg -m fill
+    ~/.config/waybar/launch.sh
+    dunst
+    xrdb -load ~/.Xresources
+    wl-paste --watch cliphist store
+    /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+    spotify --uri=%U
+    telegram-desktop
+    thunar --daemon
+
+    export XDG_CURRENT_DESKTOP=sway
+    export QT_QPA_PLATFORM=wayland
+    export _JAVA_AWT_WM_NONREPARENTING=1 
+    export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true'
+  }
+
+  exec_always {
+    ~/.config/gtk-3.0/import-gsettings
+  }
+
+include /etc/sway/config.d/*

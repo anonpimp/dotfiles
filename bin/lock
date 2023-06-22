@@ -1,0 +1,22 @@
+#!/bin/bash
+
+swaylock \
+    --screenshots \
+    --clock \
+    --indicator \
+    --indicator-radius 120 \
+    --timestr '%R' \
+    --datestr '%A, %d %B' \
+    --indicator-thickness 10 \
+    --font 'Roboto Medium' \
+    --effect-blur 15x5 \
+    --text-color c49ec4 \
+    --ring-color c49ec4 \
+    --key-hl-color 4c4c4c \
+    --ring-ver-color c49ec4 \
+    --inside-ver-color c49ec4 \
+    --inside-clear-color 9ec49f \
+    --line-color 00000000 \
+    --inside-color 00000088 \
+    --separator-color 00000000 \
+    --fade 0.3
