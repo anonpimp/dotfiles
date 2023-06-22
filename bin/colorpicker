@@ -1,9 +1,9 @@
 #!/bin/bash
 
-# requieres gpick xclip imagemagick
+# requieres dunst hyprpicker imagemagick wl-clipboard
 
-TEMP_DIR=/tmp/xcolor
-HEX_COLOR=$(grim -g "$(slurp -b 00000000 -p)" -t png - | convert - -format '%[pixel:p{0,0}]' txt:- | tail -n 1 | cut -d ' ' -f 4)
+TEMP_DIR=/tmp/colorpicker
+HEX_COLOR=$(hyprpicker)
 
 mkdir -p $TEMP_DIR
 

@@ -5,7 +5,7 @@
 	<name>Open Terminal Here</name>
 	<submenu></submenu>
 	<unique-id>1653152521049373-1</unique-id>
-	<command>bspc rule -a \* -o state=floating ; alacritty -e $SHELL</command>
+	<command>foot -T flooat</command>
 	<description></description>
 	<range></range>
 	<patterns>*</patterns>
@@ -14,10 +14,10 @@
 </action>
 <action>
 	<icon>com.github.maoschanz.DynamicWallpaperEditor</icon>
-	<name>Set wallpaper</name>
+	<name>Set Wallpaper</name>
 	<submenu></submenu>
 	<unique-id>1653152845925747-1</unique-id>
-	<command>feh --bg-fill %n</command>
+	<command>swaybg -i %n -m fill</command>
 	<description></description>
 	<range></range>
 	<patterns>*</patterns>
@@ -29,7 +29,7 @@
 	<name>Open with Nvim</name>
 	<submenu></submenu>
 	<unique-id>1653154187810667-1</unique-id>
-	<command>bspc rule -a \* -o state=floating ; alacritty -e nvim %n</command>
+	<command>foot -T flooat -e nvim %n</command>
 	<description></description>
 	<range></range>
 	<patterns>*</patterns>
@@ -42,7 +42,7 @@
 	<name>Mountain</name>
 	<submenu></submenu>
 	<unique-id>1653157696807875-1</unique-id>
-	<command>dunstify -i com.github.gijsgoudzwaard.image-optimizer &quot;Wait...&quot; &quot;customizing image&quot; &amp;&amp; python ~/Documents/ImageGoNord/src/cli.py --mountain -i=%n -o=$(ls %f | grep %n | cut -f 1 -d &apos;.&apos;)-mountain</command>
+	<command>dunstify -i com.github.gijsgoudzwaard.image-optimizer &quot;ImageGoNord&quot; &quot;Wait...&quot; &quot;customizing image&quot; &amp;&amp; python ~/Documents/ImageGoNord/src/cli.py --mountain -i=%n -o=$(ls %f | grep %n | cut -f 1 -d &apos;.&apos;)-mountain</command>
 	<description>mountainize a image</description>
 	<range></range>
 	<patterns>*</patterns>
