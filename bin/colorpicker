@@ -3,7 +3,7 @@
 # requieres gpick xclip imagemagick
 
 TEMP_DIR=/tmp/xcolor
-HEX_COLOR=$(gpick -pso --no-newline)
+HEX_COLOR=$(grim -g "$(slurp -b 00000000 -p)" -t png - | convert - -format '%[pixel:p{0,0}]' txt:- | tail -n 1 | cut -d ' ' -f 4)
 
 mkdir -p $TEMP_DIR
 
@@ -14,6 +14,6 @@ convert -size 100x100 xc:"$HEX_COLOR" "$FNAME"
 
 COLOR_CODE="$HEX_COLOR"
 
-echo "$COLOR_CODE" | tr -d '\n' | xclip -sel c
+echo "$COLOR_CODE" | wl-copy -n
 
 dunstify -u low -a "Color Picker" -i "$FNAME" $COLOR_CODE "Copied to clipboard"

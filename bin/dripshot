@@ -7,25 +7,27 @@ PIC="$DIR/$DATE.png"
 [ ! -d "$DIR" ] && mkdir -pv "$DIR"
 
 full() {
-  maim -u "$PIC"
+  grim "$PIC"
 }
+
 crop() {
-  maim --select "$PIC"
+  grim -g "$(slurp)" "$PIC"
 }
+
 abort() {
-  dunstify -u low -a Screenshot -i dialog-error "Error" "something went wrong"
+  dunstify -i dialog-error "Error" "something went wrong"
   exit 1
 }
 
 case "$1" in
 --full)
   full || abort
-  xclip -selection c -t image/png "$PIC"
+  wl-copy < "$PIC"
   dunstify -u low -a Screenshot -i "$PIC" "Copied to clipboard" "$PIC"
   ;;
 --crop)
   crop || abort
-  xclip -selection c -t image/png "$PIC"
+  wl-copy < "$PIC"
   dunstify -u low -a Screenshot -i "$PIC" "Copied to clipboard" "$PIC"
   ;;
 esac
