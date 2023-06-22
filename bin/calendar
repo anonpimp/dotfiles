@@ -1,0 +1,6 @@
+#!/bin/bash
+
+[[ $(eww windows | grep '*notifications') ]] && \
+  eww close notifications && \
+  eww open calendar || \
+  eww open --toggle calendar

@@ -1,0 +1,62 @@
+;; Vars
+(defvar music-rev 	false)
+(defvar power-rev 	false)
+(defvar volume-rev 	false)
+(defvar network-rev	false)
+(defvar updates-rev	false)
+(defvar profile-image	"assets/profile.jpg")
+
+;; Music
+(defpoll music-player			:interval "1s" "scripts/mediacontrol --player")
+(defpoll music-art				:interval "1s" "scripts/mediacontrol --cover")
+(defpoll music-title 			:interval "1s" "scripts/mediacontrol --title")
+(defpoll music-artist 		:interval "1s" "scripts/mediacontrol --artist")
+(defpoll music-album 			:interval "1s" "scripts/mediacontrol --album")
+(defpoll music-status 		:interval "1s" "scripts/mediacontrol --status")
+(defpoll music-position 	:interval "1s" "scripts/mediacontrol --position")
+(defpoll music-positions	:interval "1s" "scripts/mediacontrol --positions")
+(defpoll music-length 		:interval "1s" "scripts/mediacontrol --length")
+(defpoll music-lengths 		:interval "1s" "scripts/mediacontrol --lengths")
+(defpoll shuffle 					:interval "1s" "scripts/mediacontrol --shuffle")
+(defpoll loop 						:interval "1s" "scripts/mediacontrol --loop")
+
+;; Volume
+(defpoll volume-percent :interval "250ms" "pamixer --get-volume-human | tr -d '%'")
+
+;; Powemenu
+(defpoll profile-name	:interval "24h" "scripts/details --name")
+(defpoll uptime				:interval "1m" "uptime -p | sed -e 's/up //g'")
+
+;; Weather
+(defpoll weather-icon			:interval "1h" "scripts/weather --icon")
+(defpoll weather-temp			:interval "1h" "scripts/weather --temp")
+(defpoll weather-desc			:interval "1h" "scripts/weather --desc")
+(defpoll weather-city			:interval "1h" "scripts/weather --city")
+(deflisten weather-color	"scripts/weather --hex")
+
+;; Network
+(defpoll network-status :interval "1m" "cat /sys/class/net/e*/operstate")
+
+;; Workspaces
+(defpoll layout-status		:interval "1s" "bsp-layout get")
+(defpoll focused-desktop	:interval "1s" "bspc query -D -d focused --names")
+(deflisten workspaces			"scripts/workspaces")
+(deflisten windowtitle		"xtitle -s | stdbuf -oL -eL uniq | cat")
+
+;; Packages
+(defpoll updates :interval "2h" "scripts/updates --get")
+(defpoll packages :interval "2h" "scripts/details --pkgs")
+
+;; Notifications
+(defpoll dunst-count 				:interval "1s" "scripts/logger.zsh count")
+(defpoll dunst-waiting 			:interval "1s" "dunstctl count waiting")
+(defpoll notifications-dnd	:interval "1s" "dunstctl is-paused")
+(deflisten notifications		"scripts/logger.zsh subscribe")
+
+;; Windows
+(include "yuck/bar.yuck")
+(include "yuck/player.yuck")
+(include "yuck/notifications.yuck")
+(include "yuck/volume.yuck")
+(include "yuck/powermenu.yuck")
+(include "yuck/calendar.yuck")

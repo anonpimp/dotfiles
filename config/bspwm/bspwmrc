@@ -1,0 +1,67 @@
+#!/bin/sh
+
+## Envs
+export _JAVA_AWT_WM_NONREPARENTING=1
+export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true'
+
+## Functions
+config() { bspc config "$@" & }
+
+## Autostart
+xrandr -r 75.00 &
+
+pgrep -x sxhkd > /dev/null || sxhkd &
+
+xsetroot -cursor_name left_ptr &
+
+xrdb $HOME/.Xresources 
+
+pidof picom || picom &
+
+pidof dunst || dunst &
+
+pidof eww || eww daemon && eww open bar &
+
+# Fix eww above fullscreen windows
+fullscreen &
+
+pidof xsettingsd || xsettingsd &
+
+pidof polkit-gnome-authentication-agent-1 || \
+  /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+
+pidof thunar || thunar --daemon &
+
+pidof spotify || spotify --uri=%U &
+
+$HOME/.fehbg &
+
+## General Config
+config external_rules_command "$HOME/.config/bspwm/rules"
+
+bspc monitor -d 1 2 3 4 5 6
+
+config border_width 3
+config window_gap 10
+config split_ratio 0.50
+
+config borderless_monocle true
+config gapless_monocle true
+config single_monocle false
+config focus_follows_pointer true
+
+config top_padding 20
+config left_padding 20
+config right_padding 20
+
+config pointer_modifier mod4
+config pointer_action1 move
+config pointer_action2 resize_side
+config pointer_action2 resize_corner
+
+config focused_border_color "#0f0f0f"
+config normal_border_color "#0f0f0f"
+config active_border_color "#4c4c4c"
+
+# Double borders
+pidof 2bspwm || pkill -x 2bspwm ; sleep 0.1 ; 2bspwm &

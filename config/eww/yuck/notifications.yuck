@@ -1,0 +1,176 @@
+(defwidget dnd [icon color action waiting count]
+  (eventbox
+    :class "notifications-dnd"
+    :halign "start"
+    :cursor "pointer"
+    (box
+      (button 
+        :onclick action
+        :style "color: ${color}"
+        icon
+      )
+      (revealer 
+        :reveal waiting
+        :transition "fade"
+        (label
+          :class "notifications-dnd-count"
+          :text count
+        )
+      )
+    )
+  )
+)
+
+(defwidget notifications []
+  (box 
+    :class "notifications-box" 
+    :space-evenly false 
+    :orientation "v"
+    (box 
+      :class "notifications-header"
+      :spacing 10
+      (dnd
+        :action "dunstctl set-paused toggle"
+        :icon {notifications-dnd ? "" : ""}
+        :color {notifications-dnd ? "#dd6777;" : "#ceb188;"}
+        :waiting {dunst-waiting == "0" ? false : true}
+        :count dunst-waiting
+      )
+      (label 
+        :class "notifications-header-label" 
+        :text "Notifications"  
+      )
+      (revealer 
+        :reveal {dunst-count == "0" ? false : true}
+        :transition "fade"
+        :halign "end"
+        (box
+          :class "clear-box"
+          :space-evenly false
+          :spacing 20
+          (eventbox
+            :cursor "pointer"
+            (button 
+              :class "notifications-header-clear" 
+              :halign "end"
+              :onclick "scripts/logger.zsh clear" 
+              ""
+            )
+          )
+        )
+      )
+    )
+    (literal :content notifications)
+  )
+)
+
+(defwidget notification-card [app time id image image_width image_height summary body pop ?screenshot]
+  (eventbox 
+    :class "notification-eventbox"
+    (box 
+      :space-evenly false 
+      :orientation "v"
+      (box 
+        :class "notification-header-box"
+        (label
+          :class "notification-app-name" 
+          :text "${app}" 
+          :halign "start"
+        )
+        (box
+          :space-evenly false
+          :halign "end"
+          :spacing 15
+          (label
+            :class "notification-time"
+            :halign "end"
+            :text time
+          )
+          (eventbox
+            :cursor "pointer"
+            (button 
+              :class "notification-close" 
+              :onclick "scripts/logger.zsh rm_id ${id}"
+              :halign "end"
+              "" 
+            )
+          )
+        )
+      )
+      (box  
+        :class "notification-content"
+        :orientation {screenshot ? "v" : "h"}
+        :space-evenly false 
+        :spacing 10
+        (label 
+          :class "screenshot-name" 
+          :visible screenshot 
+          :text image
+          :limit-width 50
+        )
+        (button
+          :class "notification-image"
+          :style "background-image: url('${image}');"
+          :halign "center"
+          :valign "center"
+          :width image_width
+          :height image_height
+          :onclick pop
+        )
+        (box
+          :class "notification-card"
+          :visible {screenshot ? false : true}
+          :orientation "vertical"
+          :space-evenly false
+          :hexpand true
+          (label 
+            :class "notification-summary"
+            :limit-width 30
+            :wrap true
+            :xalign 0
+            :text summary
+            :halign "start"
+            :hexpand true
+          )
+          (label
+            :class "notification-body"
+            :limit-width 80
+            :wrap true
+            :xalign 0
+            :text body
+            :halign "start"
+          )
+        )
+        (box
+          :class "screenshot-buttons-box"
+          :visible screenshot
+          :spacing 40
+          (eventbox
+            :cursor "pointer"
+            (button
+              :class "screenshot-open"
+              :onclick "viewnior '${image}' &"
+              :timeout "1s"
+              "Open"
+            )
+          ) 
+          (eventbox
+            :cursor "pointer"
+            (button
+              :class "screenshot-delete"
+              :onclick "rm -f '${image}' && scripts/logger.zsh rm_id ${id}"
+              :timeout "1s"
+              "Delete"
+            )
+          )
+        )
+      )
+    )
+  )
+)
+
+(defwindow notifications
+  :wm-ignore false
+  :geometry (geometry :width "25%" :x "1%" :y "-6%" :anchor "bottom right")
+  (notifications)
+)

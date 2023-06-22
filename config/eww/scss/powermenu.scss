@@ -1,0 +1,197 @@
+.menu {
+  font-family: "SF Pro", "Font Awesome 6 Pro Solid";
+  background-color: $bg;
+  padding: 1rem 1rem 1rem 2rem;
+
+  .profile-box {
+    background-color: $bg-alt;
+    padding: 1rem;
+    border-radius: 1rem;
+
+    .profile-img {
+      border-radius: 1rem;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+      min-height: 7rem;
+      min-width: 7rem;
+      box-shadow: 0 0 2px 2px rgba(black, 0.3);
+    }
+
+    .profile-info {
+      color: $fg;
+
+      .profile-name {
+        font-size: 1.4rem;
+        font-weight: bold;
+      }
+
+      .profile-infos {
+        font-size: 1rem;
+        font-weight: 500;
+      }
+    }
+  }
+
+  .power-box {
+    font-size: 1.5rem;
+    .shutdown {
+      color: $red;
+      margin-bottom: -0.2rem;
+    }
+
+    .power-rev {
+      padding-left: 0.7rem;
+
+      .reboot {
+        color: $green;
+      }
+
+      .suspend {
+        color: $yellow;
+      }
+
+      .exit {
+        color: $blue;
+      }
+
+      &:hover {
+        background-color: lighten($color: $bg-alt, $amount: 4%);
+      }
+    }
+  }
+
+  .net-graph-box {
+    background-color: $bg-alt;
+    padding: 1rem;
+    border-radius: 1rem;
+    .net-graph {
+      color: $magenta;
+    }
+
+    .net-graph-mb {
+      font-family: SF Mono;
+      font-weight: bold;
+      color: $fg-alt;
+    }
+
+    .net-graph-i {
+      font-size: 1.5rem;
+      color: $blue;
+      text-shadow: 0 0 4px black;
+      background-color: $bg-alt;
+      border-radius: 1rem 1rem 1rem 0;
+      padding: 5px 10px 5px 5px;
+    }
+  }
+
+  .pacman {
+    background-color: $bg-alt;
+    padding: 1rem;
+    border-radius: 1rem 0.2rem 0.2rem 0.2rem;
+    min-width: 10rem;
+
+    .pacman-icon {
+      font-size: 2.5rem;
+      color: $yellow;
+    }
+    .pacman-updates {
+      font-size: 1.5rem;
+      font-weight: 500;
+      color: $fg;
+    }
+    .updates {
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: $fg-alt;
+    }
+  }
+
+  .fetch {
+    background-color: $bg-alt;
+    padding: 1rem;
+    border-radius: 0.2rem 1rem 0.2rem 0.2rem;
+
+    .arch {
+      font-size: 5rem;
+      color: $cyan;
+    }
+
+    .osi {
+      color: $cyan;
+    }
+
+    .wmi {
+      color: $magenta;
+    }
+
+    .pki {
+      color: $yellow;
+    }
+
+    .os,
+    .wm,
+    .pk {
+      color: $fg-alt;
+      margin-top: .2rem;
+    }
+  }
+
+  .system {
+    .memory-inside,
+    .cpu-inside,
+    .temp-inside,
+    .disk-inside {
+      padding: 2rem;
+      font-size: 1.6rem;
+    }
+
+    .memory-box {
+      background-color: $bg-alt;
+      padding: 1rem;
+      border-radius: 0.2rem 0.2rem 0.2rem 0.2rem;
+      .memory-progress {
+        color: $magenta;
+        background-color: $black;
+      }
+    }
+
+    .cpu-box {
+      background-color: $bg-alt;
+      padding: 1rem;
+      border-radius: 0.2rem 0.2rem 0.2rem 0.2rem;
+      .cpu-progress {
+        color: $cyan;
+        background-color: $black;
+      }
+    }
+
+    .temp-box {
+      background-color: $bg-alt;
+      padding: 1rem;
+      border-radius: 0.2rem 0.2rem 0.2rem 1rem;
+      .temp-progress {
+        color: $yellow;
+        background-color: $black;
+      }
+    }
+
+    .disk-box {
+      background-color: $bg-alt;
+      padding: 1rem;
+      border-radius: 0.2rem 0.2rem 1rem 0.2rem;
+      .disk-progress {
+        color: $green;
+        background-color: $black;
+      }
+    }
+
+    .memory-info,
+    .cpu-info,
+    .temp-info,
+    .disk-info {
+      color: $fg;
+      font-weight: bold;
+    }
+  }
+}

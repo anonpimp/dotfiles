@@ -1,0 +1,92 @@
+#!/bin/bash
+
+[ -n "$(pgrep spotify)" ] && Control="spotify" || Control="brave"
+
+title() {
+  title=$(playerctl --player=$Control metadata --format {{title}})
+  [ -z "$title" ] && title="Play Something"
+  echo "$title"
+}
+
+artist() {
+  artist=$(playerctl --player=$Control metadata --format {{artist}})
+  [ -z "$artist" ] && artist="Artist"
+  echo "$artist"
+}
+
+album() {
+  album=$(playerctl --player=$Control metadata --format {{album}})
+  [ -z "$album" ] && album="Album"
+  echo "$album"
+}
+
+status() {
+  status=$(playerctl --player=$Control status)
+  [ -z "$status" ] && status="Stopped"
+  echo "$status"
+}
+
+position() {
+  position=$(playerctl -p $Control position -f '{{ duration(position) }}')
+  [ -z "$position" ] && position="0:00"
+  echo "$position"
+}
+
+positions() {
+  positions=$(playerctl -p $Control position | sed 's/..\{6\}$//')
+  [ -z "$positions" ] && positions=0
+  echo "$positions"
+}
+
+length() {
+  length=$(playerctl --player=$Control metadata --format "{{ duration(mpris:length) }}")
+  [ -z "$length" ] && length="0:00"
+  echo "$length"
+}
+
+lengths() {
+  lengths=$(playerctl --player=$Control metadata mpris:length | sed 's/.\{6\}$//')
+  [ -z "$lengths" ] && lengths=0
+  echo "$lengths"
+}
+
+cover() {
+  # saves covers here
+  Cover=/tmp/cover.png
+  # if cover not found in metadata use this instead
+  bkpCover=~/.config/eww/assets/spotify.png
+
+  albumart="$(playerctl --player=$Control metadata mpris:artUrl | sed -e 's/open.spotify.com/i.scdn.co/g')"
+  [ $(playerctl --player=$Control metadata mpris:artUrl) ] && curl -s "$albumart" --output $Cover || cp $bkpCover $Cover
+  echo "$Cover"
+}
+
+shuffle() {
+  shuffle=$(playerctl -p $Control shuffle)
+  [ -z "$shuffle" ] && shuffle="Off"
+  echo "$shuffle"
+}
+
+loop() {
+  loop=$(playerctl -p $Control loop)
+  [ -z "$loop" ] && loop="None"
+  echo "$loop"
+}
+
+case $1 in
+--next) playerctl --player=$Control next ;;
+--prev) playerctl --player=$Control previous ;;
+--toggle) playerctl --player=$Control play-pause ;;
+--title) title ;;
+--artist) artist ;;
+--album) album ;;
+--status) status ;;
+--player) echo "$Control" ;;
+--cover) cover ;;
+--position) position ;;
+--positions) positions ;;
+--length) length ;;
+--lengths) lengths ;;
+--shuffle) shuffle ;;
+--loop) loop ;;
+esac

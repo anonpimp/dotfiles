@@ -1,0 +1,11 @@
+#!/bin/bash
+
+CACHE_COVER="$HOME/.cache/dunst/cover"
+SPOTIFY_TITLE=$(echo $DUNST_SUMMARY | tr '/' '-' | tr -d "'")
+CACHE_COVER_FILE="$CACHE_COVER/$SPOTIFY_TITLE.png"
+
+[[ ! -d "$CACHE_COVER" ]] && mkdir -p "$CACHE_COVER"
+
+COVER_FROM_SPOTIFY="$(playerctl -p spotify metadata mpris:artUrl | sed -e 's/open.spotify.com/i.scdn.co/g')"
+
+[ $(playerctl -p spotify metadata mpris:artUrl) ] && curl -s "$COVER_FROM_SPOTIFY" --output "$CACHE_COVER_FILE"

@@ -1,0 +1,9 @@
+#!/bin/bash
+
+if [[ -z $(eww state) ]]; then
+  eww daemon
+  eww open --toggle bar
+else
+  eww open --toggle bar
+  bspc config bottom_padding 20
+fi

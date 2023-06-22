@@ -1,0 +1,25 @@
+@icon,,18,17,16,16,0,left,top,#c49ec4,#c49ec4,/home/klyn/.config/jgmenu/icons/search.svg
+@search,,42,15,150,20,2,left,top,#cacaca,#c49ec4,Search
+
+Terminal,bspc rule -a \* -o state=floating ; alacritty,/home/klyn/.config/jgmenu/icons/terminal.svg
+Web Browser,brave,/home/klyn/.config/jgmenu/icons/edge.svg
+File Manager,thunar,/home/klyn/.config/jgmenu/icons/folder-open.svg
+Code,code,/home/klyn/.config/jgmenu/icons/code.svg
+^sep()
+
+Apps,^checkout(lx-apps),/home/klyn/.config/jgmenu/icons/rocket-launch.svg
+^sep()
+
+Color Picker,colorpicker,/home/klyn/.config/jgmenu/icons/picker.svg
+Screenshot,^checkout(screenshot),/home/klyn/.config/jgmenu/icons/screenshot.svg
+Wallpaper,feh --bg-fill -z ~/Pictures/wallpapers/,/home/klyn/.config/jgmenu/icons/image.svg
+^sep()
+
+BSPWM,^checkout(bspwm),/home/klyn/.config/jgmenu/icons/window.svg
+Exit,^checkout(exit),/home/klyn/.config/jgmenu/icons/exit.svg
+
+^tag(screenshot)
+Full,sauceshot --delay2,/home/klyn/.config/jgmenu/icons/full.svg
+Crop,sauceshot --crop,/home/klyn/.config/jgmenu/icons/crop.svg
+
+^tag(lx-apps)

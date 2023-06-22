@@ -1,0 +1,131 @@
+.notifications-box {
+  font-family: "SF Pro", "Font Awesome 6 Pro Solid";
+  background-color: $bg;
+  padding: 1.5rem 2rem 1.5rem 1rem;
+
+  .notifications-header {
+    font-size: 1.5rem;
+    color: $fg;
+    margin: 0rem 1rem 1rem 1rem;
+
+    .notifications-dnd {
+      font-size: 1.6rem;
+    }
+
+    .notifications-dnd-count {
+      font-size: 1.2rem;
+      margin-bottom: -0.3rem;
+    }
+
+    .notifications-header-label {
+      font-weight: bold;
+    }
+
+    .notifications-header-clear {
+      &:hover {
+        color: lighten($color: $red, $amount: 3%);
+      }
+    }
+  }
+
+  .notification-eventbox {
+    background-color: $bg-alt;
+    border-radius: 1rem;
+
+    &:hover {
+      background-color: lighten($color: $bg-alt, $amount: 3%);
+    }
+
+    .notification-header-box {
+      font-size: 1rem;
+      background-color: darken($color: $bg-alt, $amount: 2%);
+      border-radius: 15px 15px 0px 0px;
+      padding: 0.5rem 1rem;
+
+      .notification-app-name {
+        font-weight: 500;
+        color: $fg-alt;
+      }
+
+      .notification-time {
+        font-size: 0.9rem;
+        font-weight: 500;
+        color: $fg-alt;
+      }
+
+      .notification-close {
+        color: $fg-alt;
+        margin: 0.2rem 0rem;
+
+        &:hover {
+          color: $red;
+        }
+      }
+    }
+
+    .notification-content {
+      margin: 1rem;
+
+      .notification-image {
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        border-radius: 1rem;
+        box-shadow: 0px 0px 4px 1px rgba(black, 0.3);
+      }
+
+      .notification-summary {
+        font-weight: bold;
+        font-size: 1rem;
+        padding-bottom: 0.5rem;
+        color: $fg;
+      }
+
+      .notification-body {
+        color: $fg;
+        font-size: 1rem;
+      }
+
+      .screenshot-buttons-box {
+        font-size: 1rem;
+        font-weight: bold;
+        margin-bottom: -0.5rem;
+
+        .screenshot-open {
+          background-color: darken($color: $green, $amount: 10%);
+          color: $bg-alt;
+          padding: 0.5rem;
+          margin: 0.5rem;
+          border-radius: 1rem;
+          box-shadow: 0 2px 1px rgba(black, 0.3);
+
+          &:hover {
+            background-color: lighten($color: $green, $amount: 2%);
+          }
+        }
+
+        .screenshot-delete {
+          background-color: $black;
+          color: $red;
+          padding: 0.5rem;
+          margin: 0.5rem;
+          border-radius: 1rem;
+          box-shadow: 0px 0px 2px 1px rgba(black, 0.3);
+
+          &:hover {
+            background-color: lighten($color: $black, $amount: 4%);
+          }
+        }
+      }
+    }
+  }
+
+  .notifications-empty-box {
+    .notifications-empty-label {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin: 1rem;
+      color: $fg;
+    }
+  }
+}
