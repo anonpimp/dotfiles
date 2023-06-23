@@ -2,49 +2,41 @@
   (box 
     :class "header"
     :space-evenly false
-    (box
-      :class "dnd"
-      :halign "start"
-      (eventbox
-        :cursor "pointer"
-        (button 
-          :onclick "dunstctl set-paused toggle"
-          :style "color: ${notifications-dnd ? '#dd6777;' : '#ceb188;'}"
-          {notifications-dnd ? "" : ""}
-        )
-      )
-      (revealer 
-        :reveal {dunst-waiting == "0" ? false : true}
-        :transition "slideright"
-        (label
-          :class "dnd count"
-          :text dunst-count
-        )
-      )
-    )
-    (box 
-      :class "label"
-      :halign "end" 
-      :hexpand true 
-      (label  
-        :text "Notifications"
-      )
-    )
-    (box
-      :halign "end"
+    (overlay
       :hexpand true
+      (box
+        :class "dnd"
+        :space-evenly false
+        :halign "start"
+        (eventbox
+          :cursor "pointer"
+          (button 
+            :onclick "dunstctl set-paused toggle"
+            :style "color: ${notifications-dnd ? '#dd6777;' : '#ceb188;'}"
+            {notifications-dnd ? "" : ""}
+          )
+        )
+        (revealer 
+          :reveal {dunst-waiting == "0" ? false : true}
+          :transition "slideright"
+          (label
+            :class "dnd count"
+            :text dunst-count
+          )
+        )
+      )
+      (label :class "label" :text "Notifications")
       (revealer 
         :reveal {dunst-count == "0" ? false : true}
         :transition "fade"
-        (box
-          (eventbox
-            :cursor "pointer"
-            (button 
-              :class "clear"
-              :halign "end"
-              :onclick "scripts/logger.zsh clear" 
-              ""
-            )
+        :halign "end"
+        :hexpand true
+        (eventbox
+          :cursor "pointer"
+          (button 
+            :class "clear"
+            :onclick "scripts/logger.zsh clear" 
+            ""
           )
         )
       )

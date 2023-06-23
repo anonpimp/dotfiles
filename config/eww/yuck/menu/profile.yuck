@@ -33,59 +33,16 @@
           )
         )
       )
-      ;(box :valign "end" :halign "end" (power))
+    )
+    (eventbox
+      :cursor "pointer"
+      (button 
+        :class "exit"
+        :halign "center"
+        :valign "center" 
+        :onclick "eww open --toggle powermenu" 
+        ""
+      )
     )
 	)
-)
-
-(defwidget power []
-  (eventbox 
-		:onhover "eww update power-rev=true" 
-		:onhoverlost "eww update power-rev=false"
-    (box 
-      :class "power-box"
-      :space-evenly false
-      (eventbox
-        :cursor "pointer"
-        (button 
-          :class "shutdown" 
-          :onclick "systemctl poweroff -i" 
-          ""
-        )
-      )
-      (revealer
-        :class "power-rev"
-        :transition "slideright" 
-        :reveal power-rev 
-        :duration "500ms"
-        (box
-          :spacing 20
-          (eventbox
-            :cursor "pointer"
-            (button 
-              :class "reboot" 
-              :onclick "systemctl reboot -i" 
-              ""
-            )
-          )
-          (eventbox
-            :cursor "pointer"
-            (button 
-              :class "suspend" 
-              :onclick "systemctl suspend" 
-              ""
-            )
-          )
-          (eventbox
-            :cursor "pointer"
-            (button 
-              :class "exit" 
-              :onclick "bspc quit" 
-              ""
-            )
-          )
-        )
-      )
-    )
-  )
 )

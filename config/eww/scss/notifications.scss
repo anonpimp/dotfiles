@@ -7,13 +7,13 @@ window>.notifications {
 .notifications {
   font-family: "SF Pro", "Font Awesome 6 Pro Solid";
   background-color: transparent;
-  padding: 1.5rem 0;
+  padding: 1.5rem 1rem;
   border-radius: 1rem;
 
   .header {
     font-size: 1.5rem;
     color: $fg;
-    margin: 0 2rem;
+    margin: 0 1rem 1rem;
 
     .dnd {
       font-size: 1.6rem;
@@ -26,7 +26,7 @@ window>.notifications {
 
     .label {
       font-weight: bold;
-      margin-right: .5rem;
+      margin-left: .5rem;
     }
 
     .clear {
@@ -93,7 +93,7 @@ window>.notifications {
         color: $fg;
         font-size: 1rem;
       }
-      
+
       .buttons {
         font-size: 1rem;
         font-weight: bold;
@@ -128,18 +128,15 @@ window>.notifications {
     }
   }
 
-  &.empty {
+  .empty {
     margin-bottom: 2rem;
+
     .label {
       font-size: 1.5rem;
       font-weight: bold;
       margin: 1rem;
       color: $fg;
     }
-  }
-
-  &.scroll {
-    margin: 0 1rem;
   }
 
 }

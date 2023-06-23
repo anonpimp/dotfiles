@@ -1,7 +1,7 @@
 (defwidget music [] 
 	(eventbox 
-		:onhover "eww update music-rev=${music-status == 'Stopped' ? false : true}"
-		:onhoverlost "eww update music-rev=false"
+	 	:onhover "eww update music-rev=${music-status == 'Stopped' ? false : true}"
+	 	:onhoverlost "eww update music-rev=false"
 		(box
 			:class "music"
 			:space-evenly false 
@@ -40,7 +40,7 @@
 				)
 			)
 			(box
-				:class "music cover" 
+				:class "music cover"
 				:style "background-image: url('${music-art}');"
 			)
 		)

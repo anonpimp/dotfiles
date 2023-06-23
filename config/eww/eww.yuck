@@ -1,9 +1,10 @@
 ;; Vars
 (defvar music-rev 	false)
-(defvar power-rev 	false)
 (defvar volume-rev 	false)
-(defvar network-rev	false)
 (defvar updates-rev	false)
+
+;; Date
+(defpoll date :interval "1h" `date +'{"day": "%d", "month": "%m", "year": "%Y"}'`)
 
 ;; Music
 (defpoll music-player			:interval "1s" "scripts/mediacontrol --player")
@@ -32,21 +33,21 @@
 (defpoll weather-temp			:interval "1h" "scripts/weather --temp")
 (defpoll weather-desc			:interval "1h" "scripts/weather --desc")
 (defpoll weather-city			:interval "1h" "scripts/weather --city")
-(deflisten weather-color	"scripts/weather --hex")
+(deflisten weather-color	:initial "#4c4c4c" "scripts/weather --hex")
 
 ;; Network
 (defpoll network-status :interval "1m" "cat /sys/class/net/e*/operstate")
 
 ;; Workspaces
-(deflisten	workspaces	"scripts/hyprland --workspaces")
-(deflisten	window			`scripts/hyprland --window`)
+(deflisten workspaces   "scripts/hyprland --workspaces")
+(deflisten window       "scripts/hyprland --window")
 
 ;; Packages
-(defpoll updates :interval "2h" "scripts/updates --get")
+(defpoll updates  :interval "2h" "scripts/updates --get")
 (defpoll packages :interval "2h" "scripts/details --pkgs")
 
 ;; Notifications
-(defpoll dunst-count 				:interval "1s" "scripts/logger.zsh count")
+(defpoll dunst-count 				:interval "1s" :initial "0" "scripts/logger.zsh count")
 (defpoll dunst-waiting 			:interval "1s" "dunstctl count waiting")
 (defpoll notifications-dnd	:interval "1s" :initial "false" "dunstctl is-paused")
 (deflisten notifications		"scripts/logger.zsh subscribe")

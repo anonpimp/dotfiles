@@ -126,10 +126,12 @@ window>.menu {
 
         &.cpu {
           color: $yellow;
+          label { margin-left: 1px;}
         }
 
         &.temp {
           color: $red;
+          label { margin-left: 1px;}
         }
 
         &.disk {
@@ -174,35 +176,16 @@ window>.menu {
       }
     }
 
-    .power-box {
+    .exit {
       font-size: 1.5rem;
+      color: $blue;
       background-color: $bg-alt;
-      padding: .6rem;
+      padding: .8rem 1rem;
       border-radius: 1rem;
 
-      .shutdown {
-        color: $red;
+      &:hover {
+        background-color: lighten($color: $bg-alt, $amount: 2%);
       }
-
-      .power-rev {
-        padding-left: 1.2rem;
-
-        .reboot {
-          color: $green;
-        }
-
-        .suspend {
-          color: $yellow;
-        }
-
-        .exit {
-          color: $blue;
-        }
-
-        &:hover {
-          background-color: lighten($color: $bg-alt, $amount: 4%);
-        }
-      }
-    }
+     }
   }
 }

@@ -1,17 +1,4 @@
-(defwidget shuffle [color action status]
-	(eventbox
-		:cursor "pointer"
-		(button
-			:class "shuffle"
-			:onclick action
-			:style "color: ${color}"
-			:tooltip status
-			""
-		)
-	)
-)
-
-(defwidget loop [icon color status action]
+(defwidget control [icon color status action]
 	(eventbox
 		:cursor "pointer"
 		(button 
@@ -42,12 +29,13 @@
 					(box 
 						:space-evenly false 
 						:spacing 10
-						(shuffle
+						(control
 							:action "playerctl -p spotify shuffle toggle"
 							:color {shuffle == "On" ? "#9ec49f" : "#a0a0a0"}
 							:status shuffle
+              :icon ""
 						)
-						(loop
+						(control
 							:action {loop == "None" ? "playerctl -p spotify loop playlist" : 
 							loop == "Playlist" ? "playerctl -p spotify loop track" :
 							"playerctl -p spotify loop none"}
