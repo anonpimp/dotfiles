@@ -13,7 +13,7 @@ updates=$((updates_arch + updates_aur))
 case "$1" in
 --up)
   if [ "$updates" -gt 0 ]; then
-    bspc rule -a \* -o state=floating && alacritty -e $SHELL -c 'yay -Syu'
+    foot -T flooat -e $SHELL -c 'yay -Syu'
   fi
   ;;
 --get)

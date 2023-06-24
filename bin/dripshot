@@ -15,7 +15,7 @@ crop() {
 }
 
 abort() {
-  dunstify -i dialog-error "Error" "something went wrong"
+  dunstify -a "Screenshot info" -i dialog-error "Screenshot" "aborted"
   exit 1
 }
 

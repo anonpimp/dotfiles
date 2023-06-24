@@ -1,7 +1,8 @@
 (defwidget updates []
 	(eventbox 
 		:onhover "eww update updates-rev=true" 
-		:onhoverlost "eww update updates-rev=false" 
+		:onhoverlost "eww update updates-rev=false"
+		:halign "center"
 		(box
 			:class "updates"
 			:space-evenly false
@@ -16,6 +17,7 @@
 			)
 			(eventbox
 				:cursor "pointer"
+				:halign "center"
 				(button 
 					:class "updates icon" 
 					:onclick "scripts/updates --up"

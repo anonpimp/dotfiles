@@ -106,7 +106,7 @@
     "scrollbarSlider.background": "#393939",
     "scrollbarSlider.hoverBackground": "#4c4c4c",
     "tab.activeBorderTop": "#c49ec4",
-    "tab.activeForeground": "#767676",
+    "tab.activeForeground": "#c49ec4",
     "activityBar.activeBackground": "#0f0f0f",
     "activityBar.border": "#0f0f0f",
     "activityBar.foreground": "#c49ec4",
@@ -134,6 +134,10 @@
     "editorCursor.foreground": "#f0f0f0",
     "editor.lineHighlightBackground": "#ffffff00",
     "editor.selectionHighlightBorder": "#FFFA",
+    "textLink.foreground": "#c49ec4",
+    "textLink.activeForeground": "#c49ec4",
+    "editorLink.activeForeground": "#c49ec4",
+    "tab.inactiveForeground": "#cacaca",
     "focusBorder": "#4c4c4c"
   },
 }
