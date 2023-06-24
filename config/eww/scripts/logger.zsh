@@ -70,7 +70,7 @@ function compile_caches() {
 function make_literal() {
   local caches="$(compile_caches)"
   [[ "$caches" == "" ]] \
-  && echo '(box :class "empty" :height 800 :orientation "v" :space-evenly "false" (image :class "bell" :valign "end" :vexpand "true" :path "assets/fallback.png" :image-width 100 :image-height 100) (label :vexpand "true" :valign "start" :class "label" :text "No Notifications"))' \
+  && echo '(box :class "empty" :height 800 :orientation "v" :space-evenly "false" (image :class "bell" :valign "end" :vexpand "true" :path "assets/bell.png" :image-width 100 :image-height 100) (label :vexpand "true" :valign "start" :class "label" :text "No Notifications"))' \
   || echo "(scroll :height 800 :vscroll true (box :orientation 'v' :class 'scroll' :spacing 10 :space-evenly 'false' $caches))"
 }
 

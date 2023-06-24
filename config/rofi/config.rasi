@@ -9,7 +9,7 @@ configuration {
 }
 
 * {
-  background:                     #0F0F0Fff;
+  background:                     #0F0F0FFF;
   background-alt:                 #00000000;
   background-bar:                 #262626FF;
   foreground:                     #F0F0F0FF;
@@ -54,7 +54,7 @@ inputbar {
   expand:                         false;
   border:		                      0;
   border-radius:                  15px;
-  border-color:                   @border;
+  border-color:                   @background-bar;
   margin:                         0% 25% 0% 25%;
   padding:                        1.25%;
 }

@@ -57,7 +57,7 @@
 					:class "title" 
 					:halign "start" 
 					:text music-title
-					:limit-width 30
+					:limit-width 35
 					:wrap true
 					:xalign 0
 				)
@@ -71,7 +71,8 @@
 					:class "album" 
 					:halign "start" 
 					:text music-album
-					:limit-width 30
+					:limit-width 35
+					:wrap true
 				)
 				(box
 					:space-evenly false

@@ -10,6 +10,7 @@
   "files.autoSave": "afterDelay",
   "editor.fontFamily": "'Juminai', 'Font Awesome 6 Pro'",
   "editor.minimap.enabled": false,
+  "editor.tabSize": 2,
   "editor.tokenColorCustomizations": {
     "comments": "#767676",
     "strings": "#9ec49f",
@@ -97,6 +98,20 @@
     "tab.inactiveBackground": "#0f0f0f",
     "sideBar.background": "#0f0f0f",
     "sideBarSectionHeader.background": "#0f0f0f",
+    "sideBar.foreground": "#f0f0f0",
+    "sideBar.border": "#0f0f0f",
+    "sideBarTitle.foreground": "#c49ec4",
+    "sideBarSectionHeader.border": "#191919",
+    "sideBarSectionHeader.foreground": "#c49ec4",
+    "scrollbarSlider.background": "#393939",
+    "scrollbarSlider.hoverBackground": "#4c4c4c",
+    "tab.activeBorderTop": "#c49ec4",
+    "tab.activeForeground": "#767676",
+    "activityBar.activeBackground": "#0f0f0f",
+    "activityBar.border": "#0f0f0f",
+    "activityBar.foreground": "#c49ec4",
+    "activityBar.activeBorder": "#c49ec4",
+    "activityBar.inactiveForeground": "#767676",
     "activityBar.background": "#0f0f0f",
     "statusBar.background": "#0f0f0f",
     "scrollbarSlider.activeBackground": "#0f0f0f",
@@ -118,6 +133,7 @@
     "editor.selectionHighlightBackground": "#303030",
     "editorCursor.foreground": "#f0f0f0",
     "editor.lineHighlightBackground": "#ffffff00",
-    "editor.selectionHighlightBorder": "#FFFA"
-  }
+    "editor.selectionHighlightBorder": "#FFFA",
+    "focusBorder": "#4c4c4c"
+  },
 }

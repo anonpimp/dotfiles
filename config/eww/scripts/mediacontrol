@@ -55,7 +55,18 @@ cover() {
   Cover=/tmp/cover.png
   # if cover not found in metadata use this instead
   bkpCover=~/.config/eww/assets/spotify.png
-
+  
+  #ART_FROM_SPOTIFY="$(playerctl -p %any,spotify metadata mpris:artUrl | sed -e 's/open.spotify.com/i.scdn.co/g')"
+  #ART_FROM_BROWSER="$(playerctl -p %any,mpd,firefox,chromium,brave metadata mpris:artUrl | sed -e 's/file:\/\///g')"
+  
+  #if [[ $(playerctl -p spotify,%any,firefox,chromium,brave,mpd metadata mpris:artUrl) ]]; then
+	#  curl -s "$ART_FROM_SPOTIFY" --output $Cover
+  #elif [[ -n $ART_FROM_BROWSER ]]; then
+  #  cp $ART_FROM_BROWSER $Cover
+  #else
+  #  cp $bkpCover $Cover
+  #fi
+  
   albumart="$(playerctl --player=$Control metadata mpris:artUrl | sed -e 's/open.spotify.com/i.scdn.co/g')"
   [ $(playerctl --player=$Control metadata mpris:artUrl) ] && curl -s "$albumart" --output $Cover || cp $bkpCover $Cover
   echo "$Cover"

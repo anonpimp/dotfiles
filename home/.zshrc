@@ -81,13 +81,13 @@ alias dunstrc='nvim $HOME/.config/dunst/dunstrc'
 alias hyprc='nvim $HOME/.config/hypr/hyprland.conf'
 
 # pacman install
-alias paci="yay -Slq | fzf --prompt='󰄾 ' --color=16 -m --preview 'cat <(yay -Si {1}) <(yay -Fl {1} | awk \"{print \$2}\")' | xargs -ro yay -S --needed"
+alias paci="yay -Slq | fzf --prompt=' ' --color=16 -m --preview 'cat <(yay -Si {1}) <(yay -Fl {1} | awk \"{print \$2}\")' | xargs -ro yay -S --needed"
 
 # pacman remove
-alias pacr="yay -Qq | fzf --prompt='󰄾 ' --color=16 -m --preview 'yay -Qi {1}' | xargs -ro yay -Rns"
+alias pacr="yay -Qq | fzf --prompt=' ' --color=16 -m --preview 'yay -Qi {1}' | xargs -ro yay -Rns"
 
 # pacman view
-alias pac="yay -Qq | fzf --prompt='󰄾 ' --color=16 -m --preview 'yay -Qi {1}'"
+alias pac="yay -Qq | fzf --prompt=' ' --color=16 -m --preview 'yay -Qi {1}'"
 
 # pacman clear
 alias pacc='yay -Qtdq | yay -Rns -'
