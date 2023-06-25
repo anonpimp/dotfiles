@@ -1,0 +1,18 @@
+#!/bin/bash 
+
+toggle_bar() {
+  if [[ -z $(eww windows | grep '*bar') ]]; then
+    sed -i '2{s/^#//}' ~/.config/hypr/settings.conf
+    eww open bar
+  else
+    eww close bar
+    sed -i '2{s/^/#/}' ~/.config/hypr/settings.conf
+  fi
+}
+
+if [[ -z $(pidof eww) ]]; then
+  eww daemon
+  toggle_bar
+else
+  toggle_bar
+fi

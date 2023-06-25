@@ -21,7 +21,7 @@
           :transition "slideright"
           (label
             :class "dnd count"
-            :text dunst-count
+            :text dunst-waiting
           )
         )
       )
@@ -54,7 +54,7 @@
   )
 )
 
-(defwidget notification-card [app time id image image_width image_height summary body pop ?screenshot]
+(defwidget notification-card [app time id image image_width image_height summary body ?screenshot ?tt]
   (eventbox 
     :class "notification"
     (box 
@@ -80,7 +80,7 @@
             :cursor "pointer"
             (button 
               :class "close" 
-              :onclick "scripts/logger.zsh rm_id ${id}"
+              :onclick "scripts/logger.zsh rm_id ${tt}"
               :halign "end"
               "" 
             )
@@ -99,7 +99,7 @@
           :valign "center"
           :width image_width
           :height image_height
-          :onclick pop
+          :onclick "dunstctl history-pop ${id}"
         )
         (box
           :visible {screenshot ? false : true}
@@ -139,7 +139,7 @@
             :cursor "pointer"
             (button
               :class "delete"
-              :onclick "rm -f '${image}' && scripts/logger.zsh rm_id ${id}"
+              :onclick "rm -f '${image}' && scripts/logger.zsh rm_id ${tt}"
               :timeout "1s"
               "Delete"
             )

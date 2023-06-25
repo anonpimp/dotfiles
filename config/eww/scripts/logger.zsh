@@ -28,6 +28,7 @@ function create_cache() {
   [ "$DUNST_BODY" = "" ] && body="Body unavailable." || \
   # remove new line, turn doublequotes into apostrophe, squeeze spaces, remove bold markup, turn &quot; into apostrophe
   body="$(echo "$DUNST_BODY" | tr '\n' ' ' | tr '"' "'" | sed 's/  */ /g' | sed 's/[[:blank:]]*$//' | sed 's/<b>//' | sed 's/<\/b>/:/' | sed "s/&quot;/'/g")"
+  
   local image_width=50
   local image_height=50
   local screenshot=false
@@ -44,21 +45,21 @@ function create_cache() {
   local SPOTIFY_TITLE=$(echo $DUNST_SUMMARY | tr '/' '-' | tr -d "'")
 
   if [[ $DUNST_APP_NAME == "Spotify" ]]; then
-    ICON_PATH=$DUNST_CACHE_DIR/cover/$SPOTIFY_TITLE.png
+    icon=$DUNST_CACHE_DIR/cover/$SPOTIFY_TITLE.png
 
   elif [[ $DUNST_APP_NAME == "Kotatogram Desktop" ]]; then
-    ICON_PATH=$HOME/.config/eww/assets/telegram.png
+    icon=$HOME/.config/eww/assets/telegram.png
 
   elif [[ $DUNST_APP_NAME == "discord" ]]; then
-    ICON_PATH=$HOME/.config/eww/assets/discord.png
+    icon=$HOME/.config/eww/assets/discord.png
   else
-    ICON_PATH=$(echo ${DUNST_ICON_PATH} | sed 's/32x32/48x48/g')
+    icon=$(echo ${DUNST_ICON_PATH} | sed 's/32x32/48x48/g')
   fi
 
   # pipe stdout -> pipe cat stdin (cat conCATs multiple files and sends to stdout) -> absorb stdout from cat
   # concat: "one" + "two" + "three" -> notice how the order matters i.e. "one" will be prepended
 sleep 0.3 && \
-echo '(notification-card :id "'$DUNST_ID'" :app "'$DUNST_APP_NAME'" :summary "'$summary'" :body "'$body'" :image "'$ICON_PATH'" :image_width "'$image_width'" :image_height "'$image_height'" :time "'$(date +'%H:%M')'" :screenshot "'$screenshot'" :pop "dunstctl history-pop '$DUNST_ID'")' \
+echo '(notification-card :id "'$DUNST_ID'" :app "'$DUNST_APP_NAME'" :summary "'$summary'" :body "'$body'" :image "'$icon'" :image_width "'$image_width'" :image_height "'$image_height'" :time "'$(date +'%H:%M')'" :screenshot "'$screenshot'" :tt "'$DUNST_TIMESTAMP'")' \
   | cat - "$DUNST_LOG" \
   | sponge "$DUNST_LOG"
 }
@@ -80,13 +81,8 @@ function clear_logs() {
   rm -rf  $DUNST_CACHE_DIR/cover/*
 }
 
-function pop() {
-  sed -i '1d' "$DUNST_LOG" 
-}
-
 function remove_line() {
-  dunstctl history-rm "$1"
-  sed -i '/id "'$1'"/d' "$DUNST_LOG"
+  sed -i '/tt "'$1'"/d' "$DUNST_LOG"
 
   if [[ -z $(cat $DUNST_LOG) ]]; then
     dunstctl history-clear
@@ -103,7 +99,6 @@ function subscribe() {
 }
 
 case "$1" in
-  "pop") pop ;;
   "count") cat $DUNST_LOG | wc -l ;;
   "clear") clear_logs ;;
   "subscribe") subscribe ;;

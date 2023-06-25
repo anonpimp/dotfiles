@@ -73,6 +73,18 @@
         "settings": {
           "foreground": "#9ec49f"
         }
+      },
+      {
+        "scope": "storage.modifier",
+        "settings": {
+          "foreground": "#a5b4cb"
+        }
+      },
+      {
+        "scope": "constant.other.option",
+        "settings": {
+          "foreground": "#c4c19e"
+        }
       }
     ]
   },

@@ -17,7 +17,7 @@
 	<name>Set Wallpaper</name>
 	<submenu></submenu>
 	<unique-id>1653152845925747-1</unique-id>
-	<command>swaybg -i %n -m fill</command>
+	<command>[[ -z $(pidof swaybg) ]] &amp;&amp;  swaybg -i %n -m fill ; dunstify -a Thunar -i %d/%n &quot;Wallpaper Set&quot; %n || killall swaybg ; swaybg -i %n -m fill ; dunstify -a Thunar -i %d/%n &quot;Wallpaper Set&quot; %n</command>
 	<description></description>
 	<range></range>
 	<patterns>*</patterns>
