@@ -1,5 +1,5 @@
 (include "yuck/menu/calendar.yuck")
-(include "yuck/menu/mclock.yuck")
+(include "yuck/menu/clock.yuck")
 (include "yuck/menu/profile.yuck")
 (include "yuck/menu/system.yuck")
 (include "yuck/menu/weather.yuck")

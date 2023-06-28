@@ -7,12 +7,12 @@
         (button
           :class "bell icon"
           :onclick "notifications"
-          :style {dunst-count > 0 ? "color: #f0f0f0;" : "color: #767676;"}
-          {notifications-dnd ? "" : ""}
+          :style {count > 0 ? "color: #f0f0f0;" : "color: #767676;"}
+          {dnd ? "" : ""}
         )
         (label
           :class "bell indicator"
-          :visible {dunst-count > 0 ? true : false}
+          :visible {count > 0 ? true : false}
           :valign "start" :halign "end" 
           :text ""
         )

@@ -7,11 +7,11 @@ window>.menu {
 .menu {
   font-family: "SF Pro", "Font Awesome 6 Pro Solid";
   background-color: transparent;
-  padding: .5rem 1rem 1rem;
+  padding: .7rem 1rem 1rem;
   border-radius: 1rem;
 
   &.clock {
-    margin-bottom: -1rem;
+    margin-bottom: -.7rem;
 
     .time {
       font-family: SF Mono;
@@ -50,7 +50,7 @@ window>.menu {
     padding: 1rem 1rem 0 1rem;
 
     calendar {
-      padding: 0.5rem;
+      padding: .5rem;
 
       &.button {
         color: $fg-alt;
@@ -63,6 +63,8 @@ window>.menu {
 
       &:selected {
         color: $green;
+        text-shadow: 0 0 3px lighten($color: $bg-alt, $amount: 50%);
+        border-radius: 1rem;
       }
 
       &.header {
@@ -98,13 +100,18 @@ window>.menu {
       color: $fg;
     }
 
+    .city {
+      font-size: 1.2rem;
+      color: $fg;
+    }
+
     &.icon {
       background-color: $bg-alt;
       border-radius: 1rem;
       padding: 1rem;
 
       .icon {
-        font-size: 2rem;
+        font-size: 2.2rem;
         text-shadow: 0 0 0.2rem black;
         min-width: 4rem;
       }
@@ -152,9 +159,9 @@ window>.menu {
     min-width: 1rem;
   }
 
-  .profile-box {
+  .profile {
 
-    .profile-img {
+    &.image {
       background-repeat: no-repeat;
       background-size: cover;
       background-position: center;
@@ -164,14 +171,14 @@ window>.menu {
       box-shadow: 0 0 2px 2px rgba(black, 0.3);
     }
 
-    .profile-info {
-      .profile-name {
+    &.info {
+      .name {
         font-size: 1.1rem;
         font-weight: bold;
         color: $fg;
       }
 
-      .profile-infos {
+      .uptime {
         font-size: 1rem;
       }
     }

@@ -12,22 +12,22 @@
           :cursor "pointer"
           (button 
             :onclick "dunstctl set-paused toggle"
-            :style "color: ${notifications-dnd ? '#dd6777;' : '#ceb188;'}"
-            {notifications-dnd ? "" : ""}
+            :style "color: ${dnd ? '#dd6777;' : '#ceb188;'}"
+            {dnd ? "" : ""}
           )
         )
         (revealer 
-          :reveal {dunst-waiting == "0" ? false : true}
+          :reveal {waiting == "0" ? false : true}
           :transition "slideright"
           (label
             :class "dnd count"
-            :text dunst-waiting
+            :text waiting
           )
         )
       )
       (label :class "label" :text "Notifications")
       (revealer 
-        :reveal {dunst-count == "0" ? false : true}
+        :reveal {count == "0" ? false : true}
         :transition "fade"
         :halign "end"
         :hexpand true
@@ -54,7 +54,7 @@
   )
 )
 
-(defwidget notification-card [app time id image image_width image_height summary body ?screenshot ?tt]
+(defwidget notification [app time id image image_width image_height summary body ?screenshot ?tt]
   (eventbox 
     :class "notification"
     (box 
@@ -115,7 +115,7 @@
           )
           (label
             :class "body"
-            :limit-width 80
+            :limit-width 100
             :wrap true
             :xalign 0
             :text body

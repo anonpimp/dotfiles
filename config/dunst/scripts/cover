@@ -1,7 +1,7 @@
 #!/bin/bash
 
 CACHE_COVER="$HOME/.cache/dunst/cover"
-SPOTIFY_TITLE=$(echo $DUNST_SUMMARY | tr '/' '-' | tr -d "'")
+SPOTIFY_TITLE=$(echo $DUNST_SUMMARY | sed -e 's/\//-/g' -e "s/'//g")
 CACHE_COVER_FILE="$CACHE_COVER/$SPOTIFY_TITLE.png"
 
 [[ ! -d "$CACHE_COVER" ]] && mkdir -p "$CACHE_COVER"

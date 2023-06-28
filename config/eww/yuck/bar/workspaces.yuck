@@ -1,19 +1,19 @@
-(defwidget workspaces [] 
-	(box
+(defwidget workspaces []
+  (box 
 		:class "workspaces"
 		:spacing 5
 		:orientation "v"
 		:width 40
-		(for workspace in {workspaces.workspaces}
+    (for workspace in hyprland
 			(eventbox
 				:cursor "pointer"
 				:onscroll "echo {} | sed -e \"s/up/-1/g\" -e \"s/down/+1/g\" | xargs hyprctl dispatch workspace"
-				(button
-					:class "${workspace.id == workspaces.active ? "active" : ""} ${workspace.windows > 0 ? "occupied" : "empty"}"
+				(button 
+					:class "${workspace.id == current ? "active" : ""} ${workspace.windows > 0 ? "occupied" : "empty"}"
 					:onclick "hyprctl dispatch workspace ${workspace.id}"
 					(button 
-						:class "icon" 
-						{workspace.windows > 0 ? "${workspace.id == workspaces.active ? "" : ""}" : ""}
+						:class "icon"
+						{workspace.windows > 0 ? "${workspace.id == current ? "" : ""}" : ""}
 					)
 				)
 			)

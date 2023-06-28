@@ -1,39 +1,42 @@
 (defwidget music [] 
 	(eventbox
-	 	:onhover "eww update music-rev=${music-status == 'Stopped' ? false : true}"
-	 	:onhoverlost "eww update music-rev=false"
+	 	:onhover "eww update music_rev=${music.status == 'Stopped' ? false : true}"
+	 	:onhoverlost "eww update music_rev=false"
 		(box
 			:class "music"
 			:space-evenly false 
 			:spacing 8
 			:orientation "v"
 			(revealer 
-				:transition "slideup" 
-				:reveal music-rev 
+				:transition "slideup"
+				:reveal music_rev 
 				(box 
 					:spacing 10
 					:orientation "v"
 					(eventbox
 						:cursor "pointer"
+						:halign "center"
 						(button 
 							:class "music previous" 
-							:onclick "scripts/mediacontrol --prev" 
+							:onclick "playerctl -p ${music.player} previous" 
 							""
 						)
 					)
 					(eventbox
 						:cursor "pointer"
+						:halign "center"
 						(button 
 							:class "music toggle" 
-							:onclick "scripts/mediacontrol --toggle" 
-							{music-status == "Playing" ? "" : music-status == "Paused" ? "" : ""}
+							:onclick "playerctl -p ${music.player} play-pause" 
+							{music.status == "Playing" ? "" : music.status == "Paused" ? "" : ""}
 						)
 					)
 					(eventbox
 						:cursor "pointer"
+						:halign "center"
 						(button 
 							:class "music next" 
-							:onclick "scripts/mediacontrol --next" 
+							:onclick "playerctl -p ${music.player} next" 
 							""
 						)
 					)
@@ -41,7 +44,9 @@
 			)
 			(box
 				:class "music cover"
-				:style "background-image: url('${music-art}');"
+				:halign "center"
+				:style "background-image: url('${artUrl}')" 
+				:tooltip "${music.title} ~ ${music.artist}"
 			)
 		)
 	)

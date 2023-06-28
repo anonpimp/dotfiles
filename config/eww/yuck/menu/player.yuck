@@ -2,9 +2,8 @@
 	(eventbox
 		:cursor "pointer"
 		(button 
-			:class "loop"
 			:onclick action
-			:style "color: ${color}"
+			:style "color: ${color == "" ? "#a0a0a0" : color}"
 			:tooltip status
 			icon
 		)
@@ -17,10 +16,10 @@
 		:space-evenly false
 		(box 
 			:class "player cover" 
-			:style "background-image: url('${music-art}')"
+			:style "background-image: url('${music.artUrl == "null" ? "assets/spotify.png" : music.artUrl}')" 
 			:hexpand true
 			(box 
-				:class "player info" 
+				:class "player info"
 				:space-evenly false 
 				:orientation "v" 
 				:spacing 10
@@ -31,32 +30,33 @@
 						:spacing 10
 						(control
 							:action "playerctl -p spotify shuffle toggle"
-							:color {shuffle == "On" ? "#9ec49f" : "#a0a0a0"}
-							:status shuffle
+							:color {music.shuffle ? "#9ec49f" : "#a0a0a0"}
+							:status {music.shuffle ? "On" : "Off"}
               :icon ""
 						)
 						(control
-							:action {loop == "None" ? "playerctl -p spotify loop playlist" : 
-							loop == "Playlist" ? "playerctl -p spotify loop track" :
+							:action {music.loop == "None" ? "playerctl -p spotify loop playlist" : 
+							music.loop == "Playlist" ? "playerctl -p spotify loop track" :
 							"playerctl -p spotify loop none"}
-							:icon  {loop == "Track" ? "" :
-							loop == "Playlist" ? "" : ""}
-							:color {loop == "Playlist" || loop == "Track" ? "#9ec49f" : "#a0a0a0"}
-							:status loop
+							:color {music.loop == "Playlist" || music.loop == "Track" ? "#9ec49f" : "#a0a0a0"}
+							:status {music.loop}
+							:icon  {music.loop == "Track" ? "" :
+							music.loop == "Playlist" ? "" : ""}
 						)
 					)
 					(box
-						(button 
+						(label 
 							:class "app" 
 							:halign "end" 
-							{music-player != "spotify" ? "" : ""}
+							:text {music.player != "spotify" ? "" : ""}
+							:tooltip {music.player}
 						)
 					)
 				)
 				(label 
 					:class "title" 
 					:halign "start" 
-					:text music-title
+					:text {music.title == "" ? "Title" : music.title}
 					:limit-width 35
 					:wrap true
 					:xalign 0
@@ -64,13 +64,13 @@
 				(label 
 					:class "artist" 
 					:halign "start" 
-					:text music-artist 
+					:text {music.artist == "" ? "Artist" : music.artist}
 					:limit-width 35
 				)
 				(label 
 					:class "album" 
 					:halign "start" 
-					:text music-album
+					:text {music.album == "" ? "Album" : music.album}
 					:limit-width 35
 					:wrap true
 				)
@@ -85,10 +85,10 @@
 						(eventbox
 							:cursor "pointer"
 							(scale 
-								:onchange "playerctl -p ${music-player} position {}"
 								:min 0 
-								:max music-lengths 
-								:value music-positions
+								:max {music.l == "" ? 0 : music.l}
+								:value {music.p == "" ? 0 : music.p}
+								:onchange "playerctl -p ${music.player} position {}"
 							)
 						)
 					)
@@ -99,12 +99,12 @@
 						:spacing 3
 						(label 
 							:class "time"
-							:text music-position
+							:text {music.position == "" ? "0:00" : music.position}
 						)
 						(label :class "time" :text "/")
 						(label 
 							:class "time"
-							:text music-length
+							:text {music.length == "" ? "0:00" : music.length}
 						)	
 					)
 				)
@@ -118,7 +118,7 @@
 				:cursor "pointer"
 				(button 
 					:class "previous" 
-					:onclick "scripts/mediacontrol --prev" 
+					:onclick "playerctl -p ${music.player} previous" 
 					""
 				)
 			)
@@ -126,15 +126,15 @@
 				:cursor "pointer"
 				(button 
 					:class "toggle" 
-					:onclick "scripts/mediacontrol --toggle" 
-					{music-status == "Playing" ? "" : music-status == "Paused" ? "" : ""}
+					:onclick "playerctl -p ${music.player} play-pause" 
+					{music.status == "Playing" ? "" : music.status == "Paused" ? "" : ""}
 				)
 			)
 			(eventbox
 				:cursor "pointer"
 				(button 
 					:class "next" 
-					:onclick "scripts/mediacontrol --next" 
+					:onclick "playerctl -p ${music.player} next" 
 					""
 				)
 			)

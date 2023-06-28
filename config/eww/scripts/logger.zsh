@@ -20,14 +20,14 @@ function create_cache() {
   local body
 
   # clean summary
-  [ "$DUNST_SUMMARY" = "" ] && summary="Summary unavailable." || \
-  # turn doublequotes into apostrophe
-  summary="$(echo "$DUNST_SUMMARY" | tr '"' "'")"
+  [ "$DUNST_SUMMARY" = "" ] && summary="No summary ?" || \
+  # escape
+  summary="$(echo "$DUNST_SUMMARY" | sed 's/"/\\"/g')"
 
   # clean body
-  [ "$DUNST_BODY" = "" ] && body="Body unavailable." || \
-  # remove new line, turn doublequotes into apostrophe, squeeze spaces, remove bold markup, turn &quot; into apostrophe
-  body="$(echo "$DUNST_BODY" | tr '\n' ' ' | tr '"' "'" | sed 's/  */ /g' | sed 's/[[:blank:]]*$//' | sed 's/<b>//' | sed 's/<\/b>/:/' | sed "s/&quot;/'/g")"
+  [ "$DUNST_BODY" = "" ] && body="No body?" || \
+
+  body="$(echo "$DUNST_BODY" | sed -e 's/\n//g' -e 's/&quot;/"/g' -e 's/ \+/ /g' -e 's/<b>//' -e 's/<\/b>/:/' -e 's/"/\\"/g')"
   
   local image_width=50
   local image_height=50
@@ -42,7 +42,7 @@ function create_cache() {
     screenshot=true
   fi
 
-  local SPOTIFY_TITLE=$(echo $DUNST_SUMMARY | tr '/' '-' | tr -d "'")
+  local SPOTIFY_TITLE=$(echo $DUNST_SUMMARY | sed -e 's/\//-/g' -e "s/'//g")
 
   if [[ $DUNST_APP_NAME == "Spotify" ]]; then
     icon=$DUNST_CACHE_DIR/cover/$SPOTIFY_TITLE.png
@@ -59,9 +59,9 @@ function create_cache() {
   # pipe stdout -> pipe cat stdin (cat conCATs multiple files and sends to stdout) -> absorb stdout from cat
   # concat: "one" + "two" + "three" -> notice how the order matters i.e. "one" will be prepended
 sleep 0.3 && \
-echo '(notification-card :id "'$DUNST_ID'" :app "'$DUNST_APP_NAME'" :summary "'$summary'" :body "'$body'" :image "'$icon'" :image_width "'$image_width'" :image_height "'$image_height'" :time "'$(date +'%H:%M')'" :screenshot "'$screenshot'" :tt "'$DUNST_TIMESTAMP'")' \
+echo '(notification :id "'$DUNST_ID'" :app "'$DUNST_APP_NAME'" :summary "'$summary'" :body "'$body'" :image "'$icon'" :image_width "'$image_width'" :image_height "'$image_height'" :time "'$(date +'%H:%M')'" :screenshot "'$screenshot'" :tt "'$DUNST_TIMESTAMP'")' \
   | cat - "$DUNST_LOG" \
-  | sponge "$DUNST_LOG"
+  | sponge "$DUNST_LOG" 
 }
 
 function compile_caches() {

@@ -1,8 +1,8 @@
 (defwidget network []
-	(box 
+	(label 
 		:class "network"
-		:orientation "v"
-		:style {network-status == "down" ? "color: #dd6777;" : "color: #A39EC4;"}
-		{network-status == "up" ? "" : ""}
+		:style {network == "down" ? "color: #dd6777;" : "color: #A39EC4;"}
+		:text {network == "up" ? "" : ""}
+		:tooltip "${round(EWW_NET.enp4s0.NET_DOWN / 1000000, 2)}MB"
 	)
 )

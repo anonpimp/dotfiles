@@ -5,7 +5,7 @@
 (include "yuck/bar/network.yuck")	
 (include "yuck/bar/updates.yuck")	
 (include "yuck/bar/volume.yuck")	
-(include "yuck/bar/workspaces.yuck")	
+(include "yuck/bar/workspaces.yuck")
 
 (defwidget group []
 	(box 
@@ -14,7 +14,7 @@
 		:spacing 15
 		:orientation "v"
 		:width 40
-		(updates)
+    (updates)
 		(network)
 		(volume)
 	)
@@ -50,9 +50,13 @@
 		:orientation "v"
 		(group)
 		(bell)
-		(label :text weather-icon :style "color: ${weather-color}; font-size: 1.3rem;")
+    (label 
+			:text {weather.icon} 
+			:style "color: ${weather.color}; font-size: 1.3rem;"
+			:tooltip "${weather.temp}°C"
+		)
 		(eventbox :cursor "pointer" 
-		(button :onclick "menu" (clock))
+		  (button :onclick "menu" (clock))
 		)
 	)
 )

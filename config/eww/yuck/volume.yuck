@@ -1,24 +1,23 @@
 (defwidget volume-popup []
   (box
-    :class "volume-popup-box"
+    :class "volume_pop"
     :hexpand true
     (overlay
       (box
-        :class "volume-popup-bar"
+        :class "scale"
         (scale
           :min 0 
           :max 101
-          :value {volume-percent == "muted" ? 0 : volume-percent}
+          :value {volume == "muted" ? 0 : volume}
         )
       )
       (label
-        :class "volume-popup-icon"
         :halign "start"
-        :text {volume-percent == 0 || volume-percent == "muted" ? "" : 
-        volume-percent < 30 ? "" : 
-        volume-percent < 75 ? "" : ""} 
-        :style {volume-percent == "muted" || volume-percent == 0 ? "color: #dd6777;" : 
-        volume-percent < 12 ? "color: #cacaca;" : "color: #191919;"}
+        :text {volume == 0 || volume == "muted" ? "" : 
+        volume < 30 ? "" : 
+        volume < 75 ? "" : ""} 
+        :style {volume == "muted" || volume == 0 ? "color: #dd6777;" : 
+        volume < 15 ? "color: #cacaca;" : "color: #191919;"}
       )
     )
   )

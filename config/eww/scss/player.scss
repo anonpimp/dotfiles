@@ -1,5 +1,4 @@
 .player {
-  font-family: "SF Pro", "Font Awesome 6 Pro Solid";
   background-color: $bg-alt;
   border-radius: 1rem;
 
@@ -7,7 +6,7 @@
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    box-shadow: 1px 0 2px 2px rgba(black, 0.1);
+    box-shadow: 1px 0 2px 2px rgba(black, 0.2);
     border-radius: 1.2rem;
     min-height: 13rem;
 
@@ -27,6 +26,7 @@
         .app {
           font-size: 1.25rem;
           color: $green;
+          text-shadow: 0 0 3px black;
         }
       }
 
@@ -46,15 +46,15 @@
 
       .progress scale trough highlight {
         all: unset;
-        background-image: linear-gradient(to right,
-            darken($color: $green, $amount: 15%),
-            $green );
         border-radius: 2rem;
+        background-image: linear-gradient(to right,
+          darken($color: $green, $amount: 15%),
+          $green );
       }
 
       .progress scale trough {
         all: unset;
-        background-color: rgba($cyan, 0.5);
+        background-color: rgba($cyan, 0.2);
         box-shadow: 0 0 2px 1px rgba(black, 0.5);
         border-radius: 1rem;
         min-height: 0.25rem;

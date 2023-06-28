@@ -47,7 +47,7 @@
 (defwidget disk [] 
   (system_progress
     :css "disk"
-    :tip "SSD ${EWW_DISK["/"].used / EWW_DISK["/"].total}"
+    :tip "SSD ${round(EWW_DISK["/"].used_perc, 2)}%"
     :data {round(EWW_DISK["/"].used_perc, 0)}
     :icon ""
   )

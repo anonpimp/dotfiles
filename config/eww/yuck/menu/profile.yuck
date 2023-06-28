@@ -1,25 +1,25 @@
 (defwidget profile []
 	(box 
-		:class "profile-box" 
+		:class "profile" 
 		:space-evenly false 
     :spacing 10
     (box 
-      :class "profile-img" 
+      :class "profile image" 
       :halign "center"
       :valign "center"
-      :style "background-image: url('${profile-image}');"
+      :style "background-image: url('${image}');"
     )
     (box
       :orientation "v"
       :hexpand true
       (box 
-        :class "profile-info" 
+        :class "profile info" 
         :space-evenly false 
         :orientation "v" 
         :spacing 5
         (label 
-          :class "profile-name" 
-          :text profile-name 
+          :class "name" 
+          :text {details.user} 
           :halign "start"
         )
         (box
@@ -27,7 +27,7 @@
           :spacing 5
           (label :text "")
           (label 
-            :class "profile-infos" 
+            :class "uptime" 
             :text uptime 
             :halign "start"
           )
