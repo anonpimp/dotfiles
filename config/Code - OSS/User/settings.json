@@ -152,4 +152,5 @@
     "tab.inactiveForeground": "#cacaca",
     "focusBorder": "#4c4c4c"
   },
+  "explorer.confirmDelete": false,
 }

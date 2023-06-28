@@ -17,7 +17,7 @@
 	<name>Set Wallpaper</name>
 	<submenu></submenu>
 	<unique-id>1653152845925747-1</unique-id>
-	<command>[[ -z $(pidof swaybg) ]] &amp;&amp;  swaybg -i %n -m fill ; dunstify -a Thunar -i %d/%n &quot;Wallpaper Set&quot; %n || killall swaybg ; swaybg -i %n -m fill ; dunstify -a Thunar -i %d/%n &quot;Wallpaper Set&quot; %n</command>
+	<command>killall swaybg &amp;&amp; swaybg -i %n -m fill</command>
 	<description></description>
 	<range></range>
 	<patterns>*</patterns>
@@ -42,7 +42,7 @@
 	<name>Mountain</name>
 	<submenu></submenu>
 	<unique-id>1653157696807875-1</unique-id>
-	<command>dunstify -i com.github.gijsgoudzwaard.image-optimizer &quot;ImageGoNord&quot; &quot;Wait...&quot; &quot;customizing image&quot; &amp;&amp; python ~/Documents/ImageGoNord/src/cli.py --mountain -i=%n -o=$(ls %f | grep %n | cut -f 1 -d &apos;.&apos;)-mountain</command>
+	<command>dunstify -a Thunar -i com.github.gijsgoudzwaard.image-optimizer -r 111 &quot;ImageGoNord&quot; &quot;Applying pallete&quot; &amp;&amp; python ~/Documents/ImageGoNord/src/cli.py --mountain -i=%n -o=$(ls %f | grep %n | cut -f 1 -d &apos;.&apos;)-mountain &amp;&amp; dunstify -a Thunar -i com.github.gijsgoudzwaard.image-optimizer -r 111 &quot;ImageGoNord&quot; &quot;Done!&quot;</command>
 	<description>mountainize a image</description>
 	<range></range>
 	<patterns>*</patterns>
