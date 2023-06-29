@@ -22,27 +22,30 @@ function create_cache() {
   # clean summary
   [ "$DUNST_SUMMARY" = "" ] && summary="No summary ?" || \
   # escape
-  summary="$(echo "$DUNST_SUMMARY" | sed 's/"/\\"/g')"
+  summary=${DUNST_SUMMARY//\"/\\\"}
 
   # clean body
   [ "$DUNST_BODY" = "" ] && body="No body?" || \
-
-  body="$(echo "$DUNST_BODY" | sed -e 's/\n//g' -e 's/&quot;/"/g' -e 's/ \+/ /g' -e 's/<b>//' -e 's/<\/b>/:/' -e 's/"/\\"/g')"
+  body="$(echo "$DUNST_BODY" | tr "\n" " " | sed -e 's/&quot;/"/g' -e 's/ \+/ /g' -e 's/ \{1\}$//' -e 's/<b>//g' -e 's/<\/b>/:/g' -e 's/"/\\"/g')"
   
   local image_width=50
   local image_height=50
   local screenshot=false
 
-  if [[ $DUNST_APP_NAME == "Spotify" || $DUNST_APP_NAME == "Color Picker" ]]; then
+  case $DUNST_APP_NAME in
+  Spotify|'Color Picker')
     image_width=90
     image_height=90
-  elif [[ $DUNST_APP_NAME == "Screenshot" ]]; then
+    ;;
+  Screenshot)
     image_width=384
     image_height=216
     screenshot=true
-  fi
+    ;;
+  esac
 
-  local SPOTIFY_TITLE=$(echo $DUNST_SUMMARY | sed -e 's/\//-/g' -e "s/'//g")
+  local SPOTIFY_TITLE=${DUNST_SUMMARY//\//-}
+  SPOTIFY_TITLE=${SPOTIFY_TITLE//\'/}
 
   if [[ $DUNST_APP_NAME == "Spotify" ]]; then
     icon=$DUNST_CACHE_DIR/cover/$SPOTIFY_TITLE.png
@@ -91,15 +94,15 @@ function remove_line() {
 
 function subscribe() {
   make_literal
-  local lines=$(cat $DUNST_LOG | wc -l)
+  local lines=$(wc -l < "$DUNST_LOG")
   while sleep 0.1; do
-    local new=$(cat $DUNST_LOG | wc -l)
+    local new=$(wc -l < "$DUNST_LOG")
     [[ $lines -ne $new ]] && lines=$new && print
   done | while read -r _ do; make_literal done
 }
 
 case "$1" in
-  "count") cat $DUNST_LOG | wc -l ;;
+  "count") wc -l < "$DUNST_LOG" ;;
   "clear") clear_logs ;;
   "subscribe") subscribe ;;
   "rm_id") remove_line $2 ;;
