@@ -1,16 +1,15 @@
 #!/bin/bash
 
-playerctl --follow metadata --format \
-$'{{title}}\t{{artist}}\t{{album}}\t{{playerName}}\t{{status}}\t{{mpris:artUrl}}\t{{duration(position)}}\t{{duration(mpris:length)}}\t{{shuffle}}\t{{loop}}\t{{position}}\t{{mpris:length}}' |
+playerctl metadata --format \
+  $'{{title}}\t{{artist}}\t{{album}}\t{{playerName}}\t{{status}}\t{{mpris:artUrl}}\t{{duration(position)}}\t{{duration(mpris:length)}}\t{{shuffle}}\t{{loop}}\t{{position}}\t{{mpris:length}}' |
+  while IFS=$'\t' read -r title artist album player status artUrl position length shuffle loop p l; do
 
-while IFS=$'\t' read -r title artist album player status artUrl position length shuffle loop p l; do
+    p=$(echo "$p" | sed 's/.\{6\}$//')
+    l=$(echo "$l" | sed 's/.\{6\}$//')
 
-  p=$(echo "$p" | sed 's/.\{6\}$//')
-  l=$(echo "$l" | sed 's/.\{6\}$//')
+    title=$(echo "$title" | sed 's/"/\\"/g')
+    artist=$(echo "$artist" | sed 's/"/\\"/g')
+    album=$(echo "$album" | sed 's/"/\\"/g')
 
-  title=$(echo "$title" | sed 's/"/\\"/g')
-  artist=$(echo "$artist" | sed 's/"/\\"/g')
-  album=$(echo "$album" | sed 's/"/\\"/g')
-
-  echo '{"title": "'$title'", "artist": "'$artist'", "album": "'$album'", "player": "'$player'", "status": "'$status'", "artUrl": "'$artUrl'", "position": "'$position'", "length": "'$length'", "shuffle": "'$shuffle'", "loop": "'$loop'", "p": "'$p'", "l": "'$l'"}'
-done
+    echo '{"title": "'$title'", "artist": "'$artist'", "album": "'$album'", "player": "'$player'", "status": "'$status'", "artUrl": "'$artUrl'", "position": "'$position'", "length": "'$length'", "shuffle": "'$shuffle'", "loop": "'$loop'", "p": "'$p'", "l": "'$l'"}'
+  done

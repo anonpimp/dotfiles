@@ -16,7 +16,7 @@
 		:space-evenly false
 		(box 
 			:class "player cover" 
-			:style "background-image: url('${music.artUrl == "null" ? "assets/spotify.png" : music.artUrl}')" 
+			:style "background-image: url('${artUrl == "" ? "assets/spotify.png" : artUrl}')" 
 			:hexpand true
 			(box 
 				:class "player info"

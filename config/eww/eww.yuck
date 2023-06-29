@@ -13,11 +13,11 @@
 (defpoll count            :interval "1s" :initial "0" `scripts/logger.zsh count`)
 (defpoll waiting          :interval "1s" `dunstctl count waiting`)
 (defpoll dnd              :interval "1s" :initial "false" `dunstctl is-paused`)
+(defpoll music            :interval "1s" `scripts/media`)
 
 (deflisten hyprland       `scripts/workspaces --workspaces`)
 (deflisten notifications  `scripts/logger.zsh subscribe`)
 (deflisten network        `tail -f /sys/class/net/e*/operstate`)
-(deflisten music          `scripts/media`)
 (deflisten artUrl         `playerctl --follow metadata --format {{mpris:artUrl}}`)
 (deflisten weather        `scripts/weather`)
 

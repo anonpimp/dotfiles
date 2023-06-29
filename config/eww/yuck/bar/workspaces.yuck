@@ -8,6 +8,7 @@
 			(eventbox
 				:cursor "pointer"
 				:onscroll "echo {} | sed -e \"s/up/-1/g\" -e \"s/down/+1/g\" | xargs hyprctl dispatch workspace"
+				:halign "center"
 				(button 
 					:class "${workspace.id == current ? "active" : ""} ${workspace.windows > 0 ? "occupied" : "empty"}"
 					:onclick "hyprctl dispatch workspace ${workspace.id}"

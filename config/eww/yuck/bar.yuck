@@ -52,7 +52,7 @@
 		(bell)
     (label 
 			:text {weather.icon} 
-			:style "color: ${weather.color}; font-size: 1.3rem;"
+			:style "color: ${weather.color == "" ? "#4c4c4c" : weather.color}; font-size: 1.3rem;"
 			:tooltip "${weather.temp}°C"
 		)
 		(eventbox :cursor "pointer" 
