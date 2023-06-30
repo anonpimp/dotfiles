@@ -14,9 +14,10 @@
 	(box
 		:class "player" 
 		:space-evenly false
+		:visible {music == "" || music.player == "" ? false : true}
 		(box 
 			:class "player cover" 
-			:style "background-image: url('${artUrl == "" ? "assets/spotify.png" : artUrl}')" 
+			:style "background-image: url('${music.artUrl == "" ? "assets/spotify.png" : music.artUrl}')"
 			:hexpand true
 			(box 
 				:class "player info"
@@ -29,15 +30,15 @@
 						:space-evenly false 
 						:spacing 10
 						(control
-							:action "playerctl -p spotify shuffle toggle"
+							:action "playerctl shuffle toggle"
 							:color {music.shuffle ? "#9ec49f" : "#a0a0a0"}
 							:status {music.shuffle ? "On" : "Off"}
               :icon ""
 						)
 						(control
-							:action {music.loop == "None" ? "playerctl -p spotify loop playlist" : 
-							music.loop == "Playlist" ? "playerctl -p spotify loop track" :
-							"playerctl -p spotify loop none"}
+							:action {music.loop == "None" ? "playerctl loop playlist" : 
+							music.loop == "Playlist" ? "playerctl loop track" :
+							"playerctl loop none"}
 							:color {music.loop == "Playlist" || music.loop == "Track" ? "#9ec49f" : "#a0a0a0"}
 							:status {music.loop}
 							:icon  {music.loop == "Track" ? "" :
@@ -87,7 +88,7 @@
 							(scale 
 								:min 0 
 								:max {music.l == "" ? 0 : music.l}
-								:value {music.p == "" ? 0 : music.p}
+								:value {music.p == "" || music.p > 1000 ? 0 : music.p}
 								:onchange "playerctl -p ${music.player} position {}"
 							)
 						)

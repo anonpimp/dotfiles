@@ -26,38 +26,41 @@ function create_cache() {
 
   # clean body
   [ "$DUNST_BODY" = "" ] && body="No body?" || \
-  body="$(echo "$DUNST_BODY" | tr "\n" " " | sed -e 's/&quot;/"/g' -e 's/ \+/ /g' -e 's/ \{1\}$//' -e 's/<b>//g' -e 's/<\/b>/:/g' -e 's/"/\\"/g')"
+  body="$(echo "$DUNST_BODY" | tr '\n' ' ' | sed -e 's/&quot;/"/g' -e 's/ \+/ /g' -e 's/ \{1\}$//g' -e 's/<b>//g' -e 's/<\/b>/:/g' -e 's/"/\\"/g')"
   
   local image_width=50
   local image_height=50
   local screenshot=false
 
   case $DUNST_APP_NAME in
-  Spotify|'Color Picker')
-    image_width=90
-    image_height=90
-    ;;
+    Spotify|'Color Picker')
+      image_width=90
+      image_height=90
+      ;;
   Screenshot)
-    image_width=384
-    image_height=216
-    screenshot=true
-    ;;
+      image_width=384
+      image_height=216
+      screenshot=true
+      ;;
   esac
 
-  local SPOTIFY_TITLE=${DUNST_SUMMARY//\//-}
-  SPOTIFY_TITLE=${SPOTIFY_TITLE//\'/}
+  local SPOTIFY_TITLE="$(echo "$DUNST_SUMMARY" | sed -e 's/\//-/g' -e "s/[\"']//g")"
 
-  if [[ $DUNST_APP_NAME == "Spotify" ]]; then
-    icon=$DUNST_CACHE_DIR/cover/$SPOTIFY_TITLE.png
+  case $DUNST_APP_NAME in
+    "Spotify")
+      icon=$DUNST_CACHE_DIR/cover/$SPOTIFY_TITLE.png
+      ;;
+    "Kotatogram Desktop")
+      icon=$HOME/.config/eww/assets/telegram.png
+      ;;
+    "discord")
+      icon=$HOME/.config/eww/assets/discord.png
+      ;;
+    *)
+      icon=$(echo ${DUNST_ICON_PATH} | sed 's/32x32/48x48/g')
+      ;;
+  esac
 
-  elif [[ $DUNST_APP_NAME == "Kotatogram Desktop" ]]; then
-    icon=$HOME/.config/eww/assets/telegram.png
-
-  elif [[ $DUNST_APP_NAME == "discord" ]]; then
-    icon=$HOME/.config/eww/assets/discord.png
-  else
-    icon=$(echo ${DUNST_ICON_PATH} | sed 's/32x32/48x48/g')
-  fi
 
   # pipe stdout -> pipe cat stdin (cat conCATs multiple files and sends to stdout) -> absorb stdout from cat
   # concat: "one" + "two" + "three" -> notice how the order matters i.e. "one" will be prepended

@@ -28,7 +28,7 @@
           (label :text "")
           (label 
             :class "uptime" 
-            :text uptime 
+            :text {details.uptime} 
             :halign "start"
           )
         )

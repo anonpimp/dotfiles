@@ -8,7 +8,7 @@ window_title() {
   echo $(hyprctl activewindow -j | jq --raw-output .title)
 }
 
-case $1 in 
+case $1 in
 --window)
   window_class
   socat -u UNIX-CONNECT:/tmp/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock - | while read -r line; do
@@ -28,6 +28,7 @@ current_workpace(){
   current="$(hyprctl -j monitors | jq '.[0].activeWorkspace.id')"
   eww update current="$current"
 }
+
 
 case $1 in
 --workspaces)

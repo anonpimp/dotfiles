@@ -20,7 +20,7 @@
 				:halign "center"
 				(button 
 					:class "updates icon" 
-					:onclick {details.update != 0 ? "foot -T flooat -e $SHELL -c 'yay -Syu' &" : ""}
+					:onclick {details.update > 0 ? "foot -T flooat -e $SHELL -c 'yay -Syu' &" : ""}
 					:timeout "3s"
 					:tooltip "click to update"
 					""

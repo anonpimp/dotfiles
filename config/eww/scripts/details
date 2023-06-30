@@ -5,6 +5,7 @@ kernel="$(uname -r)"
 os="$(cat /etc/os-release | awk 'NR==1' | awk -F '"' '{print $2}')"
 pkgs="$(yay -Q | wc -l)"
 wm="$XDG_CURRENT_DESKTOP"
+uptime="$(uptime -p | sed -e 's/up //g')"
 
 if ! updates_arch=$(checkupdates 2>/dev/null | wc -l) ; then
   updates_arch=0
@@ -16,4 +17,4 @@ fi
 
 updates=$((updates_arch + updates_aur))
 
-echo '{"user": "'$user'", "kernel": "'$kernel'", "os": "'$os'", "wm": "'$wm'", "pkgs": "'$pkgs'", "updates": "'$updates'"}'
+echo '{"user": "'$user'", "kernel": "'$kernel'", "os": "'$os'", "wm": "'$wm'", "pkgs": "'$pkgs'", "updates": "'$updates'", "uptime": "'$uptime'"}'

@@ -2,6 +2,7 @@
 	(eventbox
 	 	:onhover "eww update music_rev=${music.status == 'Stopped' ? false : true}"
 	 	:onhoverlost "eww update music_rev=false"
+		:visible {music == "" || music.player == "" ? false : true}
 		(box
 			:class "music"
 			:space-evenly false 
@@ -45,7 +46,7 @@
 			(box
 				:class "music cover"
 				:halign "center"
-				:style "background-image: url('${artUrl}')" 
+				:style "background-image: url('${music.artUrl == "" ? "assets/spotify.png" : music.artUrl}')"
 				:tooltip "${music.title} ~ ${music.artist}"
 			)
 		)
