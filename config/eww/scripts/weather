@@ -105,5 +105,5 @@ while true; do
 
   echo '{"temp": "'$TEMP'", "feels": "'$FEELS'", "humidity": "'$HUMIDITY'", "desc": "'$DESC'", "icon": "'$ICON'", "color": "'$COLOR'", "city": "'$CITY'"}'
 
-  sleep 60
+  sleep 600
 done

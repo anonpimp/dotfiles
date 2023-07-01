@@ -26,12 +26,12 @@
 			)
 			(eventbox
 				:cursor "pointer"
+				:onscroll "echo {} | sed -e 's/up/-i 2/g' -e 's/down/-d 2/g' | xargs pamixer"
 				(button 
 					:class "volume icon" 
 					:style {volume == 0 || volume == "muted" ? "color: #dd6777;" : "color: #9ec49f;"} 
 					:tooltip {volume == "muted" ? "Muted" : "${volume}%" } 
 					:onclick "pamixer -t"
-					;""
 					{volume == 0 || volume == "muted" ? "" : 
 					volume < 30 ? "" : 
 					volume < 75 ? "" : ""}
