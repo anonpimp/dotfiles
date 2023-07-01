@@ -8,6 +8,7 @@
 			:space-evenly false 
 			:spacing 8
 			:orientation "v"
+			:halign "center"
 			(revealer 
 				:transition "slideup"
 				:reveal music_rev 
@@ -45,7 +46,6 @@
 			)
 			(box
 				:class "music cover"
-				:halign "center"
 				:style "background-image: url('${music.artUrl == "" ? "assets/spotify.png" : music.artUrl}')"
 				:tooltip "${music.title} ~ ${music.artist}"
 			)

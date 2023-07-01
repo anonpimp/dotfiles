@@ -36,7 +36,6 @@ window>.bar {
       }
 
       &.active {
-        font-size: 1.3rem;
         color: lighten($color: $black, $amount: 50%);
       }
 
@@ -93,6 +92,7 @@ window>.bar {
 
   .bell {
     padding-top: .2rem;
+
     &.icon {
       font-size: 1.4rem;
     }
@@ -100,8 +100,8 @@ window>.bar {
     &.indicator {
       font-size: .8rem;
       color: $yellow;
-      margin: -5px 7px 0 0;
-      text-shadow: 0 1px 2px rgba($color: black, $alpha: 1);
+      margin-top: -5px;
+      text-shadow: 0 1px 2px black;
     }
   }
 
@@ -128,11 +128,11 @@ window>.bar {
       background-repeat: no-repeat;
       background-size: cover;
       background-position: center;
-      min-height: 2.6rem;
-      min-width: 2.6rem;
+      min-height: 2.7rem;
+      min-width: 2.7rem;
       border-radius: 100%;
       box-shadow: 0 0 3px 1px rgba(black, 0.5);
-      margin: 0 0 5px 0.1px;
+      //margin: 0 0 5px 0.1px;
     }
 
     &.toggle {

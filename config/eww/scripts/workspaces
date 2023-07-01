@@ -19,16 +19,15 @@ esac
 
 NUMBER_OF_WORKSPACES=6
 
-workspaces(){
-	WORKSPACE_WINDOWS=$(hyprctl workspaces -j | jq 'map({key: .id | tostring, value: .windows}) | from_entries')
-	seq 1 $NUMBER_OF_WORKSPACES | jq --argjson windows "${WORKSPACE_WINDOWS}" --slurp -Mc 'map(tostring) | map({id: ., windows: ($windows[.]//0)})'
+workspaces() {
+  WORKSPACE_WINDOWS=$(hyprctl workspaces -j | jq 'map({key: .id | tostring, value: .windows}) | from_entries')
+  seq 1 $NUMBER_OF_WORKSPACES | jq --argjson windows "${WORKSPACE_WINDOWS}" --slurp -Mc 'map(tostring) | map({id: ., windows: ($windows[.]//0)})'
 }
 
-current_workpace(){
+current_workpace() {
   current="$(hyprctl -j monitors | jq '.[0].activeWorkspace.id')"
   eww update current="$current"
 }
-
 
 case $1 in
 --workspaces)

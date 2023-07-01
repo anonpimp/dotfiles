@@ -30,15 +30,15 @@
 						:space-evenly false 
 						:spacing 10
 						(control
-							:action "playerctl shuffle toggle"
+							:action "playerctl -p spotify shuffle toggle"
 							:color {music.shuffle ? "#9ec49f" : "#a0a0a0"}
 							:status {music.shuffle ? "On" : "Off"}
               :icon ""
 						)
 						(control
-							:action {music.loop == "None" ? "playerctl loop playlist" : 
-							music.loop == "Playlist" ? "playerctl loop track" :
-							"playerctl loop none"}
+							:action {music.loop == "None" ? "playerctl -p spotify loop playlist" : 
+							music.loop == "Playlist" ? "playerctl -p spotify loop track" :
+							"playerctl -p spotify loop none"}
 							:color {music.loop == "Playlist" || music.loop == "Track" ? "#9ec49f" : "#a0a0a0"}
 							:status {music.loop}
 							:icon  {music.loop == "Track" ? "" :

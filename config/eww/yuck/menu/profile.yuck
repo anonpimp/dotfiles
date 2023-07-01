@@ -8,6 +8,7 @@
       :halign "center"
       :valign "center"
       :style "background-image: url('${image}');"
+      :tooltip "Lindo"
     )
     (box
       :orientation "v"

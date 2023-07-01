@@ -3,6 +3,7 @@
 		:class "bell"
 		(eventbox
 			:cursor "pointer"
+      :halign "center"
 			(overlay 
         (button
           :class "bell icon"
