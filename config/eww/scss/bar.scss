@@ -1,4 +1,4 @@
-window>.bar {
+window > .bar {
   margin: 1rem;
   box-shadow: 0 0 5px 2px rgba(black, 0.5);
   background-color: $bg;
@@ -6,8 +6,9 @@ window>.bar {
 
 .bar {
   font-family: "SF Pro", "Font Awesome 6 Pro Solid";
+  font-size: 1.4rem;
   background-color: transparent;
-  padding: 1rem .4rem;
+  padding: 1rem 0.4rem;
   border-radius: 1rem;
 
   .launcher {
@@ -20,33 +21,30 @@ window>.bar {
   }
 
   .workspaces {
-    font-family: "Symbols Nerd Font";
-    font-size: 1.4rem;
     background-color: $bg-alt;
     padding: 1rem 0;
     border-radius: 1rem;
 
-    button {
-      &.empty {
-        color: $black;
+    .focused {
+      color: $green;
+      &:hover {
+        color: darken($color: $green, $amount: 10%);
       }
+    }
 
-      &.occupied {
-        color: lighten($color: $black, $amount: 10%);
-      }
-
-      &.active {
-        color: lighten($color: $black, $amount: 50%);
-      }
+    .occupied {
+      color: lighten($color: $black, $amount: 10%);
 
       &:hover {
-        &.empty {
-          color: lighten($color: $black, $amount: 5%);
-        }
+        color: rgba($color: $green, $alpha: 0.5);
+      }
+    }
 
-        &.occupied {
-          color: $green;
-        }
+    .empty {
+      color: $black;
+
+      &:hover {
+        color: lighten($color: $black, $amount: 10%);
       }
     }
   }
@@ -60,7 +58,7 @@ window>.bar {
       min-width: 2.7rem;
       border-radius: 100%;
       box-shadow: 0 0 3px 1px rgba(black, 0.5);
-      //margin: 0 0 5px 0.1px;
+      margin-bottom: 5px;
     }
 
     &.toggle {
@@ -81,21 +79,24 @@ window>.bar {
     }
   }
 
-  .forecast {font-size: 1.4rem; margin-bottom: .2rem;}
+  .forecast {
+    margin-bottom: 0.2rem;
+  }
 
   .group {
-    font-size: 1.4rem;
     background-color: $bg-alt;
-    padding: .8rem 0 1rem;
+    padding: 0.8rem 0 1rem;
     border-radius: 1rem;
 
     .bell {
-      padding-top: .2rem;
-  
-      &.icon {color: $fg-alt;}
-  
+      padding-top: 0.2rem;
+
+      &.icon {
+        color: $fg-alt;
+      }
+
       &.indicator {
-        font-size: .8rem;
+        font-size: 0.8rem;
         color: $yellow;
         margin-top: -5px;
         text-shadow: 0 1px 2px black;
@@ -108,13 +109,15 @@ window>.bar {
       }
 
       &.total {
-        font-size: 1rem;
+        font-size: .9rem;
         font-weight: bold;
-        margin-bottom: .2rem;
+        margin-bottom: 0.2rem;
       }
     }
 
-    .network {}
+    .network {
+      //
+    }
 
     .volume {
       .volume-bar scale trough {
@@ -123,7 +126,7 @@ window>.bar {
         border-radius: 1rem;
         min-width: 0.4rem;
         min-height: 3rem;
-        margin-bottom: .5rem;
+        margin-bottom: 0.5rem;
         box-shadow: 0 0 2px 1px rgba(black, 0.3);
       }
 
@@ -136,8 +139,7 @@ window>.bar {
   }
 
   .clock {
-    font-family: SF Mono;
-    font-size: 1.2rem;
+    font-family: Juminai;
 
     &.hour {
       font-weight: bold;

@@ -1,5 +1,4 @@
 (defvar image       `assets/mimde.png`)
-(defvar current     "1")
 (defvar music_rev   false)
 (defvar volume_rev  false)
 (defvar updates_rev false)

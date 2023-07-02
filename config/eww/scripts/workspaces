@@ -17,25 +17,48 @@ case $1 in
   ;;
 esac
 
-NUMBER_OF_WORKSPACES=6
-
-workspaces() {
-  WORKSPACE_WINDOWS=$(hyprctl workspaces -j | jq 'map({key: .id | tostring, value: .windows}) | from_entries')
-  seq 1 $NUMBER_OF_WORKSPACES | jq --argjson windows "${WORKSPACE_WINDOWS}" --slurp -Mc 'map(tostring) | map({id: ., windows: ($windows[.]//0)})'
+contains() {
+  for e in $1; do
+    [ "$e" -eq "$2" ] && echo 1 && return
+  done
+  echo 0
 }
 
-current_workpace() {
-  current="$(hyprctl -j monitors | jq '.[0].activeWorkspace.id')"
-  eww update current="$current"
+print_workspaces() {
+  buf=""
+  workspaces="$(seq 1 6)"
+  focused="$(hyprctl -j monitors | jq '.[0].activeWorkspace.id' | sort -n)"
+  occupied="$(hyprctl workspaces -j | jq -r '.[] | .id')"
+
+  for d in $workspaces; do
+    if [ "$(contains "$focused" "$d")" -eq 1 ]; then
+      ws=$d
+      icon=""
+      class="focused"
+    elif [ "$(contains "$occupied" "$d")" -eq 1 ]; then
+      ws=$d
+      icon=""
+      class="occupied"
+    else
+      ws=$d
+      icon=""
+      class="empty"
+    fi
+
+    buf+="(eventbox :cursor \"pointer\" \
+    :onscroll \"echo {} | sed -e 's/up/-1/g' -e 's/down/+1/g' | xargs hyprctl dispatch workspace\" \
+    (button :class \"$class\" :onclick \"hyprctl dispatch workspace $ws\" \"$icon\"))"
+
+  done
+  
+  echo "(box :class \"workspaces\" :hexpand true :vexpand true :spacing 15 :orientation \"v\" :width 40 $buf)"
 }
 
 case $1 in
 --workspaces)
-  current_workpace
-  workspaces
+  print_workspaces
   socat -u UNIX-CONNECT:/tmp/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock - | while read -r line; do
-    workspaces
-    current_workpace
+    print_workspaces &
   done
   ;;
 esac
