@@ -51,11 +51,56 @@ window>.bar {
     }
   }
 
+  .music {
+    &.cover {
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+      min-height: 2.7rem;
+      min-width: 2.7rem;
+      border-radius: 100%;
+      box-shadow: 0 0 3px 1px rgba(black, 0.5);
+      //margin: 0 0 5px 0.1px;
+    }
+
+    &.toggle {
+      font-size: 1.5rem;
+    }
+
+    &.previous,
+    &.next {
+      font-size: 1.2rem;
+    }
+
+    button {
+      color: $fg;
+
+      &:hover {
+        color: $magenta;
+      }
+    }
+  }
+
+  .forecast {font-size: 1.4rem; margin-bottom: .2rem;}
+
   .group {
     font-size: 1.4rem;
     background-color: $bg-alt;
-    padding: 1rem 0;
+    padding: .8rem 0 1rem;
     border-radius: 1rem;
+
+    .bell {
+      padding-top: .2rem;
+  
+      &.icon {color: $fg-alt;}
+  
+      &.indicator {
+        font-size: .8rem;
+        color: $yellow;
+        margin-top: -5px;
+        text-shadow: 0 1px 2px black;
+      }
+    }
 
     .updates {
       &.icon {
@@ -90,21 +135,6 @@ window>.bar {
     }
   }
 
-  .bell {
-    padding-top: .2rem;
-
-    &.icon {
-      font-size: 1.4rem;
-    }
-
-    &.indicator {
-      font-size: .8rem;
-      color: $yellow;
-      margin-top: -5px;
-      text-shadow: 0 1px 2px black;
-    }
-  }
-
   .clock {
     font-family: SF Mono;
     font-size: 1.2rem;
@@ -120,36 +150,6 @@ window>.bar {
 
     &.separator {
       color: $fg-alt;
-    }
-  }
-  
-  .music {
-    &.cover {
-      background-repeat: no-repeat;
-      background-size: cover;
-      background-position: center;
-      min-height: 2.7rem;
-      min-width: 2.7rem;
-      border-radius: 100%;
-      box-shadow: 0 0 3px 1px rgba(black, 0.5);
-      //margin: 0 0 5px 0.1px;
-    }
-
-    &.toggle {
-      font-size: 1.5rem;
-    }
-
-    &.previous,
-    &.next {
-      font-size: 1.2rem;
-    }
-
-    button {
-      color: $fg;
-
-      &:hover {
-        color: $magenta;
-      }
     }
   }
 }

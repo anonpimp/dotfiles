@@ -14,7 +14,8 @@
 		:spacing 15
 		:orientation "v"
 		:width 40
-    (updates)
+		(bell)
+		(updates)
 		(network)
 		(volume)
 	)
@@ -46,15 +47,15 @@
 		:space-evenly false 
 		:halign "center"
 		:valign "end" 
-		:spacing 15
+		:spacing 10
 		:orientation "v"
-		(group)
-		(bell)
-    (label 
+		(label
+			:class "forecast"
 			:text {weather.icon} 
-			:style "color: ${weather.color == "" ? "#4c4c4c" : weather.color}; font-size: 1.3rem;"
+			:style "color: ${weather.color == "" ? "#4c4c4c" : weather.color}"
 			:tooltip "${weather.temp}°C"
 		)
+		(group)
 		(eventbox :cursor "pointer" 
 		  (button :onclick "menu" (clock))
 		)

@@ -1,2 +1,2 @@
-![desktop images](screenshots/1.png)
-![desktop images](screenshots/2.png)
+![desktop images](screenshots/menu.png)
+![desktop images](screenshots/notifications.png)

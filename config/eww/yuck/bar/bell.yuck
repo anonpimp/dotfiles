@@ -8,7 +8,7 @@
         (button
           :class "bell icon"
           :onclick "notifications"
-          :style {count > 0 ? "color: #f0f0f0;" : "color: #767676;"}
+          :style {count > 0 ? "color: #cacaca;" : "color: #767676;"}
           {dnd ? "" : ""}
         )
         (label
