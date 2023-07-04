@@ -1,12 +1,4 @@
-# #!/usr/bin/bash
-
-encode_to_url_format() {
-  echo "$1" | sed 's/ /%20/g'
-}
-
-check_if_empty() {
-  [[ -z "$1" ]] && echo "0" || echo "$1"
-}
+#!/bin/bash
 
 KEY=56bfec39d45f284396f7e099cf4d150e
 ID='3466537'
@@ -105,5 +97,5 @@ while true; do
 
   echo '{"temp": "'$TEMP'", "feels": "'$FEELS'", "humidity": "'$HUMIDITY'", "desc": "'$DESC'", "icon": "'$ICON'", "color": "'$COLOR'", "city": "'$CITY'"}'
 
-  sleep 600
+  sleep 1800
 done

@@ -28,7 +28,7 @@
       (label :class "label" :text "Notifications")
       (revealer 
         :reveal {count == "0" ? false : true}
-        :transition "fade"
+        :transition "slideleft"
         :halign "end"
         :hexpand true
         (eventbox
@@ -115,7 +115,7 @@
           )
           (label
             :class "body"
-            :limit-width 100
+            :limit-width 150
             :wrap true
             :xalign 0
             :text body
@@ -129,7 +129,7 @@
           (eventbox
             :cursor "pointer"
             (button
-              :class "open"
+              :class "screenshot open"
               :onclick "viewnior '${image}' &"
               :timeout "1s"
               "Open"
@@ -138,7 +138,7 @@
           (eventbox
             :cursor "pointer"
             (button
-              :class "delete"
+              :class "screenshot delete"
               :onclick "rm -f '${image}' && scripts/logger.zsh rm_id ${tt}"
               :timeout "1s"
               "Delete"

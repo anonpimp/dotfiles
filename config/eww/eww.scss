@@ -1,6 +1,6 @@
 * {
-	all: unset;
-	transition: 200ms;
+  all: unset;
+  transition: 200ms;
 }
 
 $bg: #0f0f0f;
@@ -18,15 +18,13 @@ $cyan: #9ec3c4;
 $white: $fg;
 
 tooltip {
-	font-family: "SF Mono";
-	font-weight: 500;
-	font-size: 1rem;
-	color: $fg;
-	background-color: $bg;
-	border-style: solid;
-	border-width: 3px;
-	border-radius: .5rem;
-	border-color: $bg;
+  font-family: "SF Mono";
+  font-weight: 500;
+  font-size: 1rem;
+  color: $fg;
+  background-color: $bg;
+  border: 3px solid $bg;
+  border-radius: .5rem;
 }
 
 @import "scss/bar.scss";

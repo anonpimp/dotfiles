@@ -21,7 +21,7 @@
 				(button 
 					:class "updates icon" 
 					:onclick {details.update != 0 ? "foot -T flooat -e $SHELL -c 'yay -Syu' &" : ""}
-					:tooltip "click to update"
+					:tooltip {details.update != 0 ? "click to update" : ""}
 					""
 				)
 			)	

@@ -1,54 +1,48 @@
-#!/usr/bin/env zsh
+#!/usr/bin/zsh
 
-function _set_vars() {
-  typeset -gx DUNST_CACHE_DIR="$HOME/.cache/dunst"
-  typeset -gx DUNST_LOG="$DUNST_CACHE_DIR/notifications.txt"
-}
-_set_vars
+LOG="$HOME/.config/eww/scripts/notifications.txt"
 
-function _unset_vars() {
-  unset DUNST_CACHE_DIR
-  unset DUNST_LOG
-}
+[ ! -f "$DUNST_LOG" ] && touch "$LOG"
 
-mkdir "$DUNST_CACHE_DIR" 2>/dev/null
-touch "$DUNST_LOG" 2>/dev/null
-
-function create_cache() {
+create_cache() {
 
   local summary
   local body
 
-  # clean summary
-  [ "$DUNST_SUMMARY" = "" ] && summary="No summary ?" || \
+  [ "$DUNST_SUMMARY" = "" ] && summary="No summary?" || \
   # escape
   summary=${DUNST_SUMMARY//\"/\\\"}
 
-  # clean body
   [ "$DUNST_BODY" = "" ] && body="No body?" || \
-  body="$(echo "$DUNST_BODY" | tr '\n' ' ' | sed -e 's/&quot;/"/g' -e 's/ \+/ /g' -e 's/ \{1\}$//g' -e 's/<b>//g' -e 's/<\/b>/:/g' -e 's/"/\\"/g')"
-  
+  # clear body
+  body="${DUNST_BODY//$'\n'/ }"
+  body="${body//&quot;/\"}"
+  body="${body//+([[:space:]])/ }"
+  body="${body#"${body%%[![:space:]]*}"}"
+  body="${body%"${body##*[![:space:]]}"}"
+  body="${body//<b>/}"
+  body="${body//<\/b>/:}"
+  body="${body//\"/\\\"}"
+
   local image_width=50
   local image_height=50
   local screenshot=false
 
   case $DUNST_APP_NAME in
-    Spotify|'Color Picker')
+    "Spotify"|"Color Picker")
       image_width=90
       image_height=90
       ;;
-  Screenshot)
+    "Screenshot")
       image_width=384
       image_height=216
       screenshot=true
       ;;
   esac
 
-  local SPOTIFY_TITLE="$(echo "$DUNST_SUMMARY" | sed -e 's/\//-/g' -e "s/[\"']//g")"
-
   case $DUNST_APP_NAME in
     "Spotify")
-      icon=$DUNST_CACHE_DIR/cover/$SPOTIFY_TITLE.png
+      icon=$(playerctl -p spotify metadata -f {{mpris:artUrl}})
       ;;
     "Kotatogram Desktop")
       icon=$HOME/.config/eww/assets/telegram.png
@@ -57,62 +51,51 @@ function create_cache() {
       icon=$HOME/.config/eww/assets/discord.png
       ;;
     *)
-      icon=$(echo ${DUNST_ICON_PATH} | sed 's/32x32/48x48/g')
+      icon=${DUNST_ICON_PATH/32x32/48x48}
       ;;
   esac
 
-
-  # pipe stdout -> pipe cat stdin (cat conCATs multiple files and sends to stdout) -> absorb stdout from cat
-  # concat: "one" + "two" + "three" -> notice how the order matters i.e. "one" will be prepended
-sleep 0.3 && \
 echo '(notification :id "'$DUNST_ID'" :app "'$DUNST_APP_NAME'" :summary "'$summary'" :body "'$body'" :image "'$icon'" :image_width "'$image_width'" :image_height "'$image_height'" :time "'$(date +'%H:%M')'" :screenshot "'$screenshot'" :tt "'$DUNST_TIMESTAMP'")' \
-  | cat - "$DUNST_LOG" \
-  | sponge "$DUNST_LOG" 
+  | cat - "$LOG" \
+  | sponge "$LOG"
 }
 
-function compile_caches() {
-  tr -d '\n' < "$DUNST_LOG"
+compile_caches() {
+  tr -d '\n' < "$LOG"
 }
 
-function make_literal() {
+make_literal() {
   local caches="$(compile_caches)"
   [[ "$caches" == "" ]] \
   && echo '(box :class "empty" :height 800 :orientation "v" :space-evenly "false" (image :class "bell" :valign "end" :vexpand "true" :path "assets/bell.png" :image-width 100 :image-height 100) (label :vexpand "true" :valign "start" :class "label" :text "No Notifications"))' \
   || echo "(scroll :height 800 :vscroll true (box :orientation 'v' :class 'scroll' :spacing 10 :space-evenly 'false' $caches))"
 }
 
-function clear_logs() {
+clear_logs() {
   dunstctl history-clear
-  echo > "$DUNST_LOG"
-  rm -rf  $DUNST_CACHE_DIR/cover/*
+  echo > "$LOG"
 }
 
-function remove_line() {
-  sed -i '/tt "'$1'"/d' "$DUNST_LOG"
-
-  if [[ -z $(cat $DUNST_LOG) ]]; then
-    dunstctl history-clear
-  fi
+remove_line() {
+  sed -i '/tt "'$1'"/d' "$LOG"
+  [[ -z $(cat $LOG) ]] && dunstctl history-clear
 }
 
-function subscribe() {
+subscribe() {
   make_literal
-  local lines=$(wc -l < "$DUNST_LOG")
+  local lines=$(wc -l < "$LOG")
   while sleep 0.1; do
-    local new=$(wc -l < "$DUNST_LOG")
+    local new=$(wc -l < "$LOG")
     [[ $lines -ne $new ]] && lines=$new && print
   done | while read -r _ do; make_literal done
 }
 
 case "$1" in
-  "count") wc -l < "$DUNST_LOG" ;;
+  "count") wc -l < "$LOG" ;;
   "clear") clear_logs ;;
   "subscribe") subscribe ;;
   "rm_id") remove_line $2 ;;
   *) create_cache ;;
 esac
 
-sed -i '/^$/d' "$DUNST_LOG"
-_unset_vars
-
-# vim:ft=zsh
+sed -i '/^$/d' "$LOG"

@@ -457,8 +457,4 @@
 [logger]
 script = ~/.config/eww/scripts/logger.zsh
 
-[spotify]
-appname = Spotify
-script = ~/.config/dunst/scripts/cover
-
 # vim: ft=cfg
