@@ -17,6 +17,7 @@ create_cache() {
   # clear body
   body="${DUNST_BODY//$'\n'/ }"
   body="${body//&quot;/\"}"
+  body="${body//<a[^>]*>/}"
   body="${body//+([[:space:]])/ }"
   body="${body#"${body%%[![:space:]]*}"}"
   body="${body%"${body##*[![:space:]]}"}"
@@ -49,6 +50,9 @@ create_cache() {
       ;;
     "discord")
       icon=$HOME/.config/eww/assets/discord.png
+      ;;
+    "Brave")
+      icon=$HOME/.config/eww/assets/google.png
       ;;
   esac
 
