@@ -27,9 +27,15 @@ create_cache() {
   local image_width=50
   local image_height=50
   local screenshot=false
+  local icon=${DUNST_ICON_PATH/32x32/48x48}
 
   case $DUNST_APP_NAME in
-    "Spotify"|"Color Picker")
+    "Spotify")
+      image_width=90
+      image_height=90
+      icon=$(playerctl -p spotify metadata -f {{mpris:artUrl}})
+      ;;
+    "Color Picker")
       image_width=90
       image_height=90
       ;;
@@ -38,20 +44,11 @@ create_cache() {
       image_height=216
       screenshot=true
       ;;
-  esac
-
-  case $DUNST_APP_NAME in
-    "Spotify")
-      icon=$(playerctl -p spotify metadata -f {{mpris:artUrl}})
-      ;;
     "Kotatogram Desktop")
       icon=$HOME/.config/eww/assets/telegram.png
       ;;
     "discord")
       icon=$HOME/.config/eww/assets/discord.png
-      ;;
-    *)
-      icon=${DUNST_ICON_PATH/32x32/48x48}
       ;;
   esac
 
@@ -66,7 +63,7 @@ compile_caches() {
 
 make_literal() {
   local caches="$(compile_caches)"
-  [[ "$caches" == "" ]] \
+  [[ -z "$caches" ]] \
   && echo '(box :class "empty" :height 800 :orientation "v" :space-evenly "false" (image :class "bell" :valign "end" :vexpand "true" :path "assets/bell.png" :image-width 100 :image-height 100) (label :vexpand "true" :valign "start" :class "label" :text "No Notifications"))' \
   || echo "(scroll :height 800 :vscroll true (box :orientation 'v' :class 'scroll' :spacing 10 :space-evenly 'false' $caches))"
 }
@@ -78,7 +75,7 @@ clear_logs() {
 
 remove_line() {
   sed -i '/tt "'$1'"/d' "$LOG"
-  [[ -z $(cat $LOG) ]] && dunstctl history-clear
+  [[ ! -s "$LOG" ]] && dunstctl history-clear
 }
 
 subscribe() {

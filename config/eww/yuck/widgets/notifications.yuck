@@ -115,7 +115,7 @@
           )
           (label
             :class "body"
-            :limit-width 150
+            :limit-width 90
             :wrap true
             :xalign 0
             :text body

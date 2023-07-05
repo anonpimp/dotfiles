@@ -1,0 +1,144 @@
+(defwidget control [icon color status action]
+  (eventbox
+    :cursor "pointer"
+    (button 
+      :onclick action
+      :style "color: ${color == "" ? "#a0a0a0" : color}"
+      :tooltip status
+      icon
+    )
+  )
+)
+
+(defwidget player []
+  (box
+    :class "player" 
+    :space-evenly false
+    :visible {music == "" || music.player == "" ? false : true}
+    (box 
+      :class "player cover" 
+      :style "background-image: url('${music.artUrl == "" ? "assets/spotify.png" : music.artUrl}')"
+      :hexpand true
+      (box 
+        :class "player info"
+        :space-evenly false 
+        :orientation "v" 
+        :spacing 10
+        (box 
+          :class "icons"
+          (box 
+            :space-evenly false 
+            :spacing 10
+            (control
+              :action "playerctl -p spotify shuffle toggle"
+              :color {music.shuffle ? "#9ec49f" : "#a0a0a0"}
+              :status {music.shuffle ? "On" : "Off"}
+              :icon ""
+            )
+            (control
+              :action {music.loop == "None" ? "playerctl -p spotify loop playlist" : 
+              music.loop == "Playlist" ? "playerctl -p spotify loop track" :
+              "playerctl -p spotify loop none"}
+              :color {music.loop == "Playlist" || music.loop == "Track" ? "#9ec49f" : "#a0a0a0"}
+              :status {music.loop}
+              :icon  {music.loop == "Track" ? "" :
+              music.loop == "Playlist" ? "" : ""}
+            )
+          )
+          (box
+            (label 
+              :class "app" 
+              :halign "end" 
+              :text {music.player != "spotify" ? "" : ""}
+              :tooltip {music.player}
+            )
+          )
+        )
+        (label 
+          :class "title" 
+          :halign "start" 
+          :text {music.title == "" ? "Title" : music.title}
+          :limit-width 35
+          :wrap true
+          :xalign 0
+        )
+        (label 
+          :class "artist" 
+          :halign "start" 
+          :text {music.artist == "" ? "Artist" : music.artist}
+          :limit-width 35
+        )
+        (label 
+          :class "album" 
+          :halign "start" 
+          :text {music.album == "" ? "Album" : music.album}
+          :limit-width 35
+          :wrap true
+        )
+        (box
+          :space-evenly false
+          :orientation "v"
+          :valign "end"
+          :spacing 2
+          :vexpand true
+          (box 
+            :class "progress" 
+            (eventbox
+              :cursor "pointer"
+              (scale 
+                :min 0 
+                :max {music.l == "" ? 0 : music.l}
+                :value {music.p == "" || music.p > 1000 ? 0 : music.p}
+                :onchange "playerctl -p ${music.player} position {}"
+              )
+            )
+          )
+          (box 
+            :class "position" 
+            :space-evenly false 
+            :valign "end"
+            :spacing 3
+            (label 
+              :class "time"
+              :text {music.position == "" ? "0:00" : music.position}
+            )
+            (label :class "time" :text "/")
+            (label 
+              :class "time"
+              :text {music.length == "" ? "0:00" : music.length}
+            )  
+          )
+        )
+      )
+    )
+    (box 
+      :class "player controls" 
+      :orientation "v"
+      :width 50
+      (eventbox
+        :cursor "pointer"
+        (button 
+          :class "previous" 
+          :onclick "playerctl -p ${music.player} previous" 
+          ""
+        )
+      )
+      (eventbox
+        :cursor "pointer"
+        (button 
+          :class "toggle" 
+          :onclick "playerctl -p ${music.player} play-pause" 
+          {music.status == "Playing" ? "" : music.status == "Paused" ? "" : ""}
+        )
+      )
+      (eventbox
+        :cursor "pointer"
+        (button 
+          :class "next" 
+          :onclick "playerctl -p ${music.player} next" 
+          ""
+        )
+      )
+    )    
+  )
+)

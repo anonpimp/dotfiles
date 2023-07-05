@@ -1,4 +1,4 @@
-(defvar image       `assets/mimde.png`)
+(defvar image       `assets/gatinho.png`)
 (defvar music_rev   false)
 (defvar volume_rev  false)
 (defvar updates_rev false)
