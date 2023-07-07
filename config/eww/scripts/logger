@@ -52,7 +52,7 @@ create_cache() {
       icon=$HOME/.config/eww/assets/discord.png
       ;;
     "Brave")
-      icon=$HOME/.config/eww/assets/google.png
+      icon=$HOME/.config/eww/assets/chrome.png
       ;;
   esac
 
@@ -85,17 +85,18 @@ remove_line() {
 subscribe() {
   make_literal
   local lines=$(wc -l < "$LOG")
-  while sleep 0.1; do
+  while true; do
     local new=$(wc -l < "$LOG")
     [[ $lines -ne $new ]] && lines=$new && print
   done | while read -r _ do; make_literal done
 }
 
+
 case "$1" in
-  "count") wc -l < "$LOG" ;;
-  "clear") clear_logs ;;
-  "subscribe") subscribe ;;
-  "rm_id") remove_line $2 ;;
+  --count) wc -l < "$LOG" ;;
+  --clear) clear_logs ;;
+  --subscribe) subscribe ;;
+  --rm) remove_line $2 ;;
   *) create_cache ;;
 esac
 

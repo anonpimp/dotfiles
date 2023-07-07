@@ -1,22 +1,22 @@
 (defwidget clock []
-	(box 
-		:class "clock"
-		:orientation "v"
-		:space-evenly false
-		:spacing 5
-		:halign "center"
-		(label 
-			:class "clock hour" 
-			:text {formattime(EWW_TIME, "%H", "America/Sao_Paulo")}
-		)
-		(label 
-			:class "clock separator" 
-			:text ""
-			:angle "90"
-		)
-		(label 
-			:class "clock minute" 
-			:text {formattime(EWW_TIME, "%M", "America/Sao_Paulo")}
-		)
-	)
+  (box 
+    :class "clock"
+    :orientation "v"
+    :space-evenly false
+    :spacing 5
+    :halign "center"
+    (label 
+      :class "clock hour" 
+      :text {formattime(EWW_TIME, "%H", "America/Sao_Paulo")}
+    )
+    (label 
+      :class "clock separator" 
+      :text ""
+      :angle "90"
+    )
+    (label 
+      :class "clock minute" 
+      :text {formattime(EWW_TIME, "%M", "America/Sao_Paulo")}
+    )
+  )
 )

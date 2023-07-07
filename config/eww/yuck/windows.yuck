@@ -3,3 +3,4 @@
 (include "yuck/windows/volume.yuck")
 (include "yuck/windows/powermenu.yuck")
 (include "yuck/windows/notifications.yuck")
+(include "yuck/windows/dash.yuck")

@@ -1,6 +1,6 @@
 window > .bar {
   margin: 1rem;
-  box-shadow: 0 0 5px 2px rgba(black, 0.5);
+  box-shadow: 0 0 4px 1px rgba(black, 0.5);
   background-color: $bg;
 }
 
@@ -25,26 +25,29 @@ window > .bar {
     padding: 1rem 0;
     border-radius: 1rem;
 
-    .focused {
-      color: $green;
-      &:hover {
-        color: darken($color: $green, $amount: 10%);
+    button {
+      &.empty {
+        color: $black;
       }
-    }
 
-    .occupied {
-      color: lighten($color: $black, $amount: 10%);
-
-      &:hover {
-        color: rgba($color: $green, $alpha: 0.5);
-      }
-    }
-
-    .empty {
-      color: $black;
-
-      &:hover {
+      &.occupied {
         color: lighten($color: $black, $amount: 10%);
+      }
+
+      &.current {
+        color: $green;
+      }
+
+      &:hover {
+        &.empty {
+          color: lighten($color: $black, $amount: 5%);
+        }
+        &.occupied {
+          color: lighten($color: $black, $amount: 20%);
+        }
+        &.current {
+          color: darken($color: $green, $amount: 10%);
+        }
       }
     }
   }
@@ -109,7 +112,7 @@ window > .bar {
       }
 
       &.total {
-        font-size: .9rem;
+        font-size: 0.9rem;
         font-weight: bold;
         margin-bottom: 0.2rem;
       }

@@ -1,54 +1,54 @@
 (defwidget music [] 
-	(eventbox
-	 	:onhover "eww update music_rev=${music.status == 'Stopped' ? false : true}"
-	 	:onhoverlost "eww update music_rev=false"
-		:visible {music == "" || music.player == "" ? false : true}
-		(box
-			:class "music"
-			:space-evenly false 
-			:spacing 8
-			:orientation "v"
-			:halign "center"
-			(revealer 
-				:transition "slideup"
-				:reveal music_rev 
-				(box 
-					:spacing 10
-					:orientation "v"
-					(eventbox
-						:cursor "pointer"
-						:halign "center"
-						(button 
-							:class "music previous" 
-							:onclick "playerctl -p ${music.player} previous" 
-							""
-						)
-					)
-					(eventbox
-						:cursor "pointer"
-						:halign "center"
-						(button 
-							:class "music toggle" 
-							:onclick "playerctl -p ${music.player} play-pause" 
-							{music.status == "Playing" ? "" : music.status == "Paused" ? "" : ""}
-						)
-					)
-					(eventbox
-						:cursor "pointer"
-						:halign "center"
-						(button 
-							:class "music next" 
-							:onclick "playerctl -p ${music.player} next" 
-							""
-						)
-					)
-				)
-			)
-			(box
-				:class "music cover"
-				:style "background-image: url('${music.artUrl == "" ? "assets/spotify.png" : music.artUrl}')"
-				:tooltip "${music.title} ~ ${music.artist}"
-			)
-		)
-	)
+  (eventbox
+    :onhover "eww update music_rev=${music.status == 'Stopped' ? false : true}"
+    :onhoverlost "eww update music_rev=false"
+    :visible {music == "" || music.player == "" ? false : true}
+    (box
+      :class "music"
+      :space-evenly false 
+      :spacing 8
+      :orientation "v"
+      :halign "center"
+      (revealer 
+        :transition "slideup"
+        :reveal music_rev 
+        (box 
+          :spacing 10
+          :orientation "v"
+          (eventbox
+            :cursor "pointer"
+            :halign "center"
+            (button 
+              :class "music previous" 
+              :onclick "playerctl -p ${music.player} previous" 
+              ""
+            )
+          )
+          (eventbox
+            :cursor "pointer"
+            :halign "center"
+            (button 
+              :class "music toggle" 
+              :onclick "playerctl -p ${music.player} play-pause" 
+              {music.status == "Playing" ? "" : music.status == "Paused" ? "" : ""}
+            )
+          )
+          (eventbox
+            :cursor "pointer"
+            :halign "center"
+            (button 
+              :class "music next" 
+              :onclick "playerctl -p ${music.player} next" 
+              ""
+            )
+          )
+        )
+      )
+      (box
+        :class "music cover"
+        :style "background-image: url('${music.artUrl == "" ? "assets/spotify.png" : music.artUrl}')"
+        :tooltip {music != "" ?"${music.title} ~ ${music.artist}" : ""}
+      )
+    )
+  )
 )

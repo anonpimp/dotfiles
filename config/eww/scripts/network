@@ -1,0 +1,7 @@
+#!/bin/bash
+
+cat /sys/class/net/e*/operstate
+
+ip monitor link | while read -r line; do 
+  cat /sys/class/net/e*/operstate
+done

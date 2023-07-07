@@ -35,7 +35,7 @@
           :cursor "pointer"
           (button 
             :class "clear"
-            :onclick "scripts/logger.zsh clear" 
+            :onclick "scripts/logger --clear" 
             ""
           )
         )
@@ -80,7 +80,7 @@
             :cursor "pointer"
             (button 
               :class "close" 
-              :onclick "scripts/logger.zsh rm_id ${tt}"
+              :onclick "scripts/logger --rm ${tt}"
               :halign "end"
               "" 
             )
@@ -139,7 +139,7 @@
             :cursor "pointer"
             (button
               :class "screenshot delete"
-              :onclick "rm -f '${image}' && scripts/logger.zsh rm_id ${tt}"
+              :onclick "rm -f '${image}' && scripts/logger --rm ${tt}"
               :timeout "1s"
               "Delete"
             )

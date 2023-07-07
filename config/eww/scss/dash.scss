@@ -1,0 +1,65 @@
+window > .dash {
+  margin: 1rem;
+  box-shadow: 0 0 2px 2px rgba(black, 0.3);
+  background-color: $bg;
+}
+
+.dash {
+  font-family: "SF Pro", "Font Awesome 6 Pro Solid";
+  background-color: transparent;
+  padding: 0.6rem;
+  border-radius: 1rem;
+
+  &.notifications {
+    background-color: $bg-alt;
+    padding: .8rem;
+
+    .bell {
+      font-size: 2rem;
+      color: $fg;
+    }
+
+    .count {
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: $fg;
+    }
+  }
+
+  &.updates {
+    background-color: $bg-alt;
+    padding: .8rem;
+
+    .pacman {
+      font-size: 2.2rem;
+      color: $yellow;
+    }
+
+    .updates {
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: $fg;
+    }
+  }
+
+  &.weather {
+    background-color: $bg-alt;
+    padding: 1rem;
+
+    .desc {
+      font-size: 1.5rem;
+      font-weight: 500;
+      color: darken($color: $fg, $amount: 50%);
+    }
+
+    .temp {
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: $fg;
+    }
+
+    .icon {
+      font-size: 2.5rem;
+    }
+  }
+}

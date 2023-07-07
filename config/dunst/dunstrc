@@ -455,6 +455,6 @@
 #    set_stack_tag = "volume"
 
 [logger]
-script = ~/.config/eww/scripts/logger.zsh
+script = ~/.config/eww/scripts/logger
 
 # vim: ft=cfg

@@ -1,64 +1,18 @@
 #!/bin/bash
 
-window_class() {
-  echo $(hyprctl activewindow -j | jq --raw-output .class)
+WORKSPACES_NUMBER=6
+
+workspaces() {
+  WORKSPACE_WINDOWS=$(hyprctl workspaces -j | jq 'map({key: .id | tostring, value: .windows}) | from_entries')
+  CURRENT="$(hyprctl -j monitors | jq '.[0].activeWorkspace.name')"
+
+  seq 1 $WORKSPACES_NUMBER | \
+  jq --argjson windows "${WORKSPACE_WINDOWS}" \
+  --argjson current "${CURRENT}" \
+  --slurp -Mc 'map(tostring) | map({id: ., windows: ($windows[.]//0), current: ($current == .)})'
 }
 
-window_title() {
-  echo $(hyprctl activewindow -j | jq --raw-output .title)
-}
-
-case $1 in
---window)
-  window_class
-  socat -u UNIX-CONNECT:/tmp/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock - | while read -r line; do
-    window_class
-  done
-  ;;
-esac
-
-contains() {
-  for e in $1; do
-    [ "$e" -eq "$2" ] && echo 1 && return
-  done
-  echo 0
-}
-
-print_workspaces() {
-  buf=""
-  workspaces="$(seq 1 6)"
-  focused="$(hyprctl -j monitors | jq '.[0].activeWorkspace.id' | sort -n)"
-  occupied="$(hyprctl workspaces -j | jq -r '.[] | .id')"
-
-  for d in $workspaces; do
-    if [ "$(contains "$focused" "$d")" -eq 1 ]; then
-      ws=$d
-      icon=""
-      class="focused"
-    elif [ "$(contains "$occupied" "$d")" -eq 1 ]; then
-      ws=$d
-      icon=""
-      class="occupied"
-    else
-      ws=$d
-      icon=""
-      class="empty"
-    fi
-
-    buf+="(eventbox :cursor \"pointer\" \
-    :onscroll \"echo {} | sed -e 's/up/-1/g' -e 's/down/+1/g' | xargs hyprctl dispatch workspace\" \
-    (button :class \"$class\" :onclick \"hyprctl dispatch workspace $ws\" \"$icon\"))"
-
-  done
-  
-  echo "(box :class \"workspaces\" :hexpand true :vexpand true :spacing 15 :orientation \"v\" :width 40 $buf)"
-}
-
-case $1 in
---workspaces)
-  print_workspaces
-  socat -u UNIX-CONNECT:/tmp/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock - | while read -r line; do
-    print_workspaces &
-  done
-  ;;
-esac
+workspaces
+socat -u UNIX-CONNECT:/tmp/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock - | while read -r line; do
+  workspaces
+done

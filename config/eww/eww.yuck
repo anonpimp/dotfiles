@@ -6,15 +6,15 @@
 (defpoll date :interval "1h" :initial `{"day": "1", "month": "1", "year": "1"}` 
   `date +'{"day": "%d", "month": "%m", "year": "%Y"}'`)
 
-(defpoll count            :interval "1s" :initial "0" `scripts/logger.zsh count`)
+(defpoll count            :interval "1s" :initial "0" `scripts/logger --count`)
 (defpoll waiting          :interval "1s" :initial "0" `dunstctl count waiting`)
 (defpoll dnd              :interval "1s" :initial "false" `dunstctl is-paused`)
 
 (deflisten volume         `scripts/volume`)
 (deflisten music          `scripts/media`)
-(deflisten hyprland       `scripts/workspaces --workspaces`)
-(deflisten notifications  `scripts/logger.zsh subscribe`)
-(deflisten network        `tail -f /sys/class/net/e*/operstate`)
+(deflisten hyprland       `scripts/workspaces`)
+(deflisten notifications  `scripts/logger --subscribe`)
+(deflisten network        `scripts/network`)
 (deflisten weather        `scripts/weather`)
 (deflisten details        `scripts/details`)
 

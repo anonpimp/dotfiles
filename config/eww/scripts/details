@@ -1,20 +1,19 @@
 #!/bin/bash
 
+user="$(whoami)@$(hostnamectl --static)"
+kernel="$(uname -r)"
+os="$(awk -F '"' '/^NAME=/{print $2}' /etc/os-release)"
+wm="$XDG_CURRENT_DESKTOP"
+
 while true; do
-  user="$(whoami)@$(hostnamectl | awk 'FNR==1 {print $3}')"
-  kernel="$(uname -r)"
-  os="$(cat /etc/os-release | awk 'NR==1' | awk -F '"' '{print $2}')"
   pkgs="$(yay -Q | wc -l)"
-  wm="$XDG_CURRENT_DESKTOP"
   uptime="$(uptime -p | sed -e 's/up //g')"
 
-  if ! updates_arch=$(checkupdates 2>/dev/null | wc -l); then
-    updates_arch=0
-  fi
+  updates_arch=$(checkupdates 2>/dev/null | wc -l)
+  updates_arch=${updates_arch:-0}
 
-  if ! updates_aur=$(yay -Qum 2>/dev/null | wc -l); then
-    updates_aur=0
-  fi
+  updates_aur=$(yay -Qum 2>/dev/null | wc -l)
+  updates_aur=${updates_aur:-0}
 
   updates=$((updates_arch + updates_aur))
 
