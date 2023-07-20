@@ -7,38 +7,41 @@ PIC="$DIR/$DATE.png"
 [ ! -d "$DIR" ] && mkdir -pv "$DIR"
 
 full() {
-	maim -u "$PIC"
+  maim -u "$PIC"
 }
+
 crop() {
-	maim --select "$PIC"
+  maim --select "$PIC"
 }
+
 view() {
-	bspc desktop -f 5
-	viewnior "$PIC"
+  bspc desktop -f 5
+  viewnior "$PIC"
 }
+
 abort() {
-	dunstify -i dialog-error "Error" "something went wrong"
-	exit 1
+  dunstify -u low -a "Screenshot" -i dialog-error "Error" "something went wrong"
+  exit 1
 }
 
 case "$1" in
-full)
-	full || abort
-	xclip -selection c -t image/png "$PIC"
-  dunstify -u normal -i "$PIC" "Copied to clipboard" $PIC
-	view
-	;;
-crop)
-	crop || abort
-	xclip -selection c -t image/png "$PIC"
-	dunstify -u normal -i "$PIC" "Copied to clipboard" $PIC
+--full)
+  full || abort
+  xclip -selection c -t image/png "$PIC"
+  dunstify -u normal -a "Screenshot" -i "$PIC" "Copied to clipboard" "$PIC"
   view
-	;;
-delay2)
-	sleep 2
-	full || abort
-	xclip -selection c -t image/png "$PIC"
-	dunstify -u normal -i "$PIC" "Copied to clipboard" $PIC
+  ;;
+--crop)
+  crop || abort
+  xclip -selection c -t image/png "$PIC"
+  dunstify -u normal -a "Screenshot" -i "$PIC" "Copied to clipboard" "$PIC"
   view
-	;;
+  ;;
+--delay2)
+  sleep 2
+  full || abort
+  xclip -selection c -t image/png "$PIC"
+  dunstify -u normal -a "Screenshot" -i "$PIC" "Copied to clipboard" "$PIC"
+  view
+  ;;
 esac

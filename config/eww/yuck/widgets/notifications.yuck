@@ -1,0 +1,182 @@
+(defwidget header []
+  (box 
+    :class "header"
+    :space-evenly false
+    (overlay
+      :hexpand true
+      (box
+        :class "dnd"
+        :space-evenly false
+        :halign "start"
+        (eventbox
+          :cursor "pointer"
+          (button 
+            :onclick "dunstctl set-paused toggle"
+            :style "color: ${dnd ? '#dd6777;' : '#ceb188;'}"
+            {dnd ? "" : ""}
+          )
+        )
+        (revealer 
+          :reveal {dnd || count == 0 ? false : true}
+          :transition "slideright"
+          (label
+            :class "dnd count"
+            :text count
+          )
+        )
+        (revealer 
+          :reveal {waiting == 0 ? false : true}
+          :transition "slideright"
+          (label
+            :class "dnd count"
+            :text waiting
+          )
+        )
+      )
+      (label :class "label" :text "Notifications")
+      (revealer 
+        :reveal {count == 0 ? false : true}
+        :transition "slideleft"
+        :halign "end"
+        :hexpand true
+        (eventbox
+          :cursor "pointer"
+          (button 
+            :class "clear"
+            :onclick "scripts/notifications --clear" 
+            ""
+          )
+        )
+      )
+    )
+  )
+)
+
+(defwidget notification [app time id image summary body]
+  (eventbox 
+    :class "notification"
+    (box 
+      :space-evenly false 
+      :orientation "v"
+      (box 
+        :class "osd"
+        :space-evenly false
+        (box
+          :halign "start"
+          :space-evenly false
+          :spacing 10
+          (label
+            :class "icon"
+            :text {
+              app == "Screenshot" ? "" : 
+              app == "Spotify" ? "" :
+              app == "Color Picker" ? "" : 
+              app == "Kotatogram Desktop" ? "" :
+              app == "discord" ? "" :
+              app == "Brave" ? "" :
+              ""
+            }
+            :style {
+              app == "Spotify" ? "color: #9ec49f" :
+              app == "Kotatogram Desktop" ? "color: #7dcfff" :
+              app == "discord" ? "color: #A39EC4" :
+              "font-size: 1.1rem; color: #f0f0f0"
+            }
+          )
+          (label :class "app" :text app)
+          (label :class "circle" :text "")
+          (label :class "time" :text time )
+        )
+        (box
+          :halign "end"
+          :hexpand true
+          (eventbox
+            :cursor "pointer"
+            (button 
+              :class "close" 
+              :onclick "scripts/notifications --rmid ${id}"
+              "" 
+            )
+          )
+        )
+      )
+      (box  
+        :class "content"
+        :orientation {app == "Screenshot" ? "v" : "h"}
+        :space-evenly false 
+        :spacing 10
+        (box
+          :class "image"
+          :style "background-image: url('${image == "" ? "assets/bell.png" : image}');"
+          :valign "center"
+          :width {
+            app == "Screenshot" ? 384 : 
+            app == "Spotify" || app == "Color Picker" ? 90 : 
+            app == "Kotatogram Desktop" || app == "discord" || app == "Brave" ? 60 :
+            50
+          }
+          :height {
+            app == "Screenshot" ? 216 : 
+            app == "Spotify" || app == "Color Picker" ? 90 : 
+            app == "Kotatogram Desktop" || app == "discord" || app == "Brave" ? 60 :
+            50
+          }
+        )
+        (box
+          :visible {app == "Screenshot" ? false : true}
+          :orientation "v"
+          :space-evenly false
+          (label 
+            :class "summary"
+            :limit-width 30
+            :wrap true
+            :xalign 0
+            :text summary
+            :halign "start"
+          )
+          (label
+            :class "body"
+            :limit-width 120
+            :wrap true
+            :xalign 0
+            :text body
+            :halign "start"
+          )
+        )
+        (box
+          :class "screenshot buttons"
+          :visible {app == "Screenshot" ? true : false}
+          :spacing 40
+          (eventbox
+            :cursor "pointer"
+            (button
+              :class "screenshot open"
+              :onclick "viewnior '${image}' &"
+              :timeout "1s"
+              "Open"
+            )
+          ) 
+          (eventbox
+            :cursor "pointer"
+            (button
+              :class "screenshot delete"
+              :onclick "rm -f '${image}' && scripts/notifications --rmid ${id}"
+              :timeout "1s"
+              "Delete"
+            )
+          )
+        )
+      )
+    )
+  )
+)
+
+(defwidget notifications []
+  (box 
+    :class "notifications" 
+    :space-evenly false 
+    :orientation "v"
+    (header)
+    (literal :content notifications)
+  )
+)

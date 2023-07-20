@@ -1,5 +1,6 @@
 * {
-	all: unset;
+  all: unset;
+  transition: 200ms;
 }
 
 $bg: #0f0f0f;
@@ -17,13 +18,18 @@ $cyan: #9ec3c4;
 $white: $fg;
 
 tooltip {
-	background-color: $bg;
-	font-family: "SF Mono";
-	font-weight: 500;
-	font-size: .9rem;
+  font-family: "SF Mono";
+  font-weight: 500;
+  font-size: 1rem;
+  color: $fg;
+  background-color: $bg;
+  border: 3px solid $bg;
 }
 
-@import "./bar/eww.scss";
-@import "./calendar/eww.scss";
-@import "./player/eww.scss";
-@import "./powermenu/eww.scss";
+@import "scss/bar.scss";
+@import "scss/notifications.scss";
+@import "scss/menu.scss";
+@import "scss/volume.scss";
+@import "scss/player.scss";
+@import "scss/powermenu.scss";
+@import "scss/dash.scss";

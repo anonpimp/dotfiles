@@ -1,9 +1,9 @@
 ^tag(bspwm)
-Reconfigure,openbox --reconfigure,/home/kinkakuji/.config/jgmenu/icons/repeat.svg
-Restart,openbox --restart,/home/kinkakuji/.config/jgmenu/icons/repeat.svg
+Reconfigure,openbox --reconfigure,/home/yosemite/.config/jgmenu/icons/repeat.svg
+Restart,openbox --restart,/home/yosemite/.config/jgmenu/icons/repeat.svg
 
 ^tag(exit)
-Suspend,systemctl suspend,/home/kinkakuji/.config/jgmenu/icons/snooze.svg
-Reboot,systemctl reboot,/home/kinkakuji/.config/jgmenu/icons/repeat.svg
-Poweroff,systemctl poweroff,/home/kinkakuji/.config/jgmenu/icons/power-off.svg
-Log Out,openbox --exit,/home/kinkakuji/.config/jgmenu/icons/exit.svg
+Suspend,systemctl suspend,/home/yosemite/.config/jgmenu/icons/snooze.svg
+Reboot,systemctl reboot,/home/yosemite/.config/jgmenu/icons/repeat.svg
+Poweroff,systemctl poweroff,/home/yosemite/.config/jgmenu/icons/power-off.svg
+Log Out,openbox --exit,/home/yosemite/.config/jgmenu/icons/exit.svg

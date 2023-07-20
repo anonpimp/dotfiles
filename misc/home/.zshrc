@@ -52,16 +52,9 @@ setopt share_history          # share command history data
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
-# cd by name
 cd() {
   builtin cd "$@" && command lsd -A
 }
-
-if [ "$TERM" = "linux" ]; then
-  colorscript -e 2 
-else
-  colorscript -r 
-fi
 
 # init starship
 eval "$(starship init zsh)"
@@ -83,18 +76,18 @@ alias rm='rm -rfv'
 alias gc='git clone'
 alias q='exit'
 alias fetch='clear ; fetch'
-
-alias zshrc='nvim $HOME/.zshrc'
-alias xresources='nvim $HOME/.Xresources'
-alias alacrittyrc='nvim $HOME/.config/alacritty/alacritty.yml'
+alias footrc='nvim $HOME/.config/foot/foot.ini'
 alias dunstrc='nvim $HOME/.config/dunst/dunstrc'
-alias bspwmrc='nvim $HOME/.config/bspwm/bspwmrc'
-alias sxhkdrc='nvim $HOME/.config/sxhkd/sxhkdrc'
-alias bar='nvim $HOME/.config/polybar/config.ini'
-alias modules='nvim $HOME/.config/polybar/modules.ini'
-alias picomrc='nvim $HOME/.config/picom.conf'
+alias hyprc='nvim $HOME/.config/hypr/hyprland.conf'
 
-alias paci="yay -Slq | fzf --prompt='󰄾 ' --color=16 -m --preview 'cat <(yay -Si {1}) <(yay -Fl {1} | awk \"{print \$2}\")' | xargs -ro yay -S --needed"
-alias pacr="yay -Qq | fzf --prompt='󰄾 ' --color=16 -m --preview 'yay -Qi {1}' | xargs -ro yay -Rns"
-alias pac="yay -Qq | fzf --prompt='󰄾 ' --color=16 -m --preview 'yay -Qi {1}'"
+# pacman install
+alias paci="yay -Slq | fzf --prompt=' ' --color=16 -m --preview 'cat <(yay -Si {1}) <(yay -Fl {1} | awk \"{print \$2}\")' | xargs -ro yay -S --needed"
+
+# pacman remove
+alias pacr="yay -Qq | fzf --prompt=' ' --color=16 -m --preview 'yay -Qi {1}' | xargs -ro yay -Rns"
+
+# pacman view
+alias pac="yay -Qq | fzf --prompt=' ' --color=16 -m --preview 'yay -Qi {1}'"
+
+# pacman clear
 alias pacc='yay -Qtdq | yay -Rns -'

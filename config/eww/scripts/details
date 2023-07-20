@@ -1,26 +1,22 @@
-#!/usr/bin/bash
+#!/bin/bash
 
-if [[ $1 == "--name" ]]; then
-	fullname=$(getent passwd "$(whoami)" | cut -d ':' -f 5 | cut -d ',' -f 1 | tr -d "\n")
-	if [ -z "$fullname" ]; then
-		echo "$(whoami)@$(hostnamectl | awk 'FNR==1 {print $3}')"
-	else
-		echo "$fullname"
-	fi
-fi
+user="$(whoami)@$(hostnamectl --static)"
+kernel="$(uname -r)"
+os="$(awk -F '"' '/^NAME=/{print $2}' /etc/os-release)"
+wm="$(xprop -id $(xprop -root -notype | awk '$1=="_NET_SUPPORTING_WM_CHECK:"{print $5}') -notype -f _NET_WM_NAME 8t | grep "WM_NAME" | cut -f2 -d \")"
 
-if [[ $1 == "--kernel" ]]; then
-	echo "$(uname -r)"
-fi
+while true; do
+  pkgs="$(yay -Q | wc -l)"
+  uptime="$(uptime -p | sed -e 's/up //g')"
 
-if [[ $1 == "--os" ]]; then
-	echo "$(cat /etc/os-release | awk 'NR==1' | awk -F '"' '{print $2}')"
-fi
+  updates_arch=$(checkupdates 2>/dev/null | wc -l)
+  updates_arch=${updates_arch:-0}
 
-if [[ $1 == "--pkgs" ]]; then
-	echo "$(yay -Q | wc -l)"
-fi
+  updates_aur=$(yay -Qum 2>/dev/null | wc -l)
+  updates_aur=${updates_aur:-0}
 
-if [[ $1 == "--wm" ]]; then
-	echo "$XDG_CURRENT_DESKTOP"
-fi
+  updates=$((updates_arch + updates_aur))
+
+  echo '{"user": "'$user'", "kernel": "'$kernel'", "os": "'$os'", "wm": "'$wm'", "pkgs": "'$pkgs'", "updates": "'$updates'", "uptime": "'$uptime'"}'
+  sleep 300
+done

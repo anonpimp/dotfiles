@@ -95,10 +95,10 @@
     </popupFixedPosition>
   </resize>
   <margins>
-    <top>100</top>
-    <bottom>40</bottom>
-    <left>40</left>
-    <right>40</right>
+    <top>35</top>
+    <bottom>35</bottom>
+    <left>35</left>
+    <right>35</right>
   </margins>
   <keyboard>
     <!-- Keybindings for desktop switching -->
@@ -219,7 +219,27 @@
     </keybind>
     <keybind key="W-bracketright">
       <action name="Execute">
-        <command>~/.config/dunst/launch</command>
+        <command>~/.config/dunst/reload</command>
+      </action>
+    </keybind>
+    <keybind key="W-h">
+      <action name="Execute">
+        <command>hidebar</command>
+      </action>
+    </keybind>
+     <keybind key="W-m">
+      <action name="Execute">
+        <command>menu</command>
+      </action>
+    </keybind>
+     <keybind key="W-n">
+      <action name="Execute">
+        <command>notifications</command>
+      </action>
+    </keybind>
+     <keybind key="W-b">
+      <action name="Execute">
+        <command>eww open --toggle dash</command>
       </action>
     </keybind>
     <keybind key="W-e">
@@ -229,12 +249,12 @@
     </keybind>
     <keybind key="Print">
       <action name="Execute">
-        <command>dripshot full</command>
+        <command>dripshot --full</command>
       </action>
     </keybind>
     <keybind key="W-Print">
       <action name="Execute">
-        <command>dripshot crop</command>
+        <command>dripshot --crop</command>
       </action>
     </keybind>
     <keybind key="W-Return">
@@ -242,19 +262,24 @@
         <command>alacritty</command>
       </action>
     </keybind>
+    <keybind key="W-S-Return">
+      <action name="Execute">
+        <command>alacritty -T floatty</command>
+      </action>
+    </keybind>
     <keybind key="XF86AudioMute">
       <action name="Execute">
-        <command>volume toggle</command>
+        <command>volume --toggle</command>
       </action>
     </keybind>
     <keybind key="XF86AudioRaiseVolume">
       <action name="Execute">
-        <command>volume up</command>
+        <command>volume --up</command>
       </action>
     </keybind>
     <keybind key="XF86AudioLowerVolume">
       <action name="Execute">
-        <command>volume down</command>
+        <command>volume --down</command>
       </action>
     </keybind>
     <keybind key="XF86AudioPrev">
@@ -279,6 +304,7 @@
     </keybind>
     <keybind key="A-Tab">
       <action name="ShowMenu">
+        <bar>no</bar>
         <menu>client-list-combined-menu</menu>
         <position>
           <x>center</x>
@@ -332,16 +358,6 @@
     <!-- Keybindings for window switching -->
     <keybind key="W-Tab">
       <action name="NextWindow">
-        <bar>no</bar>
-        <finalactions>
-          <action name="Focus"/>
-          <action name="Raise"/>
-          <action name="Unshade"/>
-        </finalactions>
-      </action>
-    </keybind>
-    <keybind key="W-S-Tab">
-      <action name="PreviousWindow">
         <bar>no</bar>
         <finalactions>
           <action name="Focus"/>
@@ -539,7 +555,16 @@
       <position>
         <x>center</x>
         <y>center</y>
+        <focus>yes</focus>
       </position>
+    </application>
+    <application class="Alacritty">
+      <maximized>yes</maximized>
+      <decor>yes</decor>
+    </application>
+    <application title="floatty">
+      <maximized>no</maximized>
+      <decor>yes</decor>
     </application>
     <application class="Brave-browser">
       <maximized>yes</maximized>

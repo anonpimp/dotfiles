@@ -6,8 +6,8 @@ xrdb ~/.Xresources &
 # Compositor
 picom &
 
-# Notify Daemon
-dunst &
+# Logger
+python $XDG_CONFIG_HOME/eww/scripts/logger.py &
 
 # Eww
 [ -n "$(pidof eww)" ] \

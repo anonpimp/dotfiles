@@ -1,34 +1,16 @@
-#!/bin/bash
+#!/bin/bash 
 
-hide_unhide() {
-	if [[ $(eww state) == '' ]]; then
-		eww daemon
-		eww open --toggle bar
-		bspc config top_padding 80
-	else
-		eww open --toggle bar
-		bspc config top_padding 40
-	fi
+toggle_bar() {
+  if [[ -z $(eww windows | grep '*bar') ]]; then
+    eww open bar
+  else
+    eww close bar
+  fi
 }
 
-full() {
-	bspc subscribe node_state | while read -r _ _ _ _ state flag; do
-		if [[ "$state" != fullscreen ]]; then continue; fi
-		if [[ "$flag" == on ]]; then
-			eww close bar
-		else
-		  eww open bar
-		fi
-	done &
-}
-
-case $1 in
-fullscreen)
-	full
-	exit
-	;;
-hide)
-	hide_unhide
-	exit
-	;;
-esac
+if [[ -z $(pidof eww) ]]; then
+  eww daemon
+  toggle_bar
+else
+  toggle_bar
+fi

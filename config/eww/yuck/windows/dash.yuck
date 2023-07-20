@@ -1,0 +1,5 @@
+(defwindow dash
+  :monitor 0
+  :geometry (geometry :y "-10px" :width "10%" :anchor "bottom center")
+  (dash)
+)

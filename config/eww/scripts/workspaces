@@ -33,7 +33,6 @@ gib_workspace_yuck() {
 	done
 }
 
-box_attrs=':spacing 20 :class "workspaces" :space-evenly false :halign "center" :valign "center" :vexpand false '
-xprop -spy -root _NET_CURRENT_DESKTOP | while read -r; do
-	echo "(box $box_attrs $(gib_workspace_yuck))"
+xprop -spy -root _NET_CURRENT_DESKTOP _NET_CLIENT_LIST | while read -r; do
+	echo "(box :class \"workspaces\" :orientation \"v\" :spacing 20 :width 40 $(gib_workspace_yuck))"
 done

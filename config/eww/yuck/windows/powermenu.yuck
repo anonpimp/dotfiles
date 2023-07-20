@@ -1,0 +1,5 @@
+(defwindow powermenu
+  :monitor 0
+  :geometry (geometry :x "-10px" :anchor "right center")
+  (powermenu)
+)

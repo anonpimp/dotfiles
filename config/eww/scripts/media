@@ -1,0 +1,17 @@
+#!/bin/bash
+
+playerctl --follow metadata --format \
+'{{title}}\{{artist}}\{{album}}\{{playerName}}\{{status}}\{{mpris:artUrl}}\{{duration(position)}}\{{duration(mpris:length)}}\{{shuffle}}\{{loop}}\{{position}}\{{mpris:length}}' |
+
+while IFS=$'\\' read -r title artist album player status artUrl position length shuffle loop p l; do
+
+  p=${p%??????}
+  l=${l%??????}
+
+  title=${title//\"/\\\"}
+  artist=${artist//\"/\\\"}
+  album=${album//\"/\\\"}
+
+  printf '{"title": "%s", "artist": "%s", "album": "%s", "player": "%s", "status": "%s", "artUrl": "%s", "position": "%s", "length": "%s", "shuffle": "%s", "loop": "%s", "p": "%s", "l": "%s"}\n' \
+    "$title" "$artist" "$album" "$player" "$status" "$artUrl" "$position" "$length" "$shuffle" "$loop" "$p" "$l"
+done

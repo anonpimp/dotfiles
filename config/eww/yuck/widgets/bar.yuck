@@ -1,0 +1,73 @@
+(include "yuck/widgets/bar/bell.yuck")
+(include "yuck/widgets/bar/clock.yuck")  
+(include "yuck/widgets/bar/launcher.yuck")  
+(include "yuck/widgets/bar/music.yuck")  
+(include "yuck/widgets/bar/network.yuck")  
+(include "yuck/widgets/bar/updates.yuck")  
+(include "yuck/widgets/bar/volume.yuck")  
+(include "yuck/widgets/bar/workspaces.yuck")
+
+(defwidget group []
+  (box 
+    :class "group"
+    :space-evenly false
+    :spacing 15
+    :orientation "v"
+    :width 40
+    (bell)
+    (updates)
+    (network)
+    (volume)
+  )
+)
+
+(defwidget left []
+  (box 
+    :space-evenly false 
+    :halign "center"
+    :valign "start" 
+    :spacing 15
+    :orientation "v"
+    (launcher)
+    (workspaces)
+  )
+)
+
+(defwidget center []
+  (box 
+    :halign "center"
+    :valign "center" 
+    :orientation "v"
+    (music)
+  )
+)
+
+(defwidget right []
+  (box 
+    :space-evenly false 
+    :halign "center"
+    :valign "end" 
+    :spacing 10
+    :orientation "v"
+    (label
+      :class "forecast"
+      :text {weather.icon} 
+      :style "color: ${weather.color == "" ? "#4c4c4c" : weather.color}"
+      :tooltip "${weather.temp}°C"
+    )
+    (group)
+    (eventbox :cursor "pointer" 
+      (button :onclick "menu" (clock))
+    )
+  )
+)
+
+(defwidget bar []
+  (box 
+    :class "bar"
+    :orientation "v"
+    (left)
+    (center)
+    (right)
+  )
+)

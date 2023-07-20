@@ -1,0 +1,8 @@
+(defwidget network []
+  (label 
+    :class "network"
+    :style {network == "down" ? "color: #dd6777;" : "color: #A39EC4;"}
+    :text {network == "down" ? "" : ""}
+    :tooltip "${round(EWW_NET.enp4s0.NET_DOWN / 1000000, 3)}MB"
+  )
+)

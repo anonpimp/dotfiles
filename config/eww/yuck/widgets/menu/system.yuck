@@ -1,0 +1,65 @@
+(defwidget system_progress [data icon css tip] 
+  (box 
+    :class "progress" 
+    (circular-progress
+      :class css
+      :value data
+      :thickness 7
+      :tooltip tip
+      (overlay
+        :valign "center"
+        (label 
+          :class "icon" 
+          :text icon
+        )
+      )
+    )
+  )
+)
+
+(defwidget cpu [] 
+  (system_progress
+    :css "cpu"
+    :tip "CPU ${round(EWW_CPU.avg,0)}%"
+    :data {round(EWW_CPU.avg, 0)} 
+    :icon ""
+  )
+)
+
+(defwidget ram [] 
+  (system_progress
+    :css "ram"
+    :tip "RAM ${round(EWW_RAM.used_mem / 1048576, 2)}MB"
+    :data {round(EWW_RAM.used_mem_perc, 0)}
+    :icon ""
+  )
+)
+
+(defwidget temp [] 
+  (system_progress
+    :css "temp"
+    :tip "Temperature ${EWW_TEMPS["AMDGPU_EDGE"]}°C"
+    :data {round(EWW_TEMPS.AMDGPU_EDGE, 0)} 
+    :icon ""
+  )
+)
+
+(defwidget disk [] 
+  (system_progress
+    :css "disk"
+    :tip "SSD ${round(EWW_DISK["/"].used_perc, 2)}%"
+    :data {round(EWW_DISK["/"].used_perc, 0)}
+    :icon ""
+  )
+)
+
+(defwidget system []
+  (box 
+    :class "system"
+    :spacing 10
+    (ram)
+    (cpu)
+    (temp)
+    (disk)
+  )
+)

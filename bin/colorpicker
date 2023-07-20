@@ -1,28 +1,32 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
-#   ██╗  ██╗ ██████╗ ██████╗ ██╗      ██████╗ ██████╗
-#   ╚██╗██╔╝██╔════╝██╔═══██╗██║     ██╔═══██╗██╔══██╗
-#    ╚███╔╝ ██║     ██║   ██║██║     ██║   ██║██████╔╝
-#    ██╔██╗ ██║     ██║   ██║██║     ██║   ██║██╔══██╗
-#   ██╔╝ ██╗╚██████╗╚██████╔╝███████╗╚██████╔╝██║  ██║
-#   ╚═╝  ╚═╝ ╚═════╝ ╚═════╝ ╚══════╝ ╚═════╝ ╚═╝  ╚═╝
-# color picker for X.
-# Simple Script To Pick Color Quickly Using Gpick.
-# Created By: https://github.com/rxyhn
+# requieres gpick xclip imagemagick
 
 TEMP_DIR=/tmp/xcolor
 
-main() {
+[ ! -d $TEMP_DIR ] && mkdir -p $TEMP_DIR
 
-	HEX_COLOR=$(gpick -pso --no-newline)
-	mkdir -p $TEMP_DIR
-	HEX="${HEX_COLOR#\#}"
-	FNAME="$TEMP_DIR/$HEX.png"
-	convert -size 100x100 xc:"$HEX_COLOR" "$FNAME"
-	COLOR_CODE="$HEX_COLOR"
-
-	printf %s "$COLOR_CODE" | xclip -sel c
-	dunstify -u normal -i "$FNAME" "$COLOR_CODE" "Copied to clipboard"
+abort() {
+  dunstify -a "Color Picker info" -i dialog-error "Color Picker" "aborted"
+  exit 1
 }
 
-main
+pick() {
+  
+  HEX_COLOR=$(gpick -pso --no-newline)
+
+  [[ -z $HEX_COLOR ]] && abort
+
+  HEX="${HEX_COLOR#\#}"
+  FNAME="$TEMP_DIR/$HEX.png"
+
+  convert -size 100x100 xc:"$HEX_COLOR" "$FNAME"
+
+  COLOR_CODE="$HEX_COLOR"
+
+  echo "$COLOR_CODE" | tr -d '\n' | xclip -sel c
+
+  dunstify -u low -a "Color Picker" -i "$FNAME" $COLOR_CODE "Copied to clipboard"
+}
+
+pick

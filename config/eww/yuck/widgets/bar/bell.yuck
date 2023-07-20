@@ -1,0 +1,23 @@
+(defwidget bell []
+	(box
+		:class "bell"
+		(eventbox
+			:cursor "pointer"
+      :halign "center"
+			(overlay 
+        (button
+          :class "bell icon"
+          :onclick "notifications"
+          :style {count > 0 ? "color: #cacaca;" : "color: #767676;"}
+          {dnd ? "" : ""}
+        )
+        (label
+          :class "bell indicator"
+          :visible {count > 0 ? true : false}
+          :valign "start" :halign "end" 
+          :text ""
+        )
+			)
+		)
+	)
+)
